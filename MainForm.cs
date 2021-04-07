@@ -1,14 +1,19 @@
 ﻿using System;
+using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using CsvHelper;
+using CsvHelper.Configuration;
 
 namespace Warehouse
 {
     public partial class MainForm : Form
     {
+        private string filePath;
         public MainForm()
         {
             InitializeComponent();
@@ -31,6 +36,7 @@ namespace Warehouse
 
         private void fileButton_Click(object sender, EventArgs e)
         {
+            treeView.Nodes.Clear();
             indicator.Top = ((Control) sender).Top;
             controlPage.SetPage(filePage);
             AnalyzeTreeView();
@@ -60,7 +66,8 @@ namespace Warehouse
 
         private void AnalyzeTreeView()
         {
-              DirectoryInfo newRootDit = new DirectoryInfo("data");
+            DirectoryInfo newRootDit = new DirectoryInfo("data");
+            filePath = newRootDit.FullName;
             foreach (var file in newRootDit.GetFiles())
             {
                 var n = new TreeNode(file.Name, 13, 13);
@@ -122,6 +129,61 @@ namespace Warehouse
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Reading new csv table.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        private DataTable Converter(string filePath)
+        {
+            try
+            {
+                var dataTable = new DataTable("Data");
+                if (!File.Exists(filePath))
+                    throw new FileNotFoundException("File not found!");
+                // Setting up csv configuration for reading.
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    PrepareHeaderForMatch = args => args.Header.ToLower(),
+                    MissingFieldFound = null,
+                    TrimOptions = TrimOptions.Trim
+                };
+                // Creating streams to read the file.
+                using var sr = new StreamReader(filePath);
+                using var csv = new CsvReader(sr, config);
+                using var dr = new CsvDataReader(csv);
+                dataTable.Load(dr);
+
+                // For loop check for empty columns.
+                for (int i = 1; i <= dataTable.Rows.Count; i++)
+                {
+                    for (int j = 1; j <= dataTable.Columns.Count; j++)
+                    {
+                        if (dataTable.Rows[i - 1].ItemArray[1].ToString() == String.Empty ||
+                            dataTable.Rows[i - 1].ItemArray[2].ToString() == String.Empty)
+                        {
+                            dataTable.Rows.RemoveAt(i - 1);
+                        }
+                    }
+                }
+
+                return dataTable;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            return null;
+
+        }
+
+        private void treeView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            DataTable dataTable = Converter( @"" + filePath + "\\" + treeView.SelectedNode.Text);
+            fileDatagrid.DataSource = dataTable;
         }
     }
 }

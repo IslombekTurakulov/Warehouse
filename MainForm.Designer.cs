@@ -59,7 +59,8 @@ namespace Warehouse
             this.colorTransitionSide = new Bunifu.UI.WinForms.BunifuColorTransition(this.components);
             this.treeviewPanel = new Bunifu.UI.WinForms.BunifuShadowPanel();
             this.treeView = new System.Windows.Forms.TreeView();
-            this.bunifuDataGridView1 = new Bunifu.UI.WinForms.BunifuDataGridView();
+            this.fileDatagrid = new Bunifu.UI.WinForms.BunifuDataGridView();
+            this.topFilePanel = new Bunifu.UI.WinForms.BunifuPanel();
             this.bunifuSeparator2 = new Bunifu.UI.WinForms.BunifuSeparator();
             this.indicator = new System.Windows.Forms.PictureBox();
             this.settingsButton = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
@@ -81,7 +82,7 @@ namespace Warehouse
             this.explorePage.SuspendLayout();
             this.settingsPage.SuspendLayout();
             this.treeviewPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bunifuDataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileDatagrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.indicator)).BeginInit();
             this.logoPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPicture)).BeginInit();
@@ -118,7 +119,7 @@ namespace Warehouse
             this.sidebarPanel.ShadowDepth = 2;
             this.sidebarPanel.ShadowStyle = Bunifu.UI.WinForms.BunifuShadowPanel.ShadowStyles.Surrounded;
             this.sidebarPanel.ShadowTopLeftVisible = false;
-            this.sidebarPanel.Size = new System.Drawing.Size(190, 545);
+            this.sidebarPanel.Size = new System.Drawing.Size(190, 686);
             this.sidebarPanel.Style = Bunifu.UI.WinForms.BunifuShadowPanel.BevelStyles.Flat;
             this.sidebarPanel.TabIndex = 0;
             // 
@@ -134,12 +135,12 @@ namespace Warehouse
             this.controlPage.Location = new System.Drawing.Point(190, 27);
             this.controlPage.Multiline = true;
             this.controlPage.Name = "controlPage";
-            this.controlPage.Page = this.dashboardPage;
-            this.controlPage.PageIndex = 0;
-            this.controlPage.PageName = "dashboardPage";
-            this.controlPage.PageTitle = "Dashboard";
+            this.controlPage.Page = this.filePage;
+            this.controlPage.PageIndex = 1;
+            this.controlPage.PageName = "filePage";
+            this.controlPage.PageTitle = "File";
             this.controlPage.SelectedIndex = 0;
-            this.controlPage.Size = new System.Drawing.Size(831, 545);
+            this.controlPage.Size = new System.Drawing.Size(936, 686);
             this.controlPage.TabIndex = 2;
             animation1.AnimateOnlyDifferences = true;
             animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
@@ -190,12 +191,13 @@ namespace Warehouse
             // 
             // filePage
             // 
-            this.filePage.Controls.Add(this.bunifuDataGridView1);
+            this.filePage.Controls.Add(this.fileDatagrid);
             this.filePage.Controls.Add(this.treeviewPanel);
+            this.filePage.Controls.Add(this.topFilePanel);
             this.filePage.Location = new System.Drawing.Point(4, 4);
             this.filePage.Name = "filePage";
             this.filePage.Padding = new System.Windows.Forms.Padding(3);
-            this.filePage.Size = new System.Drawing.Size(823, 519);
+            this.filePage.Size = new System.Drawing.Size(928, 660);
             this.filePage.TabIndex = 1;
             this.filePage.Text = "File";
             this.filePage.UseVisualStyleBackColor = true;
@@ -393,7 +395,7 @@ namespace Warehouse
             this.treeviewPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.treeviewPanel.FillStyle = Bunifu.UI.WinForms.BunifuShadowPanel.FillStyles.Solid;
             this.treeviewPanel.GradientMode = Bunifu.UI.WinForms.BunifuShadowPanel.GradientModes.Vertical;
-            this.treeviewPanel.Location = new System.Drawing.Point(3, 3);
+            this.treeviewPanel.Location = new System.Drawing.Point(3, 37);
             this.treeviewPanel.Name = "treeviewPanel";
             this.treeviewPanel.PanelColor = System.Drawing.Color.WhiteSmoke;
             this.treeviewPanel.PanelColor2 = System.Drawing.Color.WhiteSmoke;
@@ -402,7 +404,7 @@ namespace Warehouse
             this.treeviewPanel.ShadowDepth = 5;
             this.treeviewPanel.ShadowStyle = Bunifu.UI.WinForms.BunifuShadowPanel.ShadowStyles.Surrounded;
             this.treeviewPanel.ShadowTopLeftVisible = false;
-            this.treeviewPanel.Size = new System.Drawing.Size(163, 513);
+            this.treeviewPanel.Size = new System.Drawing.Size(152, 620);
             this.treeviewPanel.Style = Bunifu.UI.WinForms.BunifuShadowPanel.BevelStyles.Flat;
             this.treeviewPanel.TabIndex = 0;
             // 
@@ -411,68 +413,84 @@ namespace Warehouse
             this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView.Location = new System.Drawing.Point(0, 0);
             this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(163, 513);
+            this.treeView.Size = new System.Drawing.Size(152, 620);
             this.treeView.TabIndex = 0;
+            this.treeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeView_MouseDoubleClick);
             // 
-            // bunifuDataGridView1
+            // fileDatagrid
             // 
-            this.bunifuDataGridView1.AllowCustomTheming = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(251)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            this.bunifuDataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.bunifuDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.bunifuDataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.bunifuDataGridView1.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            this.bunifuDataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.fileDatagrid.AllowCustomTheming = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            this.fileDatagrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.fileDatagrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.fileDatagrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.fileDatagrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.fileDatagrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.DodgerBlue;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(16)))), ((int)(((byte)(18)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 11.75F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(115)))), ((int)(((byte)(204)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.bunifuDataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.bunifuDataGridView1.ColumnHeadersHeight = 40;
-            this.bunifuDataGridView1.CurrentTheme.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(251)))), ((int)(((byte)(255)))));
-            this.bunifuDataGridView1.CurrentTheme.AlternatingRowsStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.bunifuDataGridView1.CurrentTheme.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Black;
-            this.bunifuDataGridView1.CurrentTheme.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            this.bunifuDataGridView1.CurrentTheme.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Black;
-            this.bunifuDataGridView1.CurrentTheme.BackColor = System.Drawing.Color.White;
-            this.bunifuDataGridView1.CurrentTheme.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
-            this.bunifuDataGridView1.CurrentTheme.HeaderStyle.BackColor = System.Drawing.Color.DodgerBlue;
-            this.bunifuDataGridView1.CurrentTheme.HeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 11.75F, System.Drawing.FontStyle.Bold);
-            this.bunifuDataGridView1.CurrentTheme.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.bunifuDataGridView1.CurrentTheme.HeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(115)))), ((int)(((byte)(204)))));
-            this.bunifuDataGridView1.CurrentTheme.HeaderStyle.SelectionForeColor = System.Drawing.Color.White;
-            this.bunifuDataGridView1.CurrentTheme.Name = null;
-            this.bunifuDataGridView1.CurrentTheme.RowsStyle.BackColor = System.Drawing.Color.White;
-            this.bunifuDataGridView1.CurrentTheme.RowsStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.bunifuDataGridView1.CurrentTheme.RowsStyle.ForeColor = System.Drawing.Color.Black;
-            this.bunifuDataGridView1.CurrentTheme.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            this.bunifuDataGridView1.CurrentTheme.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
+            this.fileDatagrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.fileDatagrid.ColumnHeadersHeight = 40;
+            this.fileDatagrid.CurrentTheme.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.fileDatagrid.CurrentTheme.AlternatingRowsStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            this.fileDatagrid.CurrentTheme.AlternatingRowsStyle.ForeColor = System.Drawing.Color.White;
+            this.fileDatagrid.CurrentTheme.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(117)))), ((int)(((byte)(119)))));
+            this.fileDatagrid.CurrentTheme.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            this.fileDatagrid.CurrentTheme.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(16)))), ((int)(((byte)(18)))));
+            this.fileDatagrid.CurrentTheme.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(56)))), ((int)(((byte)(62)))));
+            this.fileDatagrid.CurrentTheme.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(16)))), ((int)(((byte)(18)))));
+            this.fileDatagrid.CurrentTheme.HeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 11.75F, System.Drawing.FontStyle.Bold);
+            this.fileDatagrid.CurrentTheme.HeaderStyle.ForeColor = System.Drawing.Color.White;
+            this.fileDatagrid.CurrentTheme.HeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
+            this.fileDatagrid.CurrentTheme.HeaderStyle.SelectionForeColor = System.Drawing.Color.White;
+            this.fileDatagrid.CurrentTheme.Name = null;
+            this.fileDatagrid.CurrentTheme.RowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
+            this.fileDatagrid.CurrentTheme.RowsStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            this.fileDatagrid.CurrentTheme.RowsStyle.ForeColor = System.Drawing.Color.White;
+            this.fileDatagrid.CurrentTheme.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(117)))), ((int)(((byte)(119)))));
+            this.fileDatagrid.CurrentTheme.RowsStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(117)))), ((int)(((byte)(119)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.bunifuDataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
-            this.bunifuDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.bunifuDataGridView1.EnableHeadersVisualStyles = false;
-            this.bunifuDataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
-            this.bunifuDataGridView1.HeaderBackColor = System.Drawing.Color.DodgerBlue;
-            this.bunifuDataGridView1.HeaderBgColor = System.Drawing.Color.Empty;
-            this.bunifuDataGridView1.HeaderForeColor = System.Drawing.Color.White;
-            this.bunifuDataGridView1.Location = new System.Drawing.Point(166, 3);
-            this.bunifuDataGridView1.Name = "bunifuDataGridView1";
-            this.bunifuDataGridView1.RowHeadersVisible = false;
-            this.bunifuDataGridView1.RowTemplate.Height = 40;
-            this.bunifuDataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.bunifuDataGridView1.Size = new System.Drawing.Size(654, 513);
-            this.bunifuDataGridView1.TabIndex = 1;
-            this.bunifuDataGridView1.Theme = Bunifu.UI.WinForms.BunifuDataGridView.PresetThemes.Light;
+            this.fileDatagrid.DefaultCellStyle = dataGridViewCellStyle3;
+            this.fileDatagrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fileDatagrid.EnableHeadersVisualStyles = false;
+            this.fileDatagrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(56)))), ((int)(((byte)(62)))));
+            this.fileDatagrid.HeaderBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(16)))), ((int)(((byte)(18)))));
+            this.fileDatagrid.HeaderBgColor = System.Drawing.Color.Empty;
+            this.fileDatagrid.HeaderForeColor = System.Drawing.Color.White;
+            this.fileDatagrid.Location = new System.Drawing.Point(155, 37);
+            this.fileDatagrid.Name = "fileDatagrid";
+            this.fileDatagrid.RowHeadersVisible = false;
+            this.fileDatagrid.RowTemplate.Height = 40;
+            this.fileDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.fileDatagrid.Size = new System.Drawing.Size(770, 620);
+            this.fileDatagrid.TabIndex = 1;
+            this.fileDatagrid.Theme = Bunifu.UI.WinForms.BunifuDataGridView.PresetThemes.Dark;
+            // 
+            // topFilePanel
+            // 
+            this.topFilePanel.BackgroundColor = System.Drawing.Color.Transparent;
+            this.topFilePanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("topFilePanel.BackgroundImage")));
+            this.topFilePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.topFilePanel.BorderColor = System.Drawing.Color.Transparent;
+            this.topFilePanel.BorderRadius = 3;
+            this.topFilePanel.BorderThickness = 1;
+            this.topFilePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topFilePanel.Location = new System.Drawing.Point(3, 3);
+            this.topFilePanel.Name = "topFilePanel";
+            this.topFilePanel.ShowBorders = true;
+            this.topFilePanel.Size = new System.Drawing.Size(922, 34);
+            this.topFilePanel.TabIndex = 2;
             // 
             // bunifuSeparator2
             // 
@@ -948,7 +966,7 @@ namespace Warehouse
             this.topbarPanel.Location = new System.Drawing.Point(0, 0);
             this.topbarPanel.Name = "topbarPanel";
             this.topbarPanel.ShowBorders = true;
-            this.topbarPanel.Size = new System.Drawing.Size(1021, 27);
+            this.topbarPanel.Size = new System.Drawing.Size(1126, 27);
             this.topbarPanel.TabIndex = 1;
             // 
             // hideButton
@@ -1229,7 +1247,7 @@ namespace Warehouse
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1021, 572);
+            this.ClientSize = new System.Drawing.Size(1126, 713);
             this.Controls.Add(this.controlPage);
             this.Controls.Add(this.sidebarPanel);
             this.Controls.Add(this.topbarPanel);
@@ -1246,7 +1264,7 @@ namespace Warehouse
             this.settingsPage.ResumeLayout(false);
             this.settingsPage.PerformLayout();
             this.treeviewPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bunifuDataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileDatagrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.indicator)).EndInit();
             this.logoPanel.ResumeLayout(false);
             this.logoPanel.PerformLayout();
@@ -1285,9 +1303,10 @@ namespace Warehouse
         private Bunifu.UI.WinForms.BunifuLabel bunifuLabel2;
         private Bunifu.UI.WinForms.BunifuSeparator bunifuSeparator2;
         private Bunifu.UI.WinForms.BunifuColorTransition colorTransitionSide;
-        private Bunifu.UI.WinForms.BunifuDataGridView bunifuDataGridView1;
+        private Bunifu.UI.WinForms.BunifuDataGridView fileDatagrid;
         private Bunifu.UI.WinForms.BunifuShadowPanel treeviewPanel;
         private System.Windows.Forms.TreeView treeView;
+        private Bunifu.UI.WinForms.BunifuPanel topFilePanel;
     }
 }
 
