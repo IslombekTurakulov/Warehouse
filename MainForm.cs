@@ -189,6 +189,7 @@ namespace Warehouse
         private void bunifuButton2_Click(object sender, EventArgs e)
         {
             AddFileForm addFileForm = new AddFileForm();
+            
             addFileForm.ShowDialog();
         }
     }

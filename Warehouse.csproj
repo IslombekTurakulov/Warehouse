@@ -187,6 +187,7 @@
     <Compile Include="AddFileForm.Designer.cs">
       <DependentUpon>AddFileForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DatagridFileClass.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

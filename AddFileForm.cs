@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -49,6 +50,42 @@ namespace Warehouse
                           $"{(char)rnd.Next(65,91)}" +
                           $"{(char) rnd.Next(97, 123)}";
             ucnTxtBox.Text = rest;
+        }
+
+        private void nameTxtBox_TextChange(object sender, EventArgs e)
+        {
+            if (nameTxtBox.Text == String.Empty) 
+                return;
+            if (!Regex.IsMatch(nameTxtBox.Text, @"^[a-zA-Z]+$"))
+                MessageBox.Show(@"Incorrect name. The string must contain only latin letters!");
+        }
+
+        private void codeTxtBox_TextChange(object sender, EventArgs e)
+        {
+            if (codeTxtBox.Text == String.Empty) 
+                return;
+            if (!Regex.IsMatch(codeTxtBox.Text, @"^[0-9-]+$"))
+                MessageBox.Show(@"Incorrect code. The string must contain only digits!");
+        }
+
+        private void ucnTxtBox_TextChange(object sender, EventArgs e)
+        {
+            if (codeTxtBox.Text == String.Empty) 
+                return;
+            if (!Regex.IsMatch(ucnTxtBox.Text, @"^[a-zA-Z0-9]+$"))
+                MessageBox.Show(@"Incorrect UCN. The string must contain only words and digits!");
+        }
+
+        private void amountTxtBox_TextChange(object sender, EventArgs e)
+        {
+            if (amountTxtBox.Text == String.Empty) 
+                return;
+            if (!double.TryParse(amountTxtBox.Text, out double res) || res <= 0)
+                MessageBox.Show(@"Incorrect amount. The amount is less than value!");
+            if (!double.TryParse(amountTxtBox.Text, out double newRes) || newRes >= Double.MaxValue)
+                MessageBox.Show(@"Incorrect amount. The amount is greater than value!");
+            if (!Regex.IsMatch(amountTxtBox.Text, @"^[0-9-]+$"))
+                MessageBox.Show(@"Incorrect amount. The string must contain only digits!");
         }
     }
 }
