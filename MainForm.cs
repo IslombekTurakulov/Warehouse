@@ -185,5 +185,11 @@ namespace Warehouse
             DataTable dataTable = Converter( @"" + filePath + "\\" + treeView.SelectedNode.Text);
             fileDatagrid.DataSource = dataTable;
         }
+
+        private void bunifuButton2_Click(object sender, EventArgs e)
+        {
+            AddFileForm addFileForm = new AddFileForm();
+            addFileForm.ShowDialog();
+        }
     }
 }
