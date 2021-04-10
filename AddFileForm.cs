@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Bunifu.UI.WinForms;
 
 namespace Warehouse
 {
@@ -86,6 +88,37 @@ namespace Warehouse
                 MessageBox.Show(@"Incorrect amount. The amount is greater than value!");
             if (!Regex.IsMatch(amountTxtBox.Text, @"^[0-9-]+$"))
                 MessageBox.Show(@"Incorrect amount. The string must contain only digits!");
+        }
+
+        private void urlTxtBox_TextChange(object sender, EventArgs e)
+        {
+            if (codeTxtBox.Text == String.Empty) 
+                return;
+            if (!Regex.IsMatch(ucnTxtBox.Text, @"^[a-zA-Z0-9]+$"))
+                MessageBox.Show(@"Incorrect URL. The string must contain only words and digits!");
+        }
+
+        private void editImageButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog()
+            {
+                Filter = "PNG files(*.png)|*.png|JPEG files(*.jpeg)|*.jpeg|JPG files(*.jpg)|*.jpg"
+            };
+            if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
+                return;
+            // получаем выбранный файл
+            string filename = openFileDialog1.FileName;
+            imageFileBox.Image = Image.FromFile($@"{openFileDialog1.FileName}");
+        }
+
+        private void mainFuncButton_Click(object sender, EventArgs e)
+        {
+            controlPage.SetPage(mainFunc);
+        }
+
+        private void extraFuncButton_Click(object sender, EventArgs e)
+        {
+            controlPage.SetPage(extraFunc);
         }
     }
 }

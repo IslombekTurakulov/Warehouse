@@ -42,12 +42,6 @@ namespace Warehouse
             AnalyzeTreeView();
         }
 
-        private void exploreButton_Click(object sender, EventArgs e)
-        {
-            indicator.Top = ((Control) sender).Top;
-            controlPage.SetPage(explorePage);
-        }
-
         private void settingsButton_Click(object sender, EventArgs e)
         {
             indicator.Top = ((Control) sender).Top;
@@ -191,6 +185,11 @@ namespace Warehouse
             AddFileForm addFileForm = new AddFileForm();
             
             addFileForm.ShowDialog();
+        }
+
+        private void addNodeButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
