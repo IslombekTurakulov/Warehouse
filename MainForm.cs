@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
@@ -13,6 +14,7 @@ namespace Warehouse
 {
     public partial class MainForm : Form
     {
+        private AddFileForm addFileForm;
         private string filePath;
         public MainForm()
         {
@@ -180,11 +182,11 @@ namespace Warehouse
             fileDatagrid.DataSource = dataTable;
         }
 
-        private void bunifuButton2_Click(object sender, EventArgs e)
+        private void addDataForm_Click(object sender, EventArgs e)
         {
-            AddFileForm addFileForm = new AddFileForm();
-            
+            addFileForm = new AddFileForm();
             addFileForm.ShowDialog();
+            var dataTable = Converter("filepath.dat");
         }
 
         private void addNodeButton_Click(object sender, EventArgs e)
