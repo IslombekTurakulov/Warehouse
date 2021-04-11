@@ -16,20 +16,29 @@ namespace Warehouse
     {
         private AddFileForm addFileForm;
         private string filePath;
+        private string nodeViewName;
+        private bool nodeViewNameBoolean;
         public MainForm()
         {
             // Добавляем обработчик события - который запустит функцию Reload
-            Program.CallBackMy.callbackEventHandler = new Program.CallBackMy.callbackEvent(this.GetData);
-            Program.CallBackMy.treeViewEventHandler = new Program.CallBackMy.treeViewName(this.NameData);
+            Program.CallBackMy.CallbackEventHandler = new Program.CallBackMy.CallbackEvent(this.GetData);
+            Program.CallBackMy.TreeViewEventHandler = new Program.CallBackMy.TreeViewName(this.NameData);
+            Program.CallBackMy.AddTreeViewEventHandler = new Program.CallBackMy.AddTreeView(this.AddTreeView);
             InitializeComponent();
             MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
             bunifuFormDock.SubscribeControlToDragEvents(topbarPanel);
             bunifuFormDock.SubscribeControlToDragEvents(logoPanel);
         }
 
+        private void AddTreeView(string nodeviewname, bool nodeviewnameboolean)
+        {
+            nodeViewName = nodeviewname;
+            nodeViewNameBoolean = nodeviewnameboolean;
+        }
+
         private void NameData(string name)
         {
-
+            treeView.SelectedNode.Text = name;
         }
 
         private void exitButton_Click(object sender, EventArgs e) => Application.Exit();
@@ -199,16 +208,29 @@ namespace Warehouse
         void GetData(FileClass file)
         {
             FileClass newFileClass = file;
-        }
-
-        private void addNodeButton_Click(object sender, EventArgs e)
-        {
 
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            EditTreeName editTree = new EditTreeName();
+            editTree.ShowDialog();
+        }
 
+        private void addNodeButton_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void createChildNodeStrip_Click(object sender, EventArgs e)
+        {
+            EditTreeName editTreeName = new EditTreeName();
+            editTreeName.ShowDialog();
+            if (nodeViewNameBoolean)
+            {
+                treeView.Nodes[treeView.SelectedNode.Name].Nodes.Add(nodeViewName);
+                treeView.ExpandAll();
+            }
         }
     }
 }

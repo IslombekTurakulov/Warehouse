@@ -16,6 +16,7 @@ namespace Warehouse
         public EditTreeName()
         {
             InitializeComponent();
+            bunifuFormDock1.SubscribeControlToDragEvents(topbarPanel);
         }
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -39,7 +40,8 @@ namespace Warehouse
                     throw new InvalidOperationException(@"Incorrect name. The name can't be empty!");
                 if (!Regex.IsMatch(nameTxtBox.Text, @"^[a-zA-Zа-я-А-я]+$"))
                     throw new InvalidOperationException(@"Incorrect name. The string must contain only latin letters!");
-                Program.CallBackMy.treeViewEventHandler(nameTxtBox.Text);
+                Program.CallBackMy.TreeViewEventHandler(nameTxtBox.Text);
+                this.Close();
             }
             catch (Exception exception)
             {

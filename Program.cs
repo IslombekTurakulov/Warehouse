@@ -21,10 +21,12 @@ namespace Warehouse
 
         public static class CallBackMy
         {
-            public delegate void callbackEvent(FileClass fileClass);
-            public static callbackEvent callbackEventHandler;
-            public delegate void treeViewName(string treeviewText);
-            public static treeViewName treeViewEventHandler;
+            public delegate void CallbackEvent(FileClass fileClass);
+            public static CallbackEvent CallbackEventHandler;
+            public delegate void TreeViewName(string treeviewText);
+            public static TreeViewName TreeViewEventHandler;
+            public delegate void AddTreeView(string nodeViewName, bool nodeViewNameBoolean);
+            public static AddTreeView AddTreeViewEventHandler;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Warehouse
         private Random rnd = new Random();
         public AddFileForm()
         {
-            Program.CallBackMy.callbackEventHandler = new Program.CallBackMy.callbackEvent(this.GetData);
+            Program.CallBackMy.CallbackEventHandler = new Program.CallBackMy.CallbackEvent(this.GetData);
             InitializeComponent();
             bunifuFormDock.SubscribeControlToDragEvents(topbarPanel);
         }
@@ -217,7 +217,7 @@ namespace Warehouse
                 fileClass = file;
                 /*FileClassManager fileClassManager = new FileClassManager();
                 fileClassManager.Add(fileClass);*/
-                Program.CallBackMy.callbackEventHandler(fileClass);
+                Program.CallBackMy.CallbackEventHandler(fileClass);
             }
             catch (Exception exception)
             {
