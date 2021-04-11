@@ -23,9 +23,9 @@ namespace Warehouse
             get => _name;
             set
             {
-                if (value == String.Empty) 
-                    throw new ArgumentException(@"Incorrect Name. The string mustn't be empty!");
-                if (!Regex.IsMatch(value, @"^[a-zA-Z]+$"))
+                if (value == string.Empty) 
+                    throw new ArgumentException(@"Incorrect Name. The name is empty!");
+                if (!Regex.IsMatch(value, @"^[a-zA-Zа-я-А-я]+$"))
                     throw new ArgumentException(@"Incorrect Name. The string must contain only words!");
                 _name = value.Trim().Replace(" ", "");
             }
@@ -38,8 +38,8 @@ namespace Warehouse
             get => _code;
             set
             {
-                if (value == String.Empty) 
-                    throw new ArgumentException(@"Incorrect Name. The string mustn't be empty!");
+                if (value == string.Empty) 
+                    throw new ArgumentException(@"Incorrect Name. The code is empty!");
                 if (!Regex.IsMatch(value, @"^[0-9]+$"))
                     throw new ArgumentException(@"Incorrect code. The string must contain only digits!");
                 _code = value.Trim().Replace(" ", "");
@@ -51,7 +51,7 @@ namespace Warehouse
             get => _country;
             set
             {
-                if (value == String.Empty)
+                if (value == string.Empty)
                     throw new ArgumentException(@"Incorrect Country. The country mustn't be empty!");
                 _country = value;
             }
@@ -64,8 +64,8 @@ namespace Warehouse
             get => _url;
             set
             {
-                if (value == String.Empty) 
-                    throw new ArgumentException(@"Incorrect URL. The string mustn't be empty!");
+                if (value == string.Empty) 
+                    throw new ArgumentException(@"Incorrect URL. The url is empty!");
                 if (!Regex.IsMatch(value, @"^[a-zA-Z0-9]+$"))
                     throw new ArgumentException(@"Incorrect URL. The string must contain only words and digits!");
                 _url = value.Trim().Replace(" ", "");
@@ -75,7 +75,12 @@ namespace Warehouse
         public string UCN
         {
             get => _ucn;
-            set => _ucn = value.Trim().Replace(" ", "");
+            set
+            {
+                if (value == string.Empty) 
+                    throw new ArgumentException(@"Incorrect URL. The url is empty!");
+                _ucn = value.Trim().Replace(" ", "");
+            }
         }
 
         public bool Warranty

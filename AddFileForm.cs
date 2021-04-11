@@ -85,7 +85,7 @@ namespace Warehouse
             {
                 if (nameTxtBox.Text == String.Empty) 
                     return;
-                if (!Regex.IsMatch(nameTxtBox.Text, @"^[a-zA-Z]+$"))
+                if (!Regex.IsMatch(nameTxtBox.Text, @"^[a-zA-Zа-я-А-я]+$"))
                     throw new InvalidOperationException(@"Incorrect name. The string must contain only latin letters!");
             }
             catch (Exception exception)
@@ -189,11 +189,11 @@ namespace Warehouse
             {
                 bool warranty = warrantyDropdown.Text == @"Available";
                 bool status = statusDropdown.Text == @"Available";
-                if (!int.TryParse(amountTxtBox.Text, out amount) && amount <= 0 || amount >= Int32.MaxValue  )
-                    throw new ArgumentException("Invalid amount. The amount must be greater than 0 but less than max value");
                 if (!double.TryParse(codeTxtBox.Text,NumberStyles.Any,
                     CultureInfo.InvariantCulture, out cost) && cost <= 0 || cost >= Double.MaxValue)
                     throw new ArgumentException("Invalid code. The code must be greater than 0 but less than max value");
+                if (!int.TryParse(amountTxtBox.Text, out amount) && amount <= 0 || amount >= Int32.MaxValue  )
+                    throw new ArgumentException("Invalid amount. The amount must be greater than 0 but less than max value");
                 if (!int.TryParse(discountTxtBox.Text, out discount) && (discount < 0 || discount > 100))
                     throw new ArgumentException("Invalid discount. The discount must be greater than 0 but less than 100");
 

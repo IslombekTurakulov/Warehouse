@@ -20,10 +20,16 @@ namespace Warehouse
         {
             // Добавляем обработчик события - который запустит функцию Reload
             Program.CallBackMy.callbackEventHandler = new Program.CallBackMy.callbackEvent(this.GetData);
+            Program.CallBackMy.treeViewEventHandler = new Program.CallBackMy.treeViewName(this.NameData);
             InitializeComponent();
             MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
             bunifuFormDock.SubscribeControlToDragEvents(topbarPanel);
             bunifuFormDock.SubscribeControlToDragEvents(logoPanel);
+        }
+
+        private void NameData(string name)
+        {
+
         }
 
         private void exitButton_Click(object sender, EventArgs e) => Application.Exit();

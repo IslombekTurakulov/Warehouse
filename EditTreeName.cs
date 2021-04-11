@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -27,6 +28,22 @@ namespace Warehouse
             );
             if(dialog == DialogResult.Yes) {
                 this.Close();
+            }
+        }
+
+        private void okButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (nameTxtBox.Text == String.Empty) 
+                    throw new InvalidOperationException(@"Incorrect name. The name can't be empty!");
+                if (!Regex.IsMatch(nameTxtBox.Text, @"^[a-zA-Zа-я-А-я]+$"))
+                    throw new InvalidOperationException(@"Incorrect name. The string must contain only latin letters!");
+                Program.CallBackMy.treeViewEventHandler(nameTxtBox.Text);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
             }
         }
     }

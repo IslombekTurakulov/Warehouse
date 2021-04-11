@@ -35,10 +35,12 @@ namespace Warehouse
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties2 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties3 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties4 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges2 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             this.topbarPanel = new Bunifu.UI.WinForms.BunifuPanel();
             this.exitButton = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.nameLabel = new Bunifu.UI.WinForms.BunifuLabel();
             this.nameTxtBox = new Bunifu.UI.WinForms.BunifuTextBox();
+            this.okButton = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.topbarPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,7 +58,7 @@ namespace Warehouse
             this.topbarPanel.Location = new System.Drawing.Point(0, 0);
             this.topbarPanel.Name = "topbarPanel";
             this.topbarPanel.ShowBorders = true;
-            this.topbarPanel.Size = new System.Drawing.Size(561, 27);
+            this.topbarPanel.Size = new System.Drawing.Size(577, 27);
             this.topbarPanel.TabIndex = 5;
             // 
             // exitButton
@@ -157,7 +159,7 @@ namespace Warehouse
             this.nameLabel.Cursor = System.Windows.Forms.Cursors.Default;
             this.nameLabel.CursorType = System.Windows.Forms.Cursors.Default;
             this.nameLabel.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.nameLabel.Location = new System.Drawing.Point(12, 67);
+            this.nameLabel.Location = new System.Drawing.Point(12, 56);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.nameLabel.Size = new System.Drawing.Size(117, 21);
@@ -193,7 +195,7 @@ namespace Warehouse
             this.nameTxtBox.IconRight = null;
             this.nameTxtBox.IconRightCursor = System.Windows.Forms.Cursors.IBeam;
             this.nameTxtBox.Lines = new string[0];
-            this.nameTxtBox.Location = new System.Drawing.Point(135, 67);
+            this.nameTxtBox.Location = new System.Drawing.Point(135, 56);
             this.nameTxtBox.MaxLength = 32767;
             this.nameTxtBox.MinimumSize = new System.Drawing.Size(1, 1);
             this.nameTxtBox.Modified = false;
@@ -240,11 +242,102 @@ namespace Warehouse
             this.nameTxtBox.UseSystemPasswordChar = false;
             this.nameTxtBox.WordWrap = true;
             // 
+            // okButton
+            // 
+            this.okButton.AllowAnimations = true;
+            this.okButton.AllowMouseEffects = true;
+            this.okButton.AllowToggling = true;
+            this.okButton.AnimationSpeed = 200;
+            this.okButton.AutoGenerateColors = false;
+            this.okButton.AutoRoundBorders = false;
+            this.okButton.AutoSizeLeftIcon = true;
+            this.okButton.AutoSizeRightIcon = true;
+            this.okButton.BackColor = System.Drawing.Color.Transparent;
+            this.okButton.BackColor1 = System.Drawing.Color.Gainsboro;
+            this.okButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("okButton.BackgroundImage")));
+            this.okButton.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.okButton.ButtonText = "OK";
+            this.okButton.ButtonTextMarginLeft = 0;
+            this.okButton.ColorContrastOnClick = 45;
+            this.okButton.ColorContrastOnHover = 45;
+            this.okButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            borderEdges2.BottomLeft = true;
+            borderEdges2.BottomRight = true;
+            borderEdges2.TopLeft = true;
+            borderEdges2.TopRight = true;
+            this.okButton.CustomizableEdges = borderEdges2;
+            this.okButton.DialogResult = System.Windows.Forms.DialogResult.None;
+            this.okButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
+            this.okButton.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.okButton.DisabledForecolor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
+            this.okButton.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Idle;
+            this.okButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.okButton.ForeColor = System.Drawing.Color.DimGray;
+            this.okButton.IconLeftAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.okButton.IconLeftCursor = System.Windows.Forms.Cursors.Hand;
+            this.okButton.IconLeftPadding = new System.Windows.Forms.Padding(12, 3, 3, 3);
+            this.okButton.IconMarginLeft = 11;
+            this.okButton.IconPadding = 13;
+            this.okButton.IconRightAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.okButton.IconRightCursor = System.Windows.Forms.Cursors.Hand;
+            this.okButton.IconRightPadding = new System.Windows.Forms.Padding(3, 3, 7, 3);
+            this.okButton.IconSize = 25;
+            this.okButton.IdleBorderColor = System.Drawing.Color.Transparent;
+            this.okButton.IdleBorderRadius = 1;
+            this.okButton.IdleBorderThickness = 1;
+            this.okButton.IdleFillColor = System.Drawing.Color.Gainsboro;
+            this.okButton.IdleIconLeftImage = null;
+            this.okButton.IdleIconRightImage = null;
+            this.okButton.IndicateFocus = true;
+            this.okButton.Location = new System.Drawing.Point(439, 102);
+            this.okButton.Name = "okButton";
+            this.okButton.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
+            this.okButton.OnDisabledState.BorderRadius = 1;
+            this.okButton.OnDisabledState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.okButton.OnDisabledState.BorderThickness = 1;
+            this.okButton.OnDisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.okButton.OnDisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
+            this.okButton.OnDisabledState.IconLeftImage = null;
+            this.okButton.OnDisabledState.IconRightImage = null;
+            this.okButton.onHoverState.BorderColor = System.Drawing.Color.White;
+            this.okButton.onHoverState.BorderRadius = 1;
+            this.okButton.onHoverState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.okButton.onHoverState.BorderThickness = 1;
+            this.okButton.onHoverState.FillColor = System.Drawing.Color.White;
+            this.okButton.onHoverState.ForeColor = System.Drawing.Color.LightSalmon;
+            this.okButton.onHoverState.IconLeftImage = null;
+            this.okButton.onHoverState.IconRightImage = null;
+            this.okButton.OnIdleState.BorderColor = System.Drawing.Color.Transparent;
+            this.okButton.OnIdleState.BorderRadius = 1;
+            this.okButton.OnIdleState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.okButton.OnIdleState.BorderThickness = 1;
+            this.okButton.OnIdleState.FillColor = System.Drawing.Color.Gainsboro;
+            this.okButton.OnIdleState.ForeColor = System.Drawing.Color.DimGray;
+            this.okButton.OnIdleState.IconLeftImage = null;
+            this.okButton.OnIdleState.IconRightImage = null;
+            this.okButton.OnPressedState.BorderColor = System.Drawing.Color.White;
+            this.okButton.OnPressedState.BorderRadius = 1;
+            this.okButton.OnPressedState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.okButton.OnPressedState.BorderThickness = 1;
+            this.okButton.OnPressedState.FillColor = System.Drawing.Color.White;
+            this.okButton.OnPressedState.ForeColor = System.Drawing.Color.LightSalmon;
+            this.okButton.OnPressedState.IconLeftImage = null;
+            this.okButton.OnPressedState.IconRightImage = null;
+            this.okButton.Size = new System.Drawing.Size(122, 25);
+            this.okButton.TabIndex = 41;
+            this.okButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.okButton.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
+            this.okButton.TextMarginLeft = 0;
+            this.okButton.TextPadding = new System.Windows.Forms.Padding(0);
+            this.okButton.UseDefaultRadiusAndThickness = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
+            // 
             // EditTreeName
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(561, 117);
+            this.ClientSize = new System.Drawing.Size(577, 155);
+            this.Controls.Add(this.okButton);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.nameTxtBox);
             this.Controls.Add(this.topbarPanel);
@@ -252,6 +345,7 @@ namespace Warehouse
             this.MaximumSize = new System.Drawing.Size(577, 155);
             this.MinimumSize = new System.Drawing.Size(577, 155);
             this.Name = "EditTreeName";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EditTreeName";
             this.topbarPanel.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -265,5 +359,6 @@ namespace Warehouse
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton exitButton;
         private Bunifu.UI.WinForms.BunifuLabel nameLabel;
         private Bunifu.UI.WinForms.BunifuTextBox nameTxtBox;
+        private Bunifu.UI.WinForms.BunifuButton.BunifuButton okButton;
     }
 }
