@@ -18,6 +18,8 @@ namespace Warehouse
         private string filePath;
         public MainForm()
         {
+            // Добавляем обработчик события - который запустит функцию Reload
+            Program.CallBackMy.callbackEventHandler = new Program.CallBackMy.callbackEvent(this.GetData);
             InitializeComponent();
             MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
             bunifuFormDock.SubscribeControlToDragEvents(topbarPanel);
@@ -186,10 +188,19 @@ namespace Warehouse
         {
             addFileForm = new AddFileForm();
             addFileForm.ShowDialog();
-            var dataTable = Converter("filepath.dat");
+        }
+
+        void GetData(FileClass file)
+        {
+            FileClass newFileClass = file;
         }
 
         private void addNodeButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

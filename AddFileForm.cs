@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using Bunifu.UI.WinForms;
@@ -17,13 +11,42 @@ namespace Warehouse
 {
     public partial class AddFileForm : Form
     {
-        private FileClassManager fileClassManager = new FileClassManager();
-        private FileClass fileClass;
+        private static FileClass fileClass { get; set; }
         private Random rnd = new Random();
         public AddFileForm()
         {
+            Program.CallBackMy.callbackEventHandler = new Program.CallBackMy.callbackEvent(this.GetData);
             InitializeComponent();
             bunifuFormDock.SubscribeControlToDragEvents(topbarPanel);
+        }
+
+        private void GetData(FileClass fileclass)
+        {
+            if (fileClass != null)
+            {
+                var warrantyText = fileclass.Warranty ? "Available" : "Unavailable";
+                var statusText = fileclass.Status ? "Available" : "Unavailable";
+
+                nameTxtBox.Text = fileclass.Name;
+                codeTxtBox.Text = fileclass.Code;
+                ucnTxtBox.Text = fileclass.UCN;
+
+                companyDropdown.Text = fileclass.Company; 
+                countryDropdown.Text = fileclass.Country;
+
+                amountTxtBox.Text = fileclass.Amount.ToString();
+                firstCostTxtBox.Text = fileClass.Cost.ToString(CultureInfo.InvariantCulture);
+                currencyDropdown.Text = fileclass.Currency;
+
+                warrantyDropdown.Text = warrantyText;
+                statusDropdown.Text = statusText;
+
+                urlTxtBox.Text = fileclass.URL;
+                discountTxtBox.Text = fileclass.Discount.ToString();
+
+                imageFileBox = fileclass.PictureBox ?? new BunifuPictureBox();
+                descriptionTxtBox.Text = fileclass.Description ?? String.Empty;
+            }
         }
 
 
@@ -90,7 +113,7 @@ namespace Warehouse
         {
             try
             {
-                if (codeTxtBox.Text == String.Empty) 
+                if (ucnTxtBox.Text == String.Empty) 
                     return;
                 if (!Regex.IsMatch(ucnTxtBox.Text, @"^[a-zA-Z0-9]+$"))
                     throw new InvalidOperationException(@"Incorrect UCN. The string must contain only words and digits!");
@@ -122,9 +145,9 @@ namespace Warehouse
         {
             try
             {
-                if (codeTxtBox.Text == String.Empty) 
+                if (urlTxtBox.Text == String.Empty) 
                     return;
-                if (!Regex.IsMatch(ucnTxtBox.Text, @"^[a-zA-Z0-9]+$"))
+                if (!Regex.IsMatch(urlTxtBox.Text, @"^[a-zA-Z0-9]+$"))
                     throw new InvalidOperationException(@"Incorrect URL. The string must contain only words and digits!");
             }
             catch (Exception exception)
@@ -170,28 +193,31 @@ namespace Warehouse
                     throw new ArgumentException("Invalid amount. The amount must be greater than 0 but less than max value");
                 if (!double.TryParse(codeTxtBox.Text,NumberStyles.Any,
                     CultureInfo.InvariantCulture, out cost) && cost <= 0 || cost >= Double.MaxValue)
-                    throw new ArgumentException("Invalid cost. The cost must be greater than 0 but less than max value");
+                    throw new ArgumentException("Invalid code. The code must be greater than 0 but less than max value");
                 if (!int.TryParse(discountTxtBox.Text, out discount) && (discount < 0 || discount > 100))
                     throw new ArgumentException("Invalid discount. The discount must be greater than 0 but less than 100");
-                fileClass = new FileClass
-                (
-                    nameTxtBox.Text.Trim(),
-                    companyDropdown.Text,
-                    countryDropdown.Text.Trim(),
-                    codeTxtBox.Text.Trim(),
-                    ucnTxtBox.Text.Trim(),
-                    urlTxtBox.Text.Trim(),
-                    amount,
-                    cost,
-                    discount,
-                    warranty,
-                    status,
-                    currencyDropdown.Text
-                );
-                fileClassManager.Add(fileClass);
-                XmlSerializer formatter = new XmlSerializer(typeof(FileClass), new Type[] {typeof(FileClassManager)});
-                using (FileStream stream = File.OpenWrite("HSEKontora.xml"))
-                    formatter.Serialize(stream, fileClassManager);
+
+                FileClass file = new FileClass()
+                {
+                    Name = nameTxtBox.Text,
+                    Code = codeTxtBox.Text,
+                    UCN = ucnTxtBox.Text,
+                    Company = companyDropdown.Text,
+                    Country = countryDropdown.Text,
+                    Amount = amount,
+                    Cost = cost,
+                    Currency = currencyDropdown.Text,
+                    Warranty = warranty,
+                    Status = status,
+                    URL = urlTxtBox.Text,
+                    Discount = discount,
+                    PictureBox = imageFileBox,
+                    Description = descriptionTxtBox.Text
+                };
+                fileClass = file;
+                /*FileClassManager fileClassManager = new FileClassManager();
+                fileClassManager.Add(fileClass);*/
+                Program.CallBackMy.callbackEventHandler(fileClass);
             }
             catch (Exception exception)
             {
@@ -206,11 +232,11 @@ namespace Warehouse
                 if (firstCostTxtBox.Text == String.Empty)
                     return;
                 if (!double.TryParse(firstCostTxtBox.Text, out double res) || res <= 0)
-                   throw new InvalidOperationException(@"Incorrect amount. The amount is less than value!");
+                   throw new InvalidOperationException(@"Incorrect cost. The cost is less than value!");
                 if (!double.TryParse(firstCostTxtBox.Text, out double newRes) || newRes >= Double.MaxValue)
-                    throw new InvalidOperationException(@"Incorrect amount. The amount is greater than value!");
-                if (!Regex.IsMatch(firstCostTxtBox.Text, @"^[0-9-]+$"))
-                    throw new InvalidOperationException(@"Incorrect amount. The string must contain only digits!");
+                    throw new InvalidOperationException(@"Incorrect cost. The cost is greater than value!");
+                if (!Regex.IsMatch(firstCostTxtBox.Text, @"^[0-9]+$"))
+                    throw new InvalidOperationException(@"Incorrect cost. The cost must contain only digits!");
             }
             catch (Exception exception)
             {
@@ -221,6 +247,11 @@ namespace Warehouse
         private void okButton_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void AddFileForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

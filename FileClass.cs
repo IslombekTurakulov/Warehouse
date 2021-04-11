@@ -1,138 +1,111 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Bunifu.UI.WinForms;
 
 namespace Warehouse
 {
-    class FileClass
+    public class FileClass
     {
-        private static string _name;
-        private static string _code;
-        private static string _url;
-        private static string _ucn;
-        private static bool _warranty;
-        private static bool _status;
-        private static int _amount;
-        private static double _cost;
-        private static int _discount;
+        private string _name;
+        private string _code;
+        private string _url;
+        private string _ucn;
+        private bool _warranty;
+        private bool _status;
+        private string _country;
+        private BunifuPictureBox _pictureBox;
 
-        public FileClass(string name, string company, string country, 
-            string code, string ucn, string url, int amount, double cost, int discount,
-            bool warranty, bool status, string currency)
-        {
-            Name = name;
-            Company = company;
-            Country = country;
-            Code = code;
-            UCN = ucn;
-            Amount = amount;
-            URL = url;
-            Cost = cost;
-            Discount = discount;
-            Warranty = warranty;
-            Status = status;
-            Currency = currency;
-        }
-
-        public static string Name
+        public string Name
         {
             get => _name;
             set
             {
                 if (value == String.Empty) 
-                    MessageBox.Show(@"Incorrect Name. The string mustn't be empty!");
-                else
-                {
-
-                    if (!Regex.IsMatch(value, @"^[a-zA-Z]+$"))
-                        MessageBox.Show(@"Incorrect Name. The string must contain only words!");
-                    else
-                        _name = value.Trim().Replace(" ", "");
-                }
+                    throw new ArgumentException(@"Incorrect Name. The string mustn't be empty!");
+                if (!Regex.IsMatch(value, @"^[a-zA-Z]+$"))
+                    throw new ArgumentException(@"Incorrect Name. The string must contain only words!");
+                _name = value.Trim().Replace(" ", "");
             }
         }
 
-        public static string Company { get; set; }
+        public string Company { get; set; }
 
-        public static string Code
+        public string Code
         {
             get => _code;
             set
             {
                 if (value == String.Empty) 
-                    MessageBox.Show(@"Incorrect Name. The string mustn't be empty!");
-                else
-                {
-                    if (!Regex.IsMatch(value, @"^[0-9]+$"))
-                        MessageBox.Show(@"Incorrect code. The string must contain only digits!");
-                    else
-                        _code = value.Trim().Replace(" ", "");
-                }
+                    throw new ArgumentException(@"Incorrect Name. The string mustn't be empty!");
+                if (!Regex.IsMatch(value, @"^[0-9]+$"))
+                    throw new ArgumentException(@"Incorrect code. The string must contain only digits!");
+                _code = value.Trim().Replace(" ", "");
             }
         }
 
-        public static string Country { get; set; }
-        public static string Currency { get; set; }
+        public string Country
+        {
+            get => _country;
+            set
+            {
+                if (value == String.Empty)
+                    throw new ArgumentException(@"Incorrect Country. The country mustn't be empty!");
+                _country = value;
+            }
+        }
 
-        public static string URL
+        public string Currency { get; set; }
+
+        public string URL
         {
             get => _url;
             set
             {
                 if (value == String.Empty) 
-                    MessageBox.Show(@"Incorrect URL. The string mustn't be empty!");
-                else
-                {
-
-                    if (!Regex.IsMatch(value, @"^[a-zA-Z0-9]+$"))
-                        MessageBox.Show(@"Incorrect URL. The string must contain only words and digits!");
-                    else
-                        _url = value.Trim().Replace(" ", "");
-                }
+                    throw new ArgumentException(@"Incorrect URL. The string mustn't be empty!");
+                if (!Regex.IsMatch(value, @"^[a-zA-Z0-9]+$"))
+                    throw new ArgumentException(@"Incorrect URL. The string must contain only words and digits!");
+                _url = value.Trim().Replace(" ", "");
             }
         }
 
-        public static string UCN
+        public string UCN
         {
             get => _ucn;
             set => _ucn = value.Trim().Replace(" ", "");
         }
 
-        public static bool Warranty
+        public bool Warranty
         {
             get => _warranty;
             set => _warranty = value;
         }
-        public static bool Status
+        public bool Status
         {
             get => _status;
             set => _status = value;
         }
 
-        public static int Amount
+        public int Amount { get; set; }
+
+        public double Cost { get; set; }
+
+        public int Discount { get; set; }
+
+        public BunifuPictureBox PictureBox
         {
-            get => _amount;
+            get => _pictureBox;
             set
             {
-                _amount = value;
+                value.Image.SaveAdd(new EncoderParameters(1));
+                _pictureBox = value;
             }
         }
 
-        public static double Cost
-        {
-            get => _cost;
-            set => _cost = value;
-        }
-
-        public static int Discount
-        {
-            get => _discount;
-            set => _discount = value;
-        }
+        public string Description { get; set; }
     }
 
 }

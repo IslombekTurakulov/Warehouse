@@ -18,5 +18,11 @@ namespace Warehouse
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
         }
+
+        public static class CallBackMy
+        {
+            public delegate void callbackEvent(FileClass fileClass);
+            public static callbackEvent callbackEventHandler;
+        }
     }
 }
