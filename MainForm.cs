@@ -22,7 +22,6 @@ namespace Warehouse
         {
             // Добавляем обработчик события - который запустит функцию Reload
             Program.CallBackMy.CallbackEventHandler = new Program.CallBackMy.CallbackEvent(this.GetData);
-            Program.CallBackMy.TreeViewEventHandler = new Program.CallBackMy.TreeViewName(this.NameData);
             Program.CallBackMy.AddTreeViewEventHandler = new Program.CallBackMy.AddTreeView(this.AddTreeView);
             InitializeComponent();
             MaximizedBounds = Screen.FromHandle(Handle).WorkingArea;
@@ -36,11 +35,6 @@ namespace Warehouse
             nodeViewNameBoolean = nodeviewnameboolean;
         }
 
-        private void NameData(string name)
-        {
-            treeView.SelectedNode.Text = name;
-        }
-
         private void exitButton_Click(object sender, EventArgs e) => Application.Exit();
 
         private void windowButton_Click(object sender, EventArgs e) => WindowState = WindowState == FormWindowState.Normal ? FormWindowState.Maximized : FormWindowState.Normal;
@@ -49,21 +43,21 @@ namespace Warehouse
 
         private void menuButton_Click(object sender, EventArgs e)
         {
-            indicator.Top = ((Control) sender).Top;
+            indicator.Top = ((Control)sender).Top;
             controlPage.SetPage(dashboardPage);
         }
 
         private void fileButton_Click(object sender, EventArgs e)
         {
             treeView.Nodes.Clear();
-            indicator.Top = ((Control) sender).Top;
+            indicator.Top = ((Control)sender).Top;
             controlPage.SetPage(filePage);
             AnalyzeTreeView();
         }
 
         private void settingsButton_Click(object sender, EventArgs e)
         {
-            indicator.Top = ((Control) sender).Top;
+            indicator.Top = ((Control)sender).Top;
             controlPage.SetPage(settingsPage);
         }
 
@@ -195,7 +189,7 @@ namespace Warehouse
 
         private void treeView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            DataTable dataTable = Converter( @"" + filePath + "\\" + treeView.SelectedNode.Text);
+            DataTable dataTable = Converter(@"" + filePath + "\\" + treeView.SelectedNode.Text);
             fileDatagrid.DataSource = dataTable;
         }
 
@@ -207,8 +201,35 @@ namespace Warehouse
 
         void GetData(FileClass file)
         {
-            FileClass newFileClass = file;
+            try
+            {
+                FileClass newFileClass = file;
+                DirectoryInfo newRootDit = new DirectoryInfo("data");
+                if (!newRootDit.Exists)
+                    newRootDit.Create();
 
+                string path;
+                using (var fs = new StreamWriter(new FileStream($"{newRootDit.FullName}/{treeView.SelectedNode.Text}", FileMode.OpenOrCreate)))
+                {
+                    fs.Write($"{newFileClass.Name},{newFileClass.Code}, newFileClass.UCN,newFileClass.Company,newFileClass.Amount,newFileClass.Cost,newFileClass.Currency,newFileClass.Warranty,newFileClass.Status,newFileClass.Discount");
+                    path = $"{newRootDit.FullName}/{treeView.SelectedNode.Text}";
+                }
+                fileDatagrid.Rows.Add(
+               newFileClass.Name,
+               newFileClass.Code,
+               newFileClass.UCN,
+               newFileClass.Company,
+               newFileClass.Amount,
+               newFileClass.Cost,
+               newFileClass.Currency,
+               newFileClass.Warranty,
+               newFileClass.Status,
+               newFileClass.Discount);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -219,16 +240,31 @@ namespace Warehouse
 
         private void addNodeButton_Click_1(object sender, EventArgs e)
         {
-
-        }
-
-        private void createChildNodeStrip_Click(object sender, EventArgs e)
-        {
             EditTreeName editTreeName = new EditTreeName();
             editTreeName.ShowDialog();
             if (nodeViewNameBoolean)
             {
-                treeView.Nodes[treeView.SelectedNode.Name].Nodes.Add(nodeViewName);
+                DirectoryInfo newRootDit = new DirectoryInfo("data");
+                string path;
+                using (var fs = new StreamWriter(new FileStream($"{newRootDit.FullName}/{nodeViewName}.txt", FileMode.OpenOrCreate)))
+                {
+                    fs.Write("");
+                    path = $"{newRootDit.FullName}/{nodeViewName}.txt";
+                }
+                treeView.Nodes.Clear();
+                AnalyzeTreeView();
+                treeView.ExpandAll();
+            }
+        }
+
+        private void createChildNodeStrip_Click(object sender, EventArgs e)
+        {
+            var name = treeView.SelectedNode;
+            EditTreeName editTreeName = new EditTreeName();
+            editTreeName.ShowDialog();
+            if (nodeViewNameBoolean)
+            {
+                name.Nodes.Add(nodeViewName);
                 treeView.ExpandAll();
             }
         }

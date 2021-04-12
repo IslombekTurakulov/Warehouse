@@ -41,7 +41,6 @@ namespace Warehouse
                 warrantyDropdown.Text = warrantyText;
                 statusDropdown.Text = statusText;
 
-                urlTxtBox.Text = fileclass.URL;
                 discountTxtBox.Text = fileclass.Discount.ToString();
 
                 imageFileBox = fileclass.PictureBox ?? new BunifuPictureBox();
@@ -74,6 +73,10 @@ namespace Warehouse
                           $"{(char) rnd.Next(97, 123)}" +
                           $"{rnd.Next(1, 1000)}" +
                           $"{(char) rnd.Next(97, 123)}" +
+                          $"{(char)rnd.Next(65,91)}" +
+                          $"{rnd.Next(465, 987)}" +
+                          $"{(char) rnd.Next(97, 123)}" +
+                          $"{(char)rnd.Next(65,91)}" +
                           $"{(char)rnd.Next(65,91)}" +
                           $"{(char) rnd.Next(97, 123)}";
             ucnTxtBox.Text = rest;
@@ -141,21 +144,6 @@ namespace Warehouse
             }
         }
 
-        private void urlTxtBox_TextChange(object sender, EventArgs e)
-        {
-            try
-            {
-                if (urlTxtBox.Text == String.Empty) 
-                    return;
-                if (!Regex.IsMatch(urlTxtBox.Text, @"^[a-zA-Z0-9]+$"))
-                    throw new InvalidOperationException(@"Incorrect URL. The string must contain only words and digits!");
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
-        }
-
         private void editImageButton_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog()
@@ -209,7 +197,6 @@ namespace Warehouse
                     Currency = currencyDropdown.Text,
                     Warranty = warranty,
                     Status = status,
-                    URL = urlTxtBox.Text,
                     Discount = discount,
                     PictureBox = imageFileBox,
                     Description = descriptionTxtBox.Text

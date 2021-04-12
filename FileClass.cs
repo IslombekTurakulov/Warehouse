@@ -11,7 +11,6 @@ namespace Warehouse
     {
         private string _name;
         private string _code;
-        private string _url;
         private string _ucn;
         private bool _warranty;
         private bool _status;
@@ -59,18 +58,6 @@ namespace Warehouse
 
         public string Currency { get; set; }
 
-        public string URL
-        {
-            get => _url;
-            set
-            {
-                if (value == string.Empty) 
-                    throw new ArgumentException(@"Incorrect URL. The url is empty!");
-                if (!Regex.IsMatch(value, @"^[a-zA-Z0-9]+$"))
-                    throw new ArgumentException(@"Incorrect URL. The string must contain only words and digits!");
-                _url = value.Trim().Replace(" ", "");
-            }
-        }
 
         public string UCN
         {
