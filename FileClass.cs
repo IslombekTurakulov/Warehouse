@@ -15,7 +15,6 @@ namespace Warehouse
         private bool _warranty;
         private bool _status;
         private string _country;
-        private BunifuPictureBox _pictureBox;
 
         public string Name
         {
@@ -87,15 +86,7 @@ namespace Warehouse
 
         public int Discount { get; set; }
 
-        public BunifuPictureBox PictureBox
-        {
-            get => _pictureBox;
-            set
-            {
-                value.Image.SaveAdd(new EncoderParameters(1));
-                _pictureBox = value;
-            }
-        }
+        public BunifuPictureBox PictureBox { get; set; }
 
         public string Description { get; set; }
     }

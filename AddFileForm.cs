@@ -4,25 +4,23 @@ using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 using Bunifu.UI.WinForms;
 
 namespace Warehouse
 {
     public partial class AddFileForm : Form
     {
-        private static FileClass fileClass { get; set; }
+        private static FileClass fileVariable { get; set; }
         private Random rnd = new Random();
         public AddFileForm()
         {
-            Program.CallBackMy.CallbackEventHandler = new Program.CallBackMy.CallbackEvent(this.GetData);
             InitializeComponent();
             bunifuFormDock.SubscribeControlToDragEvents(topbarPanel);
         }
 
-        private void GetData(FileClass fileclass)
+        /*private void GetData(FileClass fileclass, bool getData)
         {
-            if (fileClass != null)
+            if (fileclass != null)
             {
                 var warrantyText = fileclass.Warranty ? "Available" : "Unavailable";
                 var statusText = fileclass.Status ? "Available" : "Unavailable";
@@ -35,7 +33,7 @@ namespace Warehouse
                 countryDropdown.Text = fileclass.Country;
 
                 amountTxtBox.Text = fileclass.Amount.ToString();
-                firstCostTxtBox.Text = fileClass.Cost.ToString(CultureInfo.InvariantCulture);
+                firstCostTxtBox.Text = fileclass.Cost.ToString(CultureInfo.InvariantCulture);
                 currencyDropdown.Text = fileclass.Currency;
 
                 warrantyDropdown.Text = warrantyText;
@@ -46,7 +44,7 @@ namespace Warehouse
                 imageFileBox = fileclass.PictureBox ?? new BunifuPictureBox();
                 descriptionTxtBox.Text = fileclass.Description ?? String.Empty;
             }
-        }
+        }*/
 
 
         private void exitButton_Click(object sender, EventArgs e)
@@ -58,7 +56,7 @@ namespace Warehouse
                 MessageBoxIcon.Warning
             );
             if(dialog == DialogResult.Yes) {
-                this.Close();
+                Close();
             }
         }
 
@@ -131,12 +129,16 @@ namespace Warehouse
         {
             try
             {
+                firstCostTxtBox.Enabled = false;
                 if (amountTxtBox.Text == String.Empty) 
                     return;
-                if (!int.TryParse(amountTxtBox.Text, out int amount) && amount <= 0 || amount >= Int32.MaxValue  )
-                    throw new InvalidOperationException("Invalid amount. The amount must be greater than 0 but less than max value");
                 if (!Regex.IsMatch(amountTxtBox.Text, @"^[0-9]+$"))
                     throw new InvalidOperationException(@"Incorrect amount. The string must contain only digits!");
+                if (!int.TryParse(amountTxtBox.Text, out int amount) && amount <= 0 || amount >= Int32.MaxValue  )
+                    throw new InvalidOperationException("Invalid amount. The amount must be greater than 0 but less than max value");
+                var temp = int.Parse(amountTxtBox.Text);
+                if (temp > 0)
+                    firstCostTxtBox.Enabled = true;
             }
             catch (Exception exception)
             {
@@ -146,7 +148,7 @@ namespace Warehouse
 
         private void editImageButton_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog()
+            OpenFileDialog openFileDialog1 = new OpenFileDialog
             {
                 Filter = "PNG files(*.png)|*.png|JPEG files(*.jpeg)|*.jpeg|JPG files(*.jpg)|*.jpg"
             };
@@ -157,10 +159,7 @@ namespace Warehouse
             imageFileBox.Image = Image.FromFile($@"{openFileDialog1.FileName}");
         }
 
-        private void mainFuncButton_Click(object sender, EventArgs e)
-        {
-            controlPage.SetPage(mainFunc);
-        }
+        private void mainFuncButton_Click(object sender, EventArgs e) => controlPage.SetPage(mainFunc);
 
         private void extraFuncButton_Click(object sender, EventArgs e)
         {
@@ -169,28 +168,23 @@ namespace Warehouse
 
         private void applyButton_Click(object sender, EventArgs e)
         {
-            int discount = 0;
-            int amount = 0;
-            double cost = 0;
-
             try
             {
-                bool warranty = warrantyDropdown.Text == @"Available";
-                bool status = statusDropdown.Text == @"Available";
-                if (!double.TryParse(codeTxtBox.Text,NumberStyles.Any,
-                    CultureInfo.InvariantCulture, out cost) && cost <= 0 || cost >= Double.MaxValue)
+                var warranty = warrantyDropdown.Text == @"Available";
+                var status = statusDropdown.Text == @"Available";
+                if (!double.TryParse(firstCostTxtBox.Text, out var cost) || cost < 0)
                     throw new ArgumentException("Invalid code. The code must be greater than 0 but less than max value");
-                if (!int.TryParse(amountTxtBox.Text, out amount) && amount <= 0 || amount >= Int32.MaxValue  )
+                if (!int.TryParse(amountTxtBox.Text, out var amount) || amount <= 0 || amount >= 1000)
                     throw new ArgumentException("Invalid amount. The amount must be greater than 0 but less than max value");
-                if (!int.TryParse(discountTxtBox.Text, out discount) && (discount < 0 || discount > 100))
+                if (!int.TryParse(discountTxtBox.Text, out var discount) || discount < 0 || discount > 100)
                     throw new ArgumentException("Invalid discount. The discount must be greater than 0 but less than 100");
 
-                FileClass file = new FileClass()
+                var file = new FileClass
                 {
                     Name = nameTxtBox.Text,
                     Code = codeTxtBox.Text,
                     UCN = ucnTxtBox.Text,
-                    Company = companyDropdown.Text,
+                    Company = companyTxtBox.Text,
                     Country = countryDropdown.Text,
                     Amount = amount,
                     Cost = cost,
@@ -201,10 +195,9 @@ namespace Warehouse
                     PictureBox = imageFileBox,
                     Description = descriptionTxtBox.Text
                 };
-                fileClass = file;
-                /*FileClassManager fileClassManager = new FileClassManager();
-                fileClassManager.Add(fileClass);*/
-                Program.CallBackMy.CallbackEventHandler(fileClass);
+
+                fileVariable = file;
+                Program.CallBackMy.CallbackEventHandler(fileVariable, true);
             }
             catch (Exception exception)
             {
@@ -233,12 +226,12 @@ namespace Warehouse
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void AddFileForm_Load(object sender, EventArgs e)
         {
-
+           
         }
     }
 }

@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 using CsvHelper;
 using CsvHelper.Configuration;
 
@@ -14,10 +15,13 @@ namespace Warehouse
 {
     public partial class MainForm : Form
     {
+        private static FileClass newFileClass;
         private AddFileForm addFileForm;
         private string filePath;
+        private string getNodeData;
         private string nodeViewName;
         private bool nodeViewNameBoolean;
+        private bool isClosedForm;
         public MainForm()
         {
             // Добавляем обработчик события - который запустит функцию Reload
@@ -77,7 +81,8 @@ namespace Warehouse
             filePath = newRootDit.FullName;
             foreach (var file in newRootDit.GetFiles())
             {
-                var n = new TreeNode(file.Name, 13, 13);
+                string newFile = file.Name.Replace(".txt", "");
+                var n = new TreeNode(newFile, 13, 13);
                 treeView.Nodes.Add(n);
             }
             if (treeView.Nodes.Count > 0)
@@ -155,7 +160,8 @@ namespace Warehouse
                 {
                     PrepareHeaderForMatch = args => args.Header.ToLower(),
                     MissingFieldFound = null,
-                    TrimOptions = TrimOptions.Trim
+                    TrimOptions = TrimOptions.Trim,
+                    HasHeaderRecord = false
                 };
                 // Creating streams to read the file.
                 using var sr = new StreamReader(filePath);
@@ -187,49 +193,42 @@ namespace Warehouse
 
         }
 
-        private void treeView_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            DataTable dataTable = Converter(@"" + filePath + "\\" + treeView.SelectedNode.Text);
-            fileDatagrid.DataSource = dataTable;
-        }
-
         private void addDataForm_Click(object sender, EventArgs e)
         {
             addFileForm = new AddFileForm();
             addFileForm.ShowDialog();
+            if (isClosedForm)
+            {
+                try
+                {
+                    DirectoryInfo newRootDit = new DirectoryInfo("data");
+                    if (!newRootDit.Exists)
+                        newRootDit.Create();
+
+                    string path;
+                    using (var fs = new FileStream($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.txt", FileMode.OpenOrCreate))
+                    {
+                        using (var sw = new StreamWriter(fs))
+                        {
+                            fs.Seek(fs.Length, SeekOrigin.Begin);
+                            sw.WriteLine(
+                                $"{newFileClass.Name},{newFileClass.Code},{newFileClass.UCN},{newFileClass.Company},{newFileClass.Amount},{newFileClass.Cost},{newFileClass.Currency},{newFileClass.Warranty},{newFileClass.Status},{newFileClass.Discount}");
+                        }
+                    }
+                    DataTable dataTable = Converter($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.txt");
+                    fileDatagrid.DataSource = dataTable;
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
+            }
         }
 
-        void GetData(FileClass file)
+        void GetData(FileClass file, bool isClosed)
         {
-            try
-            {
-                FileClass newFileClass = file;
-                DirectoryInfo newRootDit = new DirectoryInfo("data");
-                if (!newRootDit.Exists)
-                    newRootDit.Create();
-
-                string path;
-                using (var fs = new StreamWriter(new FileStream($"{newRootDit.FullName}/{treeView.SelectedNode.Text}", FileMode.OpenOrCreate)))
-                {
-                    fs.Write($"{newFileClass.Name},{newFileClass.Code}, newFileClass.UCN,newFileClass.Company,newFileClass.Amount,newFileClass.Cost,newFileClass.Currency,newFileClass.Warranty,newFileClass.Status,newFileClass.Discount");
-                    path = $"{newRootDit.FullName}/{treeView.SelectedNode.Text}";
-                }
-                fileDatagrid.Rows.Add(
-               newFileClass.Name,
-               newFileClass.Code,
-               newFileClass.UCN,
-               newFileClass.Company,
-               newFileClass.Amount,
-               newFileClass.Cost,
-               newFileClass.Currency,
-               newFileClass.Warranty,
-               newFileClass.Status,
-               newFileClass.Discount);
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-            }
+            newFileClass = file;
+            isClosedForm = isClosed;
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -240,6 +239,8 @@ namespace Warehouse
 
         private void addNodeButton_Click_1(object sender, EventArgs e)
         {
+            nodeViewName = "";
+            nodeViewNameBoolean = false;
             EditTreeName editTreeName = new EditTreeName();
             editTreeName.ShowDialog();
             if (nodeViewNameBoolean)
@@ -260,13 +261,151 @@ namespace Warehouse
         private void createChildNodeStrip_Click(object sender, EventArgs e)
         {
             var name = treeView.SelectedNode;
+            nodeViewName = "";
+            nodeViewNameBoolean = false;
             EditTreeName editTreeName = new EditTreeName();
             editTreeName.ShowDialog();
+          
             if (nodeViewNameBoolean)
             {
-                name.Nodes.Add(nodeViewName);
+                 DirectoryInfo newRootDit = new DirectoryInfo("data");
+                string path;
+                using (var fs = new StreamWriter(new FileStream($"{newRootDit.FullName}/{nodeViewName}.txt", FileMode.OpenOrCreate)))
+                {
+                    fs.Write("");
+                    path = $"{newRootDit.FullName}/{nodeViewName}.txt";
+                }
+
+                name.Nodes.Add($"{nodeViewName}");
                 treeView.ExpandAll();
             }
+        }
+
+        private void editProductToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        public static void SerializeToFile<T>(T data, string filename)
+        {
+            using (var sw = new StreamWriter(filename))
+            {
+                var ser = new XmlSerializer(typeof(T));
+                ser.Serialize(sw, data);
+            }
+        }
+        private static DataNode GetDataNode(TreeNode node)
+        {
+            var dataNode = new DataNode();
+            dataNode.Text = node.Text;
+            dataNode.IsExpanded = node.IsExpanded;
+            dataNode.IsSelected = node.IsSelected;
+
+            foreach(TreeNode n in node.Nodes)
+            {
+                var d = GetDataNode(n);
+                dataNode.Nodes.Add(d);
+            }
+
+            return dataNode;
+        }
+
+        private static void SaveTree(string filename, TreeView tv)
+        {
+            var data = new List<DataNode>();
+
+            foreach(TreeNode node in tv.Nodes)
+            {
+                var dataNode = GetDataNode(node);
+                data.Add(dataNode);
+            }
+
+            SerializeToFile(data, filename);
+        }
+
+        private static void FillNode(TreeView tv, TreeNode node, DataNode d)
+        {   
+            foreach(var c in d.Nodes)
+            {
+                var n = new TreeNode();
+                FillNode(tv, n, c);
+                node.Nodes.Add(n);
+            }       
+
+            node.Text = d.Text;
+            if (d.IsExpanded) node.Expand();        
+            if (d.IsSelected) tv.SelectedNode = node;       
+        }
+
+        private static TreeView LoadTree(string fname)
+        {
+            var data = DeserializeFromFile<DataNode[]>(fname);
+            var tv = new TreeView();        
+
+            foreach(var d in data)
+            {
+                var node = new TreeNode();
+                tv.Nodes.Add(node);
+                FillNode(tv, node, d);                      
+            }   
+
+            return tv;
+        }
+
+        public static T DeserializeFromFile<T>(string fname) where T : class
+        {
+            using (var sr = new StreamReader(fname))
+            {
+                var ser = new XmlSerializer(typeof(T));
+                var data = ser.Deserialize(sr) as T;            
+                return data;
+            }
+        }
+        private void treeView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            DirectoryInfo newRootDit = new DirectoryInfo("data");
+            if (!newRootDit.Exists)
+                newRootDit.Create();
+            else
+            {
+                if (File.Exists($"{newRootDit}/{treeView.SelectedNode}.txt"))
+                    File.Create($"{newRootDit}/{treeView.SelectedNode}.txt");
+                if (fileDatagrid.Rows.Count > 0)
+                    fileDatagrid.Rows.Clear();
+                //DataTable dataTable = Converter($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.txt");
+                using (var fs = new FileStream($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.txt",
+                    FileMode.OpenOrCreate))
+                {
+                    using (var sw = new StreamReader(fs))
+                    {
+                        while (sw.Peek() > -1)
+                        {
+                            string[] data = sw.ReadLine()?.Split(',');
+                            if (data.Length > 10)
+                                continue;
+                            fileDatagrid.Rows.Add(data?[0], data?[1],
+                                data?[2], data?[3],
+                                data?[4], data?[5],
+                                data?[6], data?[7],
+                                data?[8], data?[9]);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveTree(@"datanodes.xml", treeView);
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            var fname = @"datanodes.xml";
+            if (!File.Exists(fname))
+                return;
+           var tree = LoadTree(fname);
+           treeView = tree;
         }
     }
 }

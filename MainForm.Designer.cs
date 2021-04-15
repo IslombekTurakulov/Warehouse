@@ -31,18 +31,18 @@ namespace Warehouse
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges2 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges3 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges4 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges15 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges16 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges17 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             Utilities.BunifuPages.BunifuAnimatorNS.Animation animation1 = new Utilities.BunifuPages.BunifuAnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges5 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges6 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges7 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges18 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges19 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges20 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges21 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.sidebarPanel = new Bunifu.UI.WinForms.BunifuShadowPanel();
             this.indicator = new System.Windows.Forms.PictureBox();
@@ -58,6 +58,20 @@ namespace Warehouse
             this.dashboardLabelIntro = new Bunifu.UI.WinForms.BunifuLabel();
             this.filePage = new System.Windows.Forms.TabPage();
             this.fileDatagrid = new Bunifu.UI.WinForms.BunifuDataGridView();
+            this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UcnColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CompanyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AmountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CostColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CurrencyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WarrantyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StatusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiscountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.datagridContext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editProductToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeviewPanel = new Bunifu.UI.WinForms.BunifuShadowPanel();
             this.treeView = new System.Windows.Forms.TreeView();
             this.contextTreeview = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -80,16 +94,6 @@ namespace Warehouse
             this.hideButton = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.bunifuButton1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.exitButton = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
-            this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UcnColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CompanyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AmountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CostColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CurrencyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.WarrantyColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StatusColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiscountColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sidebarPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.indicator)).BeginInit();
             this.logoPanel.SuspendLayout();
@@ -98,6 +102,7 @@ namespace Warehouse
             this.dashboardPage.SuspendLayout();
             this.filePage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileDatagrid)).BeginInit();
+            this.datagridContext.SuspendLayout();
             this.treeviewPanel.SuspendLayout();
             this.contextTreeview.SuspendLayout();
             this.panelButton.SuspendLayout();
@@ -140,7 +145,7 @@ namespace Warehouse
             // 
             // indicator
             // 
-            this.indicator.BackColor = System.Drawing.Color.LightSalmon;
+            this.indicator.BackColor = System.Drawing.Color.DodgerBlue;
             this.indicator.Location = new System.Drawing.Point(3, 83);
             this.indicator.Name = "indicator";
             this.indicator.Size = new System.Drawing.Size(4, 57);
@@ -166,11 +171,11 @@ namespace Warehouse
             this.settingsButton.ColorContrastOnClick = 45;
             this.settingsButton.ColorContrastOnHover = 45;
             this.settingsButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            borderEdges2.BottomLeft = true;
-            borderEdges2.BottomRight = true;
-            borderEdges2.TopLeft = true;
-            borderEdges2.TopRight = true;
-            this.settingsButton.CustomizableEdges = borderEdges2;
+            borderEdges15.BottomLeft = true;
+            borderEdges15.BottomRight = true;
+            borderEdges15.TopLeft = true;
+            borderEdges15.TopRight = true;
+            this.settingsButton.CustomizableEdges = borderEdges15;
             this.settingsButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.settingsButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.settingsButton.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -257,11 +262,11 @@ namespace Warehouse
             this.fileButton.ColorContrastOnClick = 45;
             this.fileButton.ColorContrastOnHover = 45;
             this.fileButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            borderEdges3.BottomLeft = true;
-            borderEdges3.BottomRight = true;
-            borderEdges3.TopLeft = true;
-            borderEdges3.TopRight = true;
-            this.fileButton.CustomizableEdges = borderEdges3;
+            borderEdges16.BottomLeft = true;
+            borderEdges16.BottomRight = true;
+            borderEdges16.TopLeft = true;
+            borderEdges16.TopRight = true;
+            this.fileButton.CustomizableEdges = borderEdges16;
             this.fileButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.fileButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.fileButton.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -348,11 +353,11 @@ namespace Warehouse
             this.menuButton.ColorContrastOnClick = 45;
             this.menuButton.ColorContrastOnHover = 45;
             this.menuButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            borderEdges4.BottomLeft = true;
-            borderEdges4.BottomRight = true;
-            borderEdges4.TopLeft = true;
-            borderEdges4.TopRight = true;
-            this.menuButton.CustomizableEdges = borderEdges4;
+            borderEdges17.BottomLeft = true;
+            borderEdges17.BottomRight = true;
+            borderEdges17.TopLeft = true;
+            borderEdges17.TopRight = true;
+            this.menuButton.CustomizableEdges = borderEdges17;
             this.menuButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.menuButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.menuButton.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -570,18 +575,19 @@ namespace Warehouse
             // fileDatagrid
             // 
             this.fileDatagrid.AllowCustomTheming = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.White;
+            this.fileDatagrid.AllowUserToAddRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(251)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             this.fileDatagrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.fileDatagrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.fileDatagrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.fileDatagrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.fileDatagrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.RaisedVertical;
             this.fileDatagrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(16)))), ((int)(((byte)(18)))));
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.DodgerBlue;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 11.75F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(115)))), ((int)(((byte)(204)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.fileDatagrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
@@ -597,46 +603,134 @@ namespace Warehouse
             this.WarrantyColumn,
             this.StatusColumn,
             this.DiscountColumn});
-            this.fileDatagrid.CurrentTheme.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(48)))), ((int)(((byte)(52)))));
+            this.fileDatagrid.ContextMenuStrip = this.datagridContext;
+            this.fileDatagrid.CurrentTheme.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(251)))), ((int)(((byte)(255)))));
             this.fileDatagrid.CurrentTheme.AlternatingRowsStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.fileDatagrid.CurrentTheme.AlternatingRowsStyle.ForeColor = System.Drawing.Color.White;
-            this.fileDatagrid.CurrentTheme.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(117)))), ((int)(((byte)(119)))));
-            this.fileDatagrid.CurrentTheme.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
-            this.fileDatagrid.CurrentTheme.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(16)))), ((int)(((byte)(18)))));
-            this.fileDatagrid.CurrentTheme.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(56)))), ((int)(((byte)(62)))));
-            this.fileDatagrid.CurrentTheme.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(16)))), ((int)(((byte)(18)))));
+            this.fileDatagrid.CurrentTheme.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Black;
+            this.fileDatagrid.CurrentTheme.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.fileDatagrid.CurrentTheme.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Black;
+            this.fileDatagrid.CurrentTheme.BackColor = System.Drawing.Color.White;
+            this.fileDatagrid.CurrentTheme.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
+            this.fileDatagrid.CurrentTheme.HeaderStyle.BackColor = System.Drawing.Color.DodgerBlue;
             this.fileDatagrid.CurrentTheme.HeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 11.75F, System.Drawing.FontStyle.Bold);
             this.fileDatagrid.CurrentTheme.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.fileDatagrid.CurrentTheme.HeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
+            this.fileDatagrid.CurrentTheme.HeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(115)))), ((int)(((byte)(204)))));
             this.fileDatagrid.CurrentTheme.HeaderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.fileDatagrid.CurrentTheme.Name = null;
-            this.fileDatagrid.CurrentTheme.RowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
+            this.fileDatagrid.CurrentTheme.RowsStyle.BackColor = System.Drawing.Color.White;
             this.fileDatagrid.CurrentTheme.RowsStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            this.fileDatagrid.CurrentTheme.RowsStyle.ForeColor = System.Drawing.Color.White;
-            this.fileDatagrid.CurrentTheme.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(117)))), ((int)(((byte)(119)))));
-            this.fileDatagrid.CurrentTheme.RowsStyle.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            this.fileDatagrid.CurrentTheme.RowsStyle.ForeColor = System.Drawing.Color.Black;
+            this.fileDatagrid.CurrentTheme.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            this.fileDatagrid.CurrentTheme.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(37)))), ((int)(((byte)(41)))));
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(114)))), ((int)(((byte)(117)))), ((int)(((byte)(119)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(232)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.fileDatagrid.DefaultCellStyle = dataGridViewCellStyle3;
             this.fileDatagrid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileDatagrid.EnableHeadersVisualStyles = false;
-            this.fileDatagrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(56)))), ((int)(((byte)(62)))));
-            this.fileDatagrid.HeaderBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(16)))), ((int)(((byte)(18)))));
+            this.fileDatagrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(221)))), ((int)(((byte)(238)))), ((int)(((byte)(255)))));
+            this.fileDatagrid.HeaderBackColor = System.Drawing.Color.DodgerBlue;
             this.fileDatagrid.HeaderBgColor = System.Drawing.Color.Empty;
             this.fileDatagrid.HeaderForeColor = System.Drawing.Color.White;
             this.fileDatagrid.Location = new System.Drawing.Point(155, 31);
+            this.fileDatagrid.MultiSelect = false;
             this.fileDatagrid.Name = "fileDatagrid";
             this.fileDatagrid.RowHeadersVisible = false;
             this.fileDatagrid.RowTemplate.Height = 40;
             this.fileDatagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.fileDatagrid.Size = new System.Drawing.Size(770, 626);
             this.fileDatagrid.TabIndex = 1;
-            this.fileDatagrid.Theme = Bunifu.UI.WinForms.BunifuDataGridView.PresetThemes.Dark;
+            this.fileDatagrid.Theme = Bunifu.UI.WinForms.BunifuDataGridView.PresetThemes.Light;
+            // 
+            // NameColumn
+            // 
+            this.NameColumn.HeaderText = "Name";
+            this.NameColumn.Name = "NameColumn";
+            // 
+            // CodeColumn
+            // 
+            this.CodeColumn.HeaderText = "Code";
+            this.CodeColumn.Name = "CodeColumn";
+            this.CodeColumn.ReadOnly = true;
+            // 
+            // UcnColumn
+            // 
+            this.UcnColumn.HeaderText = "UCN";
+            this.UcnColumn.Name = "UcnColumn";
+            this.UcnColumn.ReadOnly = true;
+            // 
+            // CompanyColumn
+            // 
+            this.CompanyColumn.HeaderText = "Company";
+            this.CompanyColumn.Name = "CompanyColumn";
+            this.CompanyColumn.ReadOnly = true;
+            // 
+            // AmountColumn
+            // 
+            this.AmountColumn.HeaderText = "Amount";
+            this.AmountColumn.Name = "AmountColumn";
+            this.AmountColumn.ReadOnly = true;
+            // 
+            // CostColumn
+            // 
+            this.CostColumn.HeaderText = "Cost";
+            this.CostColumn.Name = "CostColumn";
+            this.CostColumn.ReadOnly = true;
+            // 
+            // CurrencyColumn
+            // 
+            this.CurrencyColumn.HeaderText = "Currency";
+            this.CurrencyColumn.Name = "CurrencyColumn";
+            this.CurrencyColumn.ReadOnly = true;
+            // 
+            // WarrantyColumn
+            // 
+            this.WarrantyColumn.HeaderText = "Warranty";
+            this.WarrantyColumn.Name = "WarrantyColumn";
+            this.WarrantyColumn.ReadOnly = true;
+            // 
+            // StatusColumn
+            // 
+            this.StatusColumn.HeaderText = "Status";
+            this.StatusColumn.Name = "StatusColumn";
+            this.StatusColumn.ReadOnly = true;
+            // 
+            // DiscountColumn
+            // 
+            this.DiscountColumn.HeaderText = "Discount";
+            this.DiscountColumn.Name = "DiscountColumn";
+            this.DiscountColumn.ReadOnly = true;
+            // 
+            // datagridContext
+            // 
+            this.datagridContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editProductToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.deleteToolStripMenuItem});
+            this.datagridContext.Name = "datagridContext";
+            this.datagridContext.Size = new System.Drawing.Size(140, 54);
+            // 
+            // editProductToolStripMenuItem
+            // 
+            this.editProductToolStripMenuItem.Name = "editProductToolStripMenuItem";
+            this.editProductToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.editProductToolStripMenuItem.Text = "Edit Product";
+            this.editProductToolStripMenuItem.Click += new System.EventHandler(this.editProductToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(136, 6);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
             // 
             // treeviewPanel
             // 
@@ -750,11 +844,11 @@ namespace Warehouse
             this.addNodeButton.ColorContrastOnClick = 45;
             this.addNodeButton.ColorContrastOnHover = 45;
             this.addNodeButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            borderEdges1.BottomLeft = true;
-            borderEdges1.BottomRight = true;
-            borderEdges1.TopLeft = true;
-            borderEdges1.TopRight = true;
-            this.addNodeButton.CustomizableEdges = borderEdges1;
+            borderEdges18.BottomLeft = true;
+            borderEdges18.BottomRight = true;
+            borderEdges18.TopLeft = true;
+            borderEdges18.TopRight = true;
+            this.addNodeButton.CustomizableEdges = borderEdges18;
             this.addNodeButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.addNodeButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.addNodeButton.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -1010,7 +1104,7 @@ namespace Warehouse
             // topbarPanel
             // 
             this.topbarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(205)))), ((int)(((byte)(182)))));
-            this.topbarPanel.BackgroundColor = System.Drawing.Color.Silver;
+            this.topbarPanel.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.topbarPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("topbarPanel.BackgroundImage")));
             this.topbarPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.topbarPanel.BorderColor = System.Drawing.Color.Transparent;
@@ -1045,11 +1139,11 @@ namespace Warehouse
             this.hideButton.ColorContrastOnClick = 45;
             this.hideButton.ColorContrastOnHover = 45;
             this.hideButton.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges5.BottomLeft = true;
-            borderEdges5.BottomRight = true;
-            borderEdges5.TopLeft = true;
-            borderEdges5.TopRight = true;
-            this.hideButton.CustomizableEdges = borderEdges5;
+            borderEdges19.BottomLeft = true;
+            borderEdges19.BottomRight = true;
+            borderEdges19.TopLeft = true;
+            borderEdges19.TopRight = true;
+            this.hideButton.CustomizableEdges = borderEdges19;
             this.hideButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.hideButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.hideButton.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -1136,11 +1230,11 @@ namespace Warehouse
             this.bunifuButton1.ColorContrastOnClick = 45;
             this.bunifuButton1.ColorContrastOnHover = 45;
             this.bunifuButton1.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges6.BottomLeft = true;
-            borderEdges6.BottomRight = true;
-            borderEdges6.TopLeft = true;
-            borderEdges6.TopRight = true;
-            this.bunifuButton1.CustomizableEdges = borderEdges6;
+            borderEdges20.BottomLeft = true;
+            borderEdges20.BottomRight = true;
+            borderEdges20.TopLeft = true;
+            borderEdges20.TopRight = true;
+            this.bunifuButton1.CustomizableEdges = borderEdges20;
             this.bunifuButton1.DialogResult = System.Windows.Forms.DialogResult.None;
             this.bunifuButton1.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.bunifuButton1.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -1227,11 +1321,11 @@ namespace Warehouse
             this.exitButton.ColorContrastOnClick = 45;
             this.exitButton.ColorContrastOnHover = 45;
             this.exitButton.Cursor = System.Windows.Forms.Cursors.Default;
-            borderEdges7.BottomLeft = true;
-            borderEdges7.BottomRight = true;
-            borderEdges7.TopLeft = true;
-            borderEdges7.TopRight = true;
-            this.exitButton.CustomizableEdges = borderEdges7;
+            borderEdges21.BottomLeft = true;
+            borderEdges21.BottomRight = true;
+            borderEdges21.TopLeft = true;
+            borderEdges21.TopRight = true;
+            this.exitButton.CustomizableEdges = borderEdges21;
             this.exitButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.exitButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.exitButton.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -1299,65 +1393,6 @@ namespace Warehouse
             this.exitButton.UseDefaultRadiusAndThickness = true;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
-            // NameColumn
-            // 
-            this.NameColumn.HeaderText = "Name";
-            this.NameColumn.Name = "NameColumn";
-            // 
-            // CodeColumn
-            // 
-            this.CodeColumn.HeaderText = "Code";
-            this.CodeColumn.Name = "CodeColumn";
-            this.CodeColumn.ReadOnly = true;
-            // 
-            // UcnColumn
-            // 
-            this.UcnColumn.HeaderText = "UCN";
-            this.UcnColumn.Name = "UcnColumn";
-            this.UcnColumn.ReadOnly = true;
-            // 
-            // CompanyColumn
-            // 
-            this.CompanyColumn.HeaderText = "Company";
-            this.CompanyColumn.Name = "CompanyColumn";
-            this.CompanyColumn.ReadOnly = true;
-            // 
-            // AmountColumn
-            // 
-            this.AmountColumn.HeaderText = "Amount";
-            this.AmountColumn.Name = "AmountColumn";
-            this.AmountColumn.ReadOnly = true;
-            // 
-            // CostColumn
-            // 
-            this.CostColumn.HeaderText = "Cost";
-            this.CostColumn.Name = "CostColumn";
-            this.CostColumn.ReadOnly = true;
-            // 
-            // CurrencyColumn
-            // 
-            this.CurrencyColumn.HeaderText = "Currency";
-            this.CurrencyColumn.Name = "CurrencyColumn";
-            this.CurrencyColumn.ReadOnly = true;
-            // 
-            // WarrantyColumn
-            // 
-            this.WarrantyColumn.HeaderText = "Warranty";
-            this.WarrantyColumn.Name = "WarrantyColumn";
-            this.WarrantyColumn.ReadOnly = true;
-            // 
-            // StatusColumn
-            // 
-            this.StatusColumn.HeaderText = "Status";
-            this.StatusColumn.Name = "StatusColumn";
-            this.StatusColumn.ReadOnly = true;
-            // 
-            // DiscountColumn
-            // 
-            this.DiscountColumn.HeaderText = "Discount";
-            this.DiscountColumn.Name = "DiscountColumn";
-            this.DiscountColumn.ReadOnly = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1370,6 +1405,8 @@ namespace Warehouse
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.sidebarPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.indicator)).EndInit();
             this.logoPanel.ResumeLayout(false);
@@ -1380,6 +1417,7 @@ namespace Warehouse
             this.dashboardPage.PerformLayout();
             this.filePage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fileDatagrid)).EndInit();
+            this.datagridContext.ResumeLayout(false);
             this.treeviewPanel.ResumeLayout(false);
             this.contextTreeview.ResumeLayout(false);
             this.panelButton.ResumeLayout(false);
@@ -1438,6 +1476,10 @@ namespace Warehouse
         private System.Windows.Forms.DataGridViewTextBoxColumn WarrantyColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn StatusColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DiscountColumn;
+        private System.Windows.Forms.ContextMenuStrip datagridContext;
+        private System.Windows.Forms.ToolStripMenuItem editProductToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }
 
