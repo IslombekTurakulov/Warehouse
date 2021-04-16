@@ -38,9 +38,7 @@ namespace Warehouse
             {
                 if (nameTxtBox.Text == String.Empty) 
                     throw new InvalidOperationException(@"Incorrect name. The name can't be empty!");
-                if (!Regex.IsMatch(nameTxtBox.Text, @"^[a-zA-Zа-я-А-я]+$"))
-                    throw new InvalidOperationException(@"Incorrect name. The string must contain only latin letters!");
-                
+               
                 Program.CallBackMy.AddTreeViewEventHandler(nameTxtBox.Text, true);
                 this.Close();
             }

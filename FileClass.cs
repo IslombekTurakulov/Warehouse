@@ -64,7 +64,7 @@ namespace Warehouse
             set
             {
                 if (value == string.Empty) 
-                    throw new ArgumentException(@"Incorrect URL. The url is empty!");
+                    throw new ArgumentException(@"Incorrect UCN. The ucn is empty!");
                 _ucn = value.Trim().Replace(" ", "");
             }
         }
@@ -86,9 +86,13 @@ namespace Warehouse
 
         public int Discount { get; set; }
 
-        public BunifuPictureBox PictureBox { get; set; }
+        public string PictureBox { get; set; }
 
         public string Description { get; set; }
+
+        public FileClass()
+        {
+        }
     }
 
 }
