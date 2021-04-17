@@ -23,8 +23,8 @@ namespace Warehouse
         {
             public delegate void CallbackEvent(FileClass fileClass, bool isClosed);
             public static CallbackEvent CallbackEventHandler;
-            public delegate void TreeViewName(string treeviewText);
-            public static TreeViewName TreeViewEventHandler;
+            public delegate void ClassEditorData(FileClass fileClass);
+            public static ClassEditorData TreeViewEventHandler;
             public delegate void AddTreeView(string nodeViewName, bool nodeViewNameBoolean);
             public static AddTreeView AddTreeViewEventHandler;
         }

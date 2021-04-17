@@ -9,7 +9,8 @@ namespace Warehouse
 {
     public class FileClassManager
     {
-        private static List<FileClass> FileList { get; set; }
+        private static List<FileClass> FileList { get; } = new List<FileClass>();
+
         public void Add(FileClass data)
         {
             var list = new List<FileClass>() {data};

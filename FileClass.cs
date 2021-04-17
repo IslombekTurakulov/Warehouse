@@ -4,32 +4,43 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Bunifu.UI.WinForms;
+using CsvHelper.Configuration.Attributes;
 
 namespace Warehouse
 {
     public class FileClass
     {
-        private string _name;
-        private string _code;
-        private string _ucn;
-        private bool _warranty;
-        private bool _status;
-        private string _country;
+        [Name("Name")] private string _name;
+        [Name("Code")] private string _code;
+        [Name("UCN")] private string _ucn;
+        [Name("Warranty")] private bool _warranty;
+        [Name("Status")] private bool _status;
+        [Name("Country")] private string _country;
+        [Name("Company")] private string _company;
 
         public string Name
         {
             get => _name;
             set
             {
-                if (value == string.Empty) 
+                if (value.Trim(' ') == string.Empty) 
                     throw new ArgumentException(@"Incorrect Name. The name is empty!");
-                if (!Regex.IsMatch(value, @"^[a-zA-Zа-я-А-я]+$"))
-                    throw new ArgumentException(@"Incorrect Name. The string must contain only words!");
-                _name = value.Trim().Replace(" ", "");
+                /*if (!Regex.IsMatch(value, @"^[a-zA-Zа-я-А-я]+$"))
+                    throw new ArgumentException(@"Incorrect Name. The string must contain only words!");*/
+                _name = value.Trim();
             }
         }
 
-        public string Company { get; set; }
+        public string Company
+        {
+            get => _company;
+            set
+            {
+                if (value.Length <= 2)
+                    throw new ArgumentException("Incorrect company. The company name is empty!");
+                _company = value;
+            }
+        }
 
         public string Code
         {
@@ -37,7 +48,7 @@ namespace Warehouse
             set
             {
                 if (value == string.Empty) 
-                    throw new ArgumentException(@"Incorrect Name. The code is empty!");
+                    throw new ArgumentException(@"Incorrect code. The code is empty!");
                 if (!Regex.IsMatch(value, @"^[0-9]+$"))
                     throw new ArgumentException(@"Incorrect code. The string must contain only digits!");
                 _code = value.Trim().Replace(" ", "");

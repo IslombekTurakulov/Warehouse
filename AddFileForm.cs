@@ -14,9 +14,10 @@ namespace Warehouse
         Michael,
         James,
         Matthew,
-        Nicholas,
-        Christopher,
-        Joseph,
+        Islam,
+        Artem,
+        Igor,
+        Rafaat,
         Zachary,
         Joshua,
         Andrew,
@@ -34,6 +35,7 @@ namespace Warehouse
 
     public partial class AddFileForm : Form
     {
+        public List<FileClass> fileClass { get; set; } = new List<FileClass>();
         private static FileClass fileVariable { get; set; }
         private Random rnd = new Random();
         public AddFileForm()
@@ -59,22 +61,29 @@ namespace Warehouse
 
         private void randomUcnButton_Click(object sender, EventArgs e)
         {
-            string rest = $"{(char)rnd.Next(65, 91)}" +
-                          $"{(char)rnd.Next(97, 123)}" +
-                          $"{rnd.Next(700, 1000)}" +
-                          $"{(char)rnd.Next(97, 123)}" +
-                          $"{(char)rnd.Next(65, 91)}" +
-                          $"{rnd.Next(80, 1000)}" +
-                          $"{(char)rnd.Next(97, 123)}" +
-                          $"{rnd.Next(1, 1000)}" +
-                          $"{(char)rnd.Next(97, 123)}" +
-                          $"{(char)rnd.Next(65, 91)}" +
-                          $"{rnd.Next(465, 987)}" +
-                          $"{(char)rnd.Next(97, 123)}" +
-                          $"{(char)rnd.Next(65, 91)}" +
-                          $"{(char)rnd.Next(65, 91)}" +
-                          $"{(char)rnd.Next(97, 123)}";
-            ucnTxtBox.Text = rest;
+            try
+            {
+                string rest = $"{(char)rnd.Next(65, 91)}" +
+                              $"{(char)rnd.Next(97, 123)}" +
+                              $"{rnd.Next(700, 1000)}" +
+                              $"{(char)rnd.Next(97, 123)}" +
+                              $"{(char)rnd.Next(65, 91)}" +
+                              $"{rnd.Next(80, 1000)}" +
+                              $"{(char)rnd.Next(97, 123)}" +
+                              $"{rnd.Next(1, 1000)}" +
+                              $"{(char)rnd.Next(97, 123)}" +
+                              $"{(char)rnd.Next(65, 91)}" +
+                              $"{rnd.Next(465, 987)}" +
+                              $"{(char)rnd.Next(97, 123)}" +
+                              $"{(char)rnd.Next(65, 91)}" +
+                              $"{(char)rnd.Next(65, 91)}" +
+                              $"{(char)rnd.Next(97, 123)}";
+                ucnTxtBox.Text = rest;
+            }
+            catch (Exception)
+            {
+                ucnTxtBox.Text = "SDjre3245md34fgKUYr324";
+            }
         }
 
         private void nameTxtBox_TextChange(object sender, EventArgs e)
@@ -160,10 +169,7 @@ namespace Warehouse
 
         private void mainFuncButton_Click(object sender, EventArgs e) => controlPage.SetPage(mainFunc);
 
-        private void extraFuncButton_Click(object sender, EventArgs e)
-        {
-            controlPage.SetPage(extraFunc);
-        }
+        private void extraFuncButton_Click(object sender, EventArgs e) => controlPage.SetPage(extraFunc);
 
         private void applyButton_Click(object sender, EventArgs e)
         {
@@ -205,7 +211,7 @@ namespace Warehouse
         private void firstCostTxtBox_TextChange(object sender, EventArgs e)
         {
             try
-            {  
+            {
                 discountTxtBox.Enabled = false;
                 if (firstCostTxtBox.Text == String.Empty)
                     return;
@@ -252,7 +258,7 @@ namespace Warehouse
             try
             {
                 if (!int.TryParse(discountTxtBox.Text, out var newDiscount) || newDiscount < 0 || newDiscount > 100)
-                    MessageBox.Show("Invalid discount. The discount must be greater than 0 but less than 100");
+                    MessageBox.Show(@"Invalid discount. The discount must be greater than 0 but less than 100");
                 resultDiscountLabel.Visible = false;
                 if (int.TryParse(discountTxtBox.Text, out int discount) && discount > 0 || discount < 100)
                 {
@@ -265,13 +271,73 @@ namespace Warehouse
             }
             catch (Exception)
             {
-              // ignore
+                // ignore
             }
         }
 
         private void codeRandomButton_Click(object sender, EventArgs e)
         {
-            codeTxtBox.Text = $"{rnd.Next(164, 5390) * 352}";
+            try
+            {
+                codeTxtBox.Text = $"{rnd.Next(164, 5390) * 352}";
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
+        }
+
+        private void AddFileForm_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                if (fileClass != null)
+                {
+                    if (fileClass.Count > 0)
+                    {
+                        foreach (var data in fileClass)
+                        {
+
+                            var warrantyText = data.Warranty ? "Available" : "Unavailable";
+                            var statusText = data.Status ? "Available" : "Unavailable";
+
+                            nameTxtBox.Text = data.Name;
+                            codeTxtBox.Text = data.Code;
+                            ucnTxtBox.Text = data.UCN;
+
+                            companyTxtBox.Text = data.Company;
+                            countryDropdown.Text = data.Country;
+
+                            amountTxtBox.Text = data.Amount.ToString();
+                            firstCostTxtBox.Text = data.Cost.ToString(CultureInfo.InvariantCulture);
+                            currencyDropdown.Text = data.Currency;
+
+                            warrantyDropdown.Text = warrantyText;
+                            statusDropdown.Text = statusText;
+
+                            discountTxtBox.Text = data.Discount.ToString();
+                            imageFileBox.Image = Image.FromFile(data.PictureBox);
+                            descriptionTxtBox.Text = data.Description ?? String.Empty;
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+               // ignored
+            }
+        }
+
+        private void countryRandomButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                countryDropdown.Text = countryDropdown.Items[rnd.Next(1, 196)].ToString();
+            }
+            catch (Exception)
+            {
+                countryDropdown.Text = @"Russian Federation";
+            }
         }
     }
 }

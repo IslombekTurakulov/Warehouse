@@ -16,7 +16,7 @@ namespace Warehouse
         public EditTreeName()
         {
             InitializeComponent();
-            bunifuFormDock1.SubscribeControlToDragEvents(topbarPanel);
+            bunifuFormDock.SubscribeControlToDragEvents(topbarPanel);
         }
 
         private void exitButton_Click(object sender, EventArgs e)
