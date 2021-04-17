@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Windows.Forms;
-using System.Xml;
 using System.Xml.Serialization;
-using Bunifu.UI.WinForms;
 using CsvHelper;
-using CsvHelper.Configuration;
 
 namespace Warehouse
 {
@@ -83,11 +77,6 @@ namespace Warehouse
             controlPage.SetPage(filePage);
         }
 
-        private void settingsButton_Click(object sender, EventArgs e)
-        {
-            indicator.Top = ((Control)sender).Top;
-            controlPage.SetPage(settingsPage);
-        }
 
         private void bunifuPictureBox1_Click(object sender, EventArgs e)
         {
@@ -337,13 +326,7 @@ namespace Warehouse
 
         private static void SaveTree(string filename, TreeView tv)
         {
-            var data = new List<DataNode>();
-
-            foreach (TreeNode node in tv.Nodes)
-            {
-                var dataNode = GetDataNode(node);
-                data.Add(dataNode);
-            }
+            var data = (from TreeNode node in tv.Nodes select GetDataNode(node)).ToList();
 
             SerializeToFile(data, filename);
         }
@@ -351,7 +334,6 @@ namespace Warehouse
         private static DataNode GetDataNode(TreeNode node)
         {
             var dataNode = new DataNode { Text = node.Text, IsExpanded = node.IsExpanded, IsSelected = node.IsSelected };
-
             foreach (TreeNode n in node.Nodes)
             {
                 var d = GetDataNode(n);
@@ -363,16 +345,29 @@ namespace Warehouse
 
         private void deleteChildNodeStrip_Click(object sender, EventArgs e)
         {
-            DirectoryInfo newRootDit = new DirectoryInfo("data");
-            if (!newRootDit.Exists)
-                newRootDit.Create();
-            else
+            try
             {
-                var path = $"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json";
-                if (File.Exists(path))
-                    File.Delete(path);
-                treeView.SelectedNode.Nodes.Clear();
-                treeView.Nodes.Remove(treeView.SelectedNode);
+                DirectoryInfo newRootDit = new DirectoryInfo("data");
+                if (!newRootDit.Exists)
+                    newRootDit.Create();
+                else
+                {
+                    var path = $"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json";
+                    if (File.Exists(path))
+                        File.Delete(path);
+                    if (treeView.SelectedNode.Nodes.Count >= 1)
+                    {
+                        TreeNodeCollection nodes = treeView.SelectedNode.Nodes;
+                        foreach (TreeNode node in nodes)
+                            File.Delete($"{node.Text}.json");
+                    }
+                    treeView.SelectedNode.Nodes.Clear();
+                    treeView.Nodes.Remove(treeView.SelectedNode);
+                }
+            }
+            catch (Exception)
+            {
+                // ignored
             }
         }
 
@@ -387,14 +382,15 @@ namespace Warehouse
                 {
                     if (dataGridProduct.Rows.Count > 0)
                         dataGridProduct.Rows.Clear();
-                    if (!File.Exists($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json"))
+                    var path = $"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json";
+                    if (!File.Exists(path))
                     {
                         treeView.Nodes.Remove(treeView.SelectedNode);
                         throw new ArgumentException("File doesn't exist");
                     }
 
                     using (FileStream fs =
-                        new FileStream($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json",
+                        new FileStream(path,
                             FileMode.OpenOrCreate, FileAccess.ReadWrite))
                     {
                         using var sReader = new StreamReader(fs);
@@ -406,15 +402,18 @@ namespace Warehouse
                             if (input.Length < 10)
                                 throw new ArgumentException("File is empty");
                             List<FileClass> listOfRestoredPerson =
-                                JsonSerializer.Deserialize<List<FileClass>>(input ?? string.Empty);
-                            foreach (var restoredPerson in listOfRestoredPerson)
-                            {
-                                dataGridProduct.Rows.Add(restoredPerson?.Name, restoredPerson?.Code,
-                                    restoredPerson?.UCN, restoredPerson?.Company,
-                                    restoredPerson?.Amount, restoredPerson?.Cost,
-                                    restoredPerson?.Currency, restoredPerson?.Warranty,
-                                    restoredPerson?.Status, restoredPerson?.Discount, restoredPerson?.Country);
-                            }
+                                JsonSerializer.Deserialize<List<FileClass>>(input);
+                            if (listOfRestoredPerson != null)
+                                foreach (var restoredPerson in listOfRestoredPerson)
+                                {
+                                    dataGridProduct.Rows.Add(restoredPerson?.Name, 
+                                        restoredPerson?.Code,
+                                        restoredPerson?.UCN, restoredPerson?.Company,
+                                        restoredPerson?.Amount, restoredPerson?.Cost,
+                                        restoredPerson?.Currency, restoredPerson?.Warranty,
+                                        restoredPerson?.Status, restoredPerson?.Discount, 
+                                        restoredPerson?.Country);
+                                }
                         }
                     }
                 }
@@ -491,8 +490,11 @@ namespace Warehouse
         {
             try
             {
-                treeView.TreeViewNodeSorter = new SortNode();
-                treeView.Sort();
+                if (treeView.Nodes.Count > 2)
+                {
+                    treeView.TreeViewNodeSorter = new SortNode();
+                    treeView.Sort();
+                }
             }
             catch (Exception)
             {
@@ -588,6 +590,11 @@ namespace Warehouse
             {
                 PrintRecursive(n);
             }
+        }
+
+        private void okButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
