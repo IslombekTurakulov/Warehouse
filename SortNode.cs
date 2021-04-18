@@ -8,18 +8,19 @@ namespace Warehouse
     // Create a node sorter that implements the IComparer interface.
     public class SortNode : IComparer
     {
+
+        public SortNode() { }
         // Compare the length of the strings, or the strings
         // themselves, if they are the same length.
         public int Compare(object x, object y)
         {
-            TreeNode tx = x as TreeNode;
-            TreeNode ty = y as TreeNode;
-            // Compare the length of the strings, returning the difference.
-            if (tx.Text.Length != ty.Text.Length)
-                return tx.Text.Length - ty.Text.Length;
-
-            // If they are the same length, call Compare.
-            return String.CompareOrdinal(tx.Text, ty.Text);
+            var tx = x as TreeNode;
+            var ty = y as TreeNode;
+            // If this is a child node, preserve the same order by comparing the node Index, not the text
+            if (tx.Parent != null && ty.Parent != null)
+                return tx.Index - ty.Index;
+            // This is a root node, compare by name.
+            return string.Compare(tx.Text, ty.Text);
         }
     } 
 }

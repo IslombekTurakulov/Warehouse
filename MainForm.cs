@@ -15,7 +15,6 @@ namespace Warehouse
     {
         private static FileClass fileClasses;
         private AddFileForm addFileForm;
-        private string filePath;
         private string nodeViewName;
         private bool nodeViewNameBoolean;
         private bool isClosedForm;
@@ -285,6 +284,7 @@ namespace Warehouse
                     FillNode(treeView, treeNode, d);
                 }
                 treeView.ExpandAll();
+                RefreshDashboard();
             }
             catch (Exception ex)
             {
@@ -292,6 +292,16 @@ namespace Warehouse
             }
         }
 
+
+        private void RefreshDashboard()
+        {
+            var treeNodeCollection = treeView.Nodes;
+            chartDashboard.DataSource = treeNodeCollection;
+            var newRootDit = new DirectoryInfo("data");
+            var amountOfFiles = newRootDit.GetFiles().Length;
+            totalFilesNumLabel.Text = $@"{amountOfFiles}";
+            totalNodesNumLabel.Text = $@"{treeView.Nodes.Count}";
+        }
         public static void SerializeToFile<T>(T data, string filename)
         {
             using (var sw = new StreamWriter(filename))
@@ -424,11 +434,6 @@ namespace Warehouse
             }
         }
 
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void editProductToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -490,11 +495,8 @@ namespace Warehouse
         {
             try
             {
-                if (treeView.Nodes.Count > 2)
-                {
-                    treeView.TreeViewNodeSorter = new SortNode();
-                    treeView.Sort();
-                }
+                treeView.TreeViewNodeSorter = new SortNode();
+                treeView.Sort();
             }
             catch (Exception)
             {
@@ -567,10 +569,6 @@ namespace Warehouse
             }
         }
 
-        private void quantitySort_Click(object sender, EventArgs e)
-        {
-        }
-
         private void PrintRecursive(TreeNode treeNode)
         {
             node.Add(treeNode);
@@ -592,9 +590,5 @@ namespace Warehouse
             }
         }
 
-        private void okButton_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

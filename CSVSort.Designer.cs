@@ -482,6 +482,7 @@ namespace Warehouse
             this.Controls.Add(this.topbarPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CSVSort";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CSVSort";
             this.topbarPanel.ResumeLayout(false);
             this.ResumeLayout(false);

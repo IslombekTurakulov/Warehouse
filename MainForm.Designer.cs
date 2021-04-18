@@ -1,5 +1,7 @@
 ﻿
 
+using Bunifu.Framework.UI;
+
 namespace Warehouse
 {
     partial class MainForm
@@ -31,21 +33,23 @@ namespace Warehouse
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges5 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges6 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
-            Utilities.BunifuPages.BunifuAnimatorNS.Animation animation1 = new Utilities.BunifuPages.BunifuAnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges2 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Utilities.BunifuPages.BunifuAnimatorNS.Animation animation1 = new Utilities.BunifuPages.BunifuAnimatorNS.Animation();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
-            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges2 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges3 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges4 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges5 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
+            Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges6 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges7 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges8 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
             Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges borderEdges9 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderEdges();
-            this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.sidebarPanel = new Bunifu.UI.WinForms.BunifuShadowPanel();
             this.indicator = new System.Windows.Forms.PictureBox();
             this.fileButton = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
@@ -56,9 +60,21 @@ namespace Warehouse
             this.logoPicture = new Bunifu.UI.WinForms.BunifuPictureBox();
             this.controlPage = new Bunifu.UI.WinForms.BunifuPages();
             this.dashboardPage = new System.Windows.Forms.TabPage();
+            this.thirdDashboardPanel = new Bunifu.UI.WinForms.BunifuPanel();
+            this.chartDashboard = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.statisticsLabel = new Bunifu.UI.WinForms.BunifuLabel();
+            this.secondDashboardPanel = new Bunifu.UI.WinForms.BunifuPanel();
+            this.nodePicture = new Bunifu.UI.WinForms.BunifuPictureBox();
+            this.totalNodesLabel = new Bunifu.UI.WinForms.BunifuLabel();
+            this.totalNodesNumLabel = new Bunifu.UI.WinForms.BunifuLabel();
+            this.firstDashboardPanel = new Bunifu.UI.WinForms.BunifuPanel();
+            this.filePicture = new Bunifu.UI.WinForms.BunifuPictureBox();
+            this.totalFilesLabel = new Bunifu.UI.WinForms.BunifuLabel();
+            this.totalFilesNumLabel = new Bunifu.UI.WinForms.BunifuLabel();
             this.dashboardLabelIntro = new Bunifu.UI.WinForms.BunifuLabel();
             this.filePage = new System.Windows.Forms.TabPage();
             this.dataGridProduct = new Bunifu.UI.WinForms.BunifuDataGridView();
+            dataGridProduct.HeaderBgColor = System.Drawing.Color.Empty;
             this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CodeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UcnColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,21 +107,27 @@ namespace Warehouse
             this.secondPanelButton = new System.Windows.Forms.Panel();
             this.sortButton = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.addNodeButton = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
-            this.topFilePanel = new Bunifu.UI.WinForms.BunifuPanel();
             this.bunifuFormDock = new Bunifu.UI.WinForms.BunifuFormDock();
             this.colorTransitionSide = new Bunifu.UI.WinForms.BunifuColorTransition(this.components);
             this.topbarPanel = new Bunifu.UI.WinForms.BunifuPanel();
             this.hideButton = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.bunifuButton1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.exitButton = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
+            this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
             this.sidebarPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.indicator)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.indicator)).BeginInit();
             this.logoPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.logoPicture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.logoPicture)).BeginInit();
             this.controlPage.SuspendLayout();
             this.dashboardPage.SuspendLayout();
+            this.thirdDashboardPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.chartDashboard)).BeginInit();
+            this.secondDashboardPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.nodePicture)).BeginInit();
+            this.firstDashboardPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize) (this.filePicture)).BeginInit();
             this.filePage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridProduct)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.dataGridProduct)).BeginInit();
             this.datagridContext.SuspendLayout();
             this.treeviewPanel.SuspendLayout();
             this.quantity.SuspendLayout();
@@ -115,11 +137,6 @@ namespace Warehouse
             this.secondPanelButton.SuspendLayout();
             this.topbarPanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // bunifuElipse
-            // 
-            this.bunifuElipse.ElipseRadius = 5;
-            this.bunifuElipse.TargetControl = this;
             // 
             // sidebarPanel
             // 
@@ -170,22 +187,26 @@ namespace Warehouse
             this.fileButton.AutoSizeRightIcon = true;
             this.fileButton.BackColor = System.Drawing.Color.Transparent;
             this.fileButton.BackColor1 = System.Drawing.Color.Transparent;
-            this.fileButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("fileButton.BackgroundImage")));
+            this.fileButton.BackgroundImage =
+                ((System.Drawing.Image) (resources.GetObject("fileButton.BackgroundImage")));
             this.fileButton.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.fileButton.ButtonText = "File Data";
             this.fileButton.ButtonTextMarginLeft = 0;
             this.fileButton.ColorContrastOnClick = 45;
             this.fileButton.ColorContrastOnHover = 45;
             this.fileButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            borderEdges5.BottomLeft = true;
-            borderEdges5.BottomRight = true;
-            borderEdges5.TopLeft = true;
-            borderEdges5.TopRight = true;
-            this.fileButton.CustomizableEdges = borderEdges5;
+            borderEdges1.BottomLeft = true;
+            borderEdges1.BottomRight = true;
+            borderEdges1.TopLeft = true;
+            borderEdges1.TopRight = true;
+            this.fileButton.CustomizableEdges = borderEdges1;
             this.fileButton.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.fileButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
-            this.fileButton.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.fileButton.DisabledForecolor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
+            this.fileButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int) (((byte) (191)))),
+                ((int) (((byte) (191)))), ((int) (((byte) (191)))));
+            this.fileButton.DisabledFillColor = System.Drawing.Color.FromArgb(((int) (((byte) (204)))),
+                ((int) (((byte) (204)))), ((int) (((byte) (204)))));
+            this.fileButton.DisabledForecolor = System.Drawing.Color.FromArgb(((int) (((byte) (168)))),
+                ((int) (((byte) (160)))), ((int) (((byte) (168)))));
             this.fileButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.fileButton.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Idle;
             this.fileButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
@@ -208,12 +229,16 @@ namespace Warehouse
             this.fileButton.IndicateFocus = true;
             this.fileButton.Location = new System.Drawing.Point(0, 137);
             this.fileButton.Name = "fileButton";
-            this.fileButton.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
+            this.fileButton.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int) (((byte) (191)))),
+                ((int) (((byte) (191)))), ((int) (((byte) (191)))));
             this.fileButton.OnDisabledState.BorderRadius = 1;
-            this.fileButton.OnDisabledState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.fileButton.OnDisabledState.BorderStyle =
+                Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.fileButton.OnDisabledState.BorderThickness = 1;
-            this.fileButton.OnDisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.fileButton.OnDisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
+            this.fileButton.OnDisabledState.FillColor = System.Drawing.Color.FromArgb(((int) (((byte) (204)))),
+                ((int) (((byte) (204)))), ((int) (((byte) (204)))));
+            this.fileButton.OnDisabledState.ForeColor = System.Drawing.Color.FromArgb(((int) (((byte) (168)))),
+                ((int) (((byte) (160)))), ((int) (((byte) (168)))));
             this.fileButton.OnDisabledState.IconLeftImage = null;
             this.fileButton.OnDisabledState.IconRightImage = null;
             this.fileButton.onHoverState.BorderColor = System.Drawing.Color.White;
@@ -234,7 +259,8 @@ namespace Warehouse
             this.fileButton.OnIdleState.IconRightImage = null;
             this.fileButton.OnPressedState.BorderColor = System.Drawing.Color.White;
             this.fileButton.OnPressedState.BorderRadius = 1;
-            this.fileButton.OnPressedState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.fileButton.OnPressedState.BorderStyle =
+                Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.fileButton.OnPressedState.BorderThickness = 1;
             this.fileButton.OnPressedState.FillColor = System.Drawing.Color.White;
             this.fileButton.OnPressedState.ForeColor = System.Drawing.Color.LightSalmon;
@@ -261,22 +287,26 @@ namespace Warehouse
             this.menuButton.AutoSizeRightIcon = true;
             this.menuButton.BackColor = System.Drawing.Color.Transparent;
             this.menuButton.BackColor1 = System.Drawing.Color.Transparent;
-            this.menuButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("menuButton.BackgroundImage")));
+            this.menuButton.BackgroundImage =
+                ((System.Drawing.Image) (resources.GetObject("menuButton.BackgroundImage")));
             this.menuButton.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.menuButton.ButtonText = "Dashboard";
             this.menuButton.ButtonTextMarginLeft = 0;
             this.menuButton.ColorContrastOnClick = 45;
             this.menuButton.ColorContrastOnHover = 45;
             this.menuButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            borderEdges6.BottomLeft = true;
-            borderEdges6.BottomRight = true;
-            borderEdges6.TopLeft = true;
-            borderEdges6.TopRight = true;
-            this.menuButton.CustomizableEdges = borderEdges6;
+            borderEdges2.BottomLeft = true;
+            borderEdges2.BottomRight = true;
+            borderEdges2.TopLeft = true;
+            borderEdges2.TopRight = true;
+            this.menuButton.CustomizableEdges = borderEdges2;
             this.menuButton.DialogResult = System.Windows.Forms.DialogResult.None;
-            this.menuButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
-            this.menuButton.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.menuButton.DisabledForecolor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
+            this.menuButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int) (((byte) (191)))),
+                ((int) (((byte) (191)))), ((int) (((byte) (191)))));
+            this.menuButton.DisabledFillColor = System.Drawing.Color.FromArgb(((int) (((byte) (204)))),
+                ((int) (((byte) (204)))), ((int) (((byte) (204)))));
+            this.menuButton.DisabledForecolor = System.Drawing.Color.FromArgb(((int) (((byte) (168)))),
+                ((int) (((byte) (160)))), ((int) (((byte) (168)))));
             this.menuButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.menuButton.FocusState = Bunifu.UI.WinForms.BunifuButton.BunifuButton.ButtonStates.Idle;
             this.menuButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
@@ -299,12 +329,16 @@ namespace Warehouse
             this.menuButton.IndicateFocus = true;
             this.menuButton.Location = new System.Drawing.Point(0, 83);
             this.menuButton.Name = "menuButton";
-            this.menuButton.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
+            this.menuButton.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int) (((byte) (191)))),
+                ((int) (((byte) (191)))), ((int) (((byte) (191)))));
             this.menuButton.OnDisabledState.BorderRadius = 1;
-            this.menuButton.OnDisabledState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.menuButton.OnDisabledState.BorderStyle =
+                Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.menuButton.OnDisabledState.BorderThickness = 1;
-            this.menuButton.OnDisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
-            this.menuButton.OnDisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(168)))), ((int)(((byte)(160)))), ((int)(((byte)(168)))));
+            this.menuButton.OnDisabledState.FillColor = System.Drawing.Color.FromArgb(((int) (((byte) (204)))),
+                ((int) (((byte) (204)))), ((int) (((byte) (204)))));
+            this.menuButton.OnDisabledState.ForeColor = System.Drawing.Color.FromArgb(((int) (((byte) (168)))),
+                ((int) (((byte) (160)))), ((int) (((byte) (168)))));
             this.menuButton.OnDisabledState.IconLeftImage = null;
             this.menuButton.OnDisabledState.IconRightImage = null;
             this.menuButton.onHoverState.BorderColor = System.Drawing.Color.White;
@@ -325,7 +359,8 @@ namespace Warehouse
             this.menuButton.OnIdleState.IconRightImage = null;
             this.menuButton.OnPressedState.BorderColor = System.Drawing.Color.White;
             this.menuButton.OnPressedState.BorderRadius = 1;
-            this.menuButton.OnPressedState.BorderStyle = Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
+            this.menuButton.OnPressedState.BorderStyle =
+                Bunifu.UI.WinForms.BunifuButton.BunifuButton.BorderStyles.Solid;
             this.menuButton.OnPressedState.BorderThickness = 1;
             this.menuButton.OnPressedState.FillColor = System.Drawing.Color.White;
             this.menuButton.OnPressedState.ForeColor = System.Drawing.Color.LightSalmon;
@@ -343,7 +378,8 @@ namespace Warehouse
             // bunifuSeparator1
             // 
             this.bunifuSeparator1.BackColor = System.Drawing.Color.Transparent;
-            this.bunifuSeparator1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bunifuSeparator1.BackgroundImage")));
+            this.bunifuSeparator1.BackgroundImage =
+                ((System.Drawing.Image) (resources.GetObject("bunifuSeparator1.BackgroundImage")));
             this.bunifuSeparator1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.bunifuSeparator1.DashCap = Bunifu.UI.WinForms.BunifuSeparator.CapStyles.Flat;
             this.bunifuSeparator1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -359,7 +395,8 @@ namespace Warehouse
             // logoPanel
             // 
             this.logoPanel.BackgroundColor = System.Drawing.Color.WhiteSmoke;
-            this.logoPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("logoPanel.BackgroundImage")));
+            this.logoPanel.BackgroundImage =
+                ((System.Drawing.Image) (resources.GetObject("logoPanel.BackgroundImage")));
             this.logoPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.logoPanel.BorderColor = System.Drawing.Color.Transparent;
             this.logoPanel.BorderRadius = 3;
@@ -397,7 +434,7 @@ namespace Warehouse
             this.logoPicture.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.logoPicture.AutoSizeHeight = true;
             this.logoPicture.BorderRadius = 28;
-            this.logoPicture.Image = ((System.Drawing.Image)(resources.GetObject("logoPicture.Image")));
+            this.logoPicture.Image = ((System.Drawing.Image) (resources.GetObject("logoPicture.Image")));
             this.logoPicture.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.logoPicture.IsCircle = true;
             this.logoPicture.Location = new System.Drawing.Point(12, 12);
@@ -408,7 +445,8 @@ namespace Warehouse
             this.logoPicture.TabStop = false;
             this.logoPicture.Type = Bunifu.UI.WinForms.BunifuPictureBox.Types.Circle;
             this.logoPicture.Click += new System.EventHandler(this.bunifuPictureBox1_Click);
-            this.logoPicture.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.logoPicture_MouseDoubleClick);
+            this.logoPicture.MouseDoubleClick +=
+                new System.Windows.Forms.MouseEventHandler(this.logoPicture_MouseDoubleClick);
             // 
             // controlPage
             // 
@@ -428,18 +466,18 @@ namespace Warehouse
             this.controlPage.Size = new System.Drawing.Size(1010, 773);
             this.controlPage.TabIndex = 2;
             animation1.AnimateOnlyDifferences = true;
-            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.BlindCoeff = ((System.Drawing.PointF) (resources.GetObject("animation1.BlindCoeff")));
             animation1.LeafCoeff = 0F;
             animation1.MaxTime = 1F;
             animation1.MinTime = 0F;
-            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
-            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicCoeff = ((System.Drawing.PointF) (resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF) (resources.GetObject("animation1.MosaicShift")));
             animation1.MosaicSize = 0;
             animation1.Padding = new System.Windows.Forms.Padding(0, 0, 0, 0);
             animation1.RotateCoeff = 0F;
             animation1.RotateLimit = 0F;
-            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
-            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.ScaleCoeff = ((System.Drawing.PointF) (resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF) (resources.GetObject("animation1.SlideCoeff")));
             animation1.TimeCoeff = 0F;
             animation1.TransparencyCoeff = 1F;
             this.controlPage.Transition = animation1;
@@ -447,6 +485,9 @@ namespace Warehouse
             // 
             // dashboardPage
             // 
+            this.dashboardPage.Controls.Add(this.thirdDashboardPanel);
+            this.dashboardPage.Controls.Add(this.secondDashboardPanel);
+            this.dashboardPage.Controls.Add(this.firstDashboardPanel);
             this.dashboardPage.Controls.Add(this.dashboardLabelIntro);
             this.dashboardPage.Location = new System.Drawing.Point(4, 4);
             this.dashboardPage.Name = "dashboardPage";
@@ -455,6 +496,204 @@ namespace Warehouse
             this.dashboardPage.TabIndex = 0;
             this.dashboardPage.Text = "Dashboard";
             this.dashboardPage.UseVisualStyleBackColor = true;
+            // 
+            // thirdDashboardPanel
+            // 
+            this.thirdDashboardPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.thirdDashboardPanel.BackgroundColor = System.Drawing.Color.LightGray;
+            this.thirdDashboardPanel.BackgroundImage =
+                ((System.Drawing.Image) (resources.GetObject("thirdDashboardPanel.BackgroundImage")));
+            this.thirdDashboardPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.thirdDashboardPanel.BorderColor = System.Drawing.Color.Transparent;
+            this.thirdDashboardPanel.BorderRadius = 3;
+            this.thirdDashboardPanel.BorderThickness = 1;
+            this.thirdDashboardPanel.Controls.Add(this.chartDashboard);
+            this.thirdDashboardPanel.Controls.Add(this.statisticsLabel);
+            this.thirdDashboardPanel.Location = new System.Drawing.Point(58, 307);
+            this.thirdDashboardPanel.Name = "thirdDashboardPanel";
+            this.thirdDashboardPanel.ShowBorders = true;
+            this.thirdDashboardPanel.Size = new System.Drawing.Size(905, 368);
+            this.thirdDashboardPanel.TabIndex = 5;
+            // 
+            // chartDashboard
+            // 
+            this.chartDashboard.Anchor = System.Windows.Forms.AnchorStyles.None;
+            chartArea1.Name = "ChartArea1";
+            this.chartDashboard.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartDashboard.Legends.Add(legend1);
+            this.chartDashboard.Location = new System.Drawing.Point(20, 55);
+            this.chartDashboard.Name = "chartDashboard";
+            this.chartDashboard.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartDashboard.Series.Add(series1);
+            this.chartDashboard.Size = new System.Drawing.Size(437, 300);
+            this.chartDashboard.TabIndex = 6;
+            this.chartDashboard.Text = "chart";
+            // 
+            // statisticsLabel
+            // 
+            this.statisticsLabel.AllowParentOverrides = false;
+            this.statisticsLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.statisticsLabel.AutoEllipsis = false;
+            this.statisticsLabel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.statisticsLabel.CursorType = System.Windows.Forms.Cursors.Default;
+            this.statisticsLabel.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
+            this.statisticsLabel.ForeColor = System.Drawing.Color.Black;
+            this.statisticsLabel.Location = new System.Drawing.Point(20, 19);
+            this.statisticsLabel.Name = "statisticsLabel";
+            this.statisticsLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.statisticsLabel.Size = new System.Drawing.Size(237, 30);
+            this.statisticsLabel.TabIndex = 4;
+            this.statisticsLabel.Text = "Total program statistics:";
+            this.statisticsLabel.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.statisticsLabel.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // secondDashboardPanel
+            // 
+            this.secondDashboardPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.secondDashboardPanel.BackgroundColor = System.Drawing.Color.LightGray;
+            this.secondDashboardPanel.BackgroundImage =
+                ((System.Drawing.Image) (resources.GetObject("secondDashboardPanel.BackgroundImage")));
+            this.secondDashboardPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.secondDashboardPanel.BorderColor = System.Drawing.Color.Transparent;
+            this.secondDashboardPanel.BorderRadius = 3;
+            this.secondDashboardPanel.BorderThickness = 1;
+            this.secondDashboardPanel.Controls.Add(this.nodePicture);
+            this.secondDashboardPanel.Controls.Add(this.totalNodesLabel);
+            this.secondDashboardPanel.Controls.Add(this.totalNodesNumLabel);
+            this.secondDashboardPanel.Location = new System.Drawing.Point(549, 54);
+            this.secondDashboardPanel.Name = "secondDashboardPanel";
+            this.secondDashboardPanel.ShowBorders = true;
+            this.secondDashboardPanel.Size = new System.Drawing.Size(414, 153);
+            this.secondDashboardPanel.TabIndex = 4;
+            // 
+            // nodePicture
+            // 
+            this.nodePicture.AllowFocused = false;
+            this.nodePicture.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.nodePicture.AutoSizeHeight = true;
+            this.nodePicture.BackColor = System.Drawing.Color.Transparent;
+            this.nodePicture.BorderRadius = 0;
+            this.nodePicture.Image = global::Warehouse.Properties.Resources.node;
+            this.nodePicture.IsCircle = true;
+            this.nodePicture.Location = new System.Drawing.Point(266, 21);
+            this.nodePicture.Name = "nodePicture";
+            this.nodePicture.Size = new System.Drawing.Size(115, 115);
+            this.nodePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.nodePicture.TabIndex = 7;
+            this.nodePicture.TabStop = false;
+            this.nodePicture.Type = Bunifu.UI.WinForms.BunifuPictureBox.Types.Square;
+            // 
+            // totalNodesLabel
+            // 
+            this.totalNodesLabel.AllowParentOverrides = false;
+            this.totalNodesLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.totalNodesLabel.AutoEllipsis = false;
+            this.totalNodesLabel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.totalNodesLabel.CursorType = System.Windows.Forms.Cursors.Default;
+            this.totalNodesLabel.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
+            this.totalNodesLabel.ForeColor = System.Drawing.Color.Black;
+            this.totalNodesLabel.Location = new System.Drawing.Point(77, 79);
+            this.totalNodesLabel.Name = "totalNodesLabel";
+            this.totalNodesLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.totalNodesLabel.Size = new System.Drawing.Size(115, 30);
+            this.totalNodesLabel.TabIndex = 6;
+            this.totalNodesLabel.Text = "Total nodes";
+            this.totalNodesLabel.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.totalNodesLabel.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // totalNodesNumLabel
+            // 
+            this.totalNodesNumLabel.AllowParentOverrides = false;
+            this.totalNodesNumLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.totalNodesNumLabel.AutoEllipsis = false;
+            this.totalNodesNumLabel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.totalNodesNumLabel.CursorType = System.Windows.Forms.Cursors.Default;
+            this.totalNodesNumLabel.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
+            this.totalNodesNumLabel.ForeColor = System.Drawing.Color.Black;
+            this.totalNodesNumLabel.Location = new System.Drawing.Point(124, 16);
+            this.totalNodesNumLabel.Name = "totalNodesNumLabel";
+            this.totalNodesNumLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.totalNodesNumLabel.Size = new System.Drawing.Size(16, 37);
+            this.totalNodesNumLabel.TabIndex = 5;
+            this.totalNodesNumLabel.Text = "0";
+            this.totalNodesNumLabel.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.totalNodesNumLabel.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // firstDashboardPanel
+            // 
+            this.firstDashboardPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.firstDashboardPanel.BackgroundColor = System.Drawing.Color.LightGray;
+            this.firstDashboardPanel.BackgroundImage =
+                ((System.Drawing.Image) (resources.GetObject("firstDashboardPanel.BackgroundImage")));
+            this.firstDashboardPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.firstDashboardPanel.BorderColor = System.Drawing.Color.Transparent;
+            this.firstDashboardPanel.BorderRadius = 3;
+            this.firstDashboardPanel.BorderThickness = 1;
+            this.firstDashboardPanel.Controls.Add(this.filePicture);
+            this.firstDashboardPanel.Controls.Add(this.totalFilesLabel);
+            this.firstDashboardPanel.Controls.Add(this.totalFilesNumLabel);
+            this.firstDashboardPanel.Location = new System.Drawing.Point(58, 54);
+            this.firstDashboardPanel.Name = "firstDashboardPanel";
+            this.firstDashboardPanel.ShowBorders = true;
+            this.firstDashboardPanel.Size = new System.Drawing.Size(407, 153);
+            this.firstDashboardPanel.TabIndex = 3;
+            // 
+            // filePicture
+            // 
+            this.filePicture.AllowFocused = false;
+            this.filePicture.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.filePicture.AutoSizeHeight = true;
+            this.filePicture.BackColor = System.Drawing.Color.Transparent;
+            this.filePicture.BorderRadius = 0;
+            this.filePicture.Image = global::Warehouse.Properties.Resources.fileBigNew;
+            this.filePicture.IsCircle = true;
+            this.filePicture.Location = new System.Drawing.Point(289, 18);
+            this.filePicture.Name = "filePicture";
+            this.filePicture.Size = new System.Drawing.Size(115, 115);
+            this.filePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.filePicture.TabIndex = 4;
+            this.filePicture.TabStop = false;
+            this.filePicture.Type = Bunifu.UI.WinForms.BunifuPictureBox.Types.Square;
+            // 
+            // totalFilesLabel
+            // 
+            this.totalFilesLabel.AllowParentOverrides = false;
+            this.totalFilesLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.totalFilesLabel.AutoEllipsis = false;
+            this.totalFilesLabel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.totalFilesLabel.CursorType = System.Windows.Forms.Cursors.Default;
+            this.totalFilesLabel.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
+            this.totalFilesLabel.ForeColor = System.Drawing.Color.Black;
+            this.totalFilesLabel.Location = new System.Drawing.Point(109, 79);
+            this.totalFilesLabel.Name = "totalFilesLabel";
+            this.totalFilesLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.totalFilesLabel.Size = new System.Drawing.Size(96, 30);
+            this.totalFilesLabel.TabIndex = 3;
+            this.totalFilesLabel.Text = "Total files";
+            this.totalFilesLabel.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.totalFilesLabel.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // totalFilesNumLabel
+            // 
+            this.totalFilesNumLabel.AllowParentOverrides = false;
+            this.totalFilesNumLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.totalFilesNumLabel.AutoEllipsis = false;
+            this.totalFilesNumLabel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.totalFilesNumLabel.CursorType = System.Windows.Forms.Cursors.Default;
+            this.totalFilesNumLabel.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
+            this.totalFilesNumLabel.ForeColor = System.Drawing.Color.Black;
+            this.totalFilesNumLabel.Location = new System.Drawing.Point(147, 13);
+            this.totalFilesNumLabel.Name = "totalFilesNumLabel";
+            this.totalFilesNumLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.totalFilesNumLabel.Size = new System.Drawing.Size(16, 37);
+            this.totalFilesNumLabel.TabIndex = 2;
+            this.totalFilesNumLabel.Text = "0";
+            this.totalFilesNumLabel.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.totalFilesNumLabel.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
             // 
             // dashboardLabelIntro
             // 
@@ -467,6 +706,7 @@ namespace Warehouse
             this.dashboardLabelIntro.ForeColor = System.Drawing.Color.DimGray;
             this.dashboardLabelIntro.Location = new System.Drawing.Point(3, 3);
             this.dashboardLabelIntro.Name = "dashboardLabelIntro";
+            this.dashboardLabelIntro.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
             this.dashboardLabelIntro.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dashboardLabelIntro.Size = new System.Drawing.Size(996, 31);
             this.dashboardLabelIntro.TabIndex = 2;
@@ -478,7 +718,6 @@ namespace Warehouse
             // 
             this.filePage.Controls.Add(this.dataGridProduct);
             this.filePage.Controls.Add(this.treeviewPanel);
-            this.filePage.Controls.Add(this.topFilePanel);
             this.filePage.Location = new System.Drawing.Point(4, 4);
             this.filePage.Name = "filePage";
             this.filePage.Padding = new System.Windows.Forms.Padding(3);
@@ -492,7 +731,8 @@ namespace Warehouse
             this.dataGridProduct.AllowCustomTheming = false;
             this.dataGridProduct.AllowUserToAddRows = false;
             this.dataGridProduct.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(232)))), ((int)(((byte)(191)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (255)))),
+                ((int) (((byte) (232)))), ((int) (((byte) (191)))));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             this.dataGridProduct.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridProduct.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -501,65 +741,78 @@ namespace Warehouse
             this.dataGridProduct.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.Orange;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI Semibold", 11.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.Font =
+                new System.Drawing.Font("Segoe UI Semibold", 11.75F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(132)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int) (((byte) (204)))),
+                ((int) (((byte) (132)))), ((int) (((byte) (0)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridProduct.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridProduct.ColumnHeadersHeight = 40;
-            this.dataGridProduct.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NameColumn,
-            this.CodeColumn,
-            this.UcnColumn,
-            this.CompanyColumn,
-            this.AmountColumn,
-            this.CostColumn,
-            this.CurrencyColumn,
-            this.WarrantyColumn,
-            this.StatusColumn,
-            this.DiscountColumn,
-            this.CountryColumn});
+            this.dataGridProduct.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[]
+            {
+                this.NameColumn, this.CodeColumn, this.UcnColumn, this.CompanyColumn, this.AmountColumn,
+                this.CostColumn, this.CurrencyColumn, this.WarrantyColumn, this.StatusColumn, this.DiscountColumn,
+                this.CountryColumn
+            });
             this.dataGridProduct.ContextMenuStrip = this.datagridContext;
-            this.dataGridProduct.CurrentTheme.AlternatingRowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(232)))), ((int)(((byte)(191)))));
-            this.dataGridProduct.CurrentTheme.AlternatingRowsStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            this.dataGridProduct.CurrentTheme.AlternatingRowsStyle.BackColor =
+                System.Drawing.Color.FromArgb(((int) (((byte) (255)))), ((int) (((byte) (232)))),
+                    ((int) (((byte) (191)))));
+            this.dataGridProduct.CurrentTheme.AlternatingRowsStyle.Font =
+                new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             this.dataGridProduct.CurrentTheme.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Black;
-            this.dataGridProduct.CurrentTheme.AlternatingRowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(201)))), ((int)(((byte)(102)))));
+            this.dataGridProduct.CurrentTheme.AlternatingRowsStyle.SelectionBackColor =
+                System.Drawing.Color.FromArgb(((int) (((byte) (255)))), ((int) (((byte) (201)))),
+                    ((int) (((byte) (102)))));
             this.dataGridProduct.CurrentTheme.AlternatingRowsStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dataGridProduct.CurrentTheme.BackColor = System.Drawing.Color.Orange;
-            this.dataGridProduct.CurrentTheme.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(226)))), ((int)(((byte)(173)))));
+            this.dataGridProduct.CurrentTheme.GridColor = System.Drawing.Color.FromArgb(((int) (((byte) (255)))),
+                ((int) (((byte) (226)))), ((int) (((byte) (173)))));
             this.dataGridProduct.CurrentTheme.HeaderStyle.BackColor = System.Drawing.Color.Orange;
-            this.dataGridProduct.CurrentTheme.HeaderStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 11.75F, System.Drawing.FontStyle.Bold);
+            this.dataGridProduct.CurrentTheme.HeaderStyle.Font =
+                new System.Drawing.Font("Segoe UI Semibold", 11.75F, System.Drawing.FontStyle.Bold);
             this.dataGridProduct.CurrentTheme.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.dataGridProduct.CurrentTheme.HeaderStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(132)))), ((int)(((byte)(0)))));
+            this.dataGridProduct.CurrentTheme.HeaderStyle.SelectionBackColor =
+                System.Drawing.Color.FromArgb(((int) (((byte) (204)))), ((int) (((byte) (132)))),
+                    ((int) (((byte) (0)))));
             this.dataGridProduct.CurrentTheme.HeaderStyle.SelectionForeColor = System.Drawing.Color.White;
             this.dataGridProduct.CurrentTheme.Name = null;
-            this.dataGridProduct.CurrentTheme.RowsStyle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(237)))), ((int)(((byte)(204)))));
-            this.dataGridProduct.CurrentTheme.RowsStyle.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            this.dataGridProduct.CurrentTheme.RowsStyle.BackColor =
+                System.Drawing.Color.FromArgb(((int) (((byte) (255)))), ((int) (((byte) (237)))),
+                    ((int) (((byte) (204)))));
+            this.dataGridProduct.CurrentTheme.RowsStyle.Font =
+                new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             this.dataGridProduct.CurrentTheme.RowsStyle.ForeColor = System.Drawing.Color.Black;
-            this.dataGridProduct.CurrentTheme.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(201)))), ((int)(((byte)(102)))));
+            this.dataGridProduct.CurrentTheme.RowsStyle.SelectionBackColor =
+                System.Drawing.Color.FromArgb(((int) (((byte) (255)))), ((int) (((byte) (201)))),
+                    ((int) (((byte) (102)))));
             this.dataGridProduct.CurrentTheme.RowsStyle.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(237)))), ((int)(((byte)(204)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (255)))),
+                ((int) (((byte) (237)))), ((int) (((byte) (204)))));
+            dataGridViewCellStyle3.Font =
+                new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold);
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(201)))), ((int)(((byte)(102)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int) (((byte) (255)))),
+                ((int) (((byte) (201)))), ((int) (((byte) (102)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridProduct.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridProduct.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridProduct.EnableHeadersVisualStyles = false;
-            this.dataGridProduct.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(226)))), ((int)(((byte)(173)))));
+            this.dataGridProduct.GridColor = System.Drawing.Color.FromArgb(((int) (((byte) (255)))),
+                ((int) (((byte) (226)))), ((int) (((byte) (173)))));
             this.dataGridProduct.HeaderBackColor = System.Drawing.Color.Orange;
-            this.dataGridProduct.HeaderBgColor = System.Drawing.Color.Empty;
             this.dataGridProduct.HeaderForeColor = System.Drawing.Color.White;
-            this.dataGridProduct.Location = new System.Drawing.Point(179, 31);
+            this.dataGridProduct.Location = new System.Drawing.Point(179, 3);
             this.dataGridProduct.MultiSelect = false;
             this.dataGridProduct.Name = "dataGridProduct";
             this.dataGridProduct.RowHeadersVisible = false;
             this.dataGridProduct.RowTemplate.Height = 40;
             this.dataGridProduct.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridProduct.Size = new System.Drawing.Size(820, 713);
+            this.dataGridProduct.Size = new System.Drawing.Size(820, 741);
             this.dataGridProduct.TabIndex = 1;
             this.dataGridProduct.Theme = Bunifu.UI.WinForms.BunifuDataGridView.PresetThemes.Orange;
             // 
@@ -654,7 +907,6 @@ namespace Warehouse
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // treeviewPanel
             // 
@@ -668,7 +920,7 @@ namespace Warehouse
             this.treeviewPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.treeviewPanel.FillStyle = Bunifu.UI.WinForms.BunifuShadowPanel.FillStyles.Solid;
             this.treeviewPanel.GradientMode = Bunifu.UI.WinForms.BunifuShadowPanel.GradientModes.Vertical;
-            this.treeviewPanel.Location = new System.Drawing.Point(3, 31);
+            this.treeviewPanel.Location = new System.Drawing.Point(3, 3);
             this.treeviewPanel.Name = "treeviewPanel";
             this.treeviewPanel.PanelColor = System.Drawing.Color.WhiteSmoke;
             this.treeviewPanel.PanelColor2 = System.Drawing.Color.WhiteSmoke;
@@ -677,7 +929,7 @@ namespace Warehouse
             this.treeviewPanel.ShadowDepth = 5;
             this.treeviewPanel.ShadowStyle = Bunifu.UI.WinForms.BunifuShadowPanel.ShadowStyles.Surrounded;
             this.treeviewPanel.ShadowTopLeftVisible = false;
-            this.treeviewPanel.Size = new System.Drawing.Size(176, 713);
+            this.treeviewPanel.Size = new System.Drawing.Size(176, 741);
             this.treeviewPanel.Style = Bunifu.UI.WinForms.BunifuShadowPanel.BevelStyles.Flat;
             this.treeviewPanel.TabIndex = 0;
             // 
@@ -691,7 +943,7 @@ namespace Warehouse
             this.quantity.BorderThickness = 1;
             this.quantity.Controls.Add(this.bunifuButton2);
             this.quantity.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.quantity.Location = new System.Drawing.Point(0, 677);
+            this.quantity.Location = new System.Drawing.Point(0, 705);
             this.quantity.Name = "quantity";
             this.quantity.ShowBorders = true;
             this.quantity.Size = new System.Drawing.Size(176, 36);
@@ -716,11 +968,11 @@ namespace Warehouse
             this.bunifuButton2.ColorContrastOnClick = 45;
             this.bunifuButton2.ColorContrastOnHover = 45;
             this.bunifuButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            borderEdges1.BottomLeft = true;
-            borderEdges1.BottomRight = true;
-            borderEdges1.TopLeft = true;
-            borderEdges1.TopRight = true;
-            this.bunifuButton2.CustomizableEdges = borderEdges1;
+            borderEdges3.BottomLeft = true;
+            borderEdges3.BottomRight = true;
+            borderEdges3.TopLeft = true;
+            borderEdges3.TopRight = true;
+            this.bunifuButton2.CustomizableEdges = borderEdges3;
             this.bunifuButton2.DialogResult = System.Windows.Forms.DialogResult.None;
             this.bunifuButton2.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.bunifuButton2.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -786,7 +1038,6 @@ namespace Warehouse
             this.bunifuButton2.TextMarginLeft = 0;
             this.bunifuButton2.TextPadding = new System.Windows.Forms.Padding(0);
             this.bunifuButton2.UseDefaultRadiusAndThickness = true;
-            this.bunifuButton2.Click += new System.EventHandler(this.quantitySort_Click);
             // 
             // treeView
             // 
@@ -794,7 +1045,7 @@ namespace Warehouse
             this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView.Location = new System.Drawing.Point(0, 48);
             this.treeView.Name = "treeView";
-            this.treeView.Size = new System.Drawing.Size(176, 665);
+            this.treeView.Size = new System.Drawing.Size(176, 693);
             this.treeView.TabIndex = 0;
             this.treeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeView_MouseDoubleClick);
             // 
@@ -896,11 +1147,11 @@ namespace Warehouse
             this.csvButton.ColorContrastOnClick = 45;
             this.csvButton.ColorContrastOnHover = 45;
             this.csvButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            borderEdges2.BottomLeft = true;
-            borderEdges2.BottomRight = true;
-            borderEdges2.TopLeft = true;
-            borderEdges2.TopRight = true;
-            this.csvButton.CustomizableEdges = borderEdges2;
+            borderEdges4.BottomLeft = true;
+            borderEdges4.BottomRight = true;
+            borderEdges4.TopLeft = true;
+            borderEdges4.TopRight = true;
+            this.csvButton.CustomizableEdges = borderEdges4;
             this.csvButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.csvButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.csvButton.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -996,11 +1247,11 @@ namespace Warehouse
             this.sortButton.ColorContrastOnClick = 45;
             this.sortButton.ColorContrastOnHover = 45;
             this.sortButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            borderEdges3.BottomLeft = true;
-            borderEdges3.BottomRight = true;
-            borderEdges3.TopLeft = true;
-            borderEdges3.TopRight = true;
-            this.sortButton.CustomizableEdges = borderEdges3;
+            borderEdges5.BottomLeft = true;
+            borderEdges5.BottomRight = true;
+            borderEdges5.TopLeft = true;
+            borderEdges5.TopRight = true;
+            this.sortButton.CustomizableEdges = borderEdges5;
             this.sortButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.sortButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.sortButton.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -1087,11 +1338,11 @@ namespace Warehouse
             this.addNodeButton.ColorContrastOnClick = 45;
             this.addNodeButton.ColorContrastOnHover = 45;
             this.addNodeButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            borderEdges4.BottomLeft = true;
-            borderEdges4.BottomRight = true;
-            borderEdges4.TopLeft = true;
-            borderEdges4.TopRight = true;
-            this.addNodeButton.CustomizableEdges = borderEdges4;
+            borderEdges6.BottomLeft = true;
+            borderEdges6.BottomRight = true;
+            borderEdges6.TopLeft = true;
+            borderEdges6.TopRight = true;
+            this.addNodeButton.CustomizableEdges = borderEdges6;
             this.addNodeButton.DialogResult = System.Windows.Forms.DialogResult.None;
             this.addNodeButton.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.addNodeButton.DisabledFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
@@ -1158,21 +1409,6 @@ namespace Warehouse
             this.addNodeButton.TextPadding = new System.Windows.Forms.Padding(0);
             this.addNodeButton.UseDefaultRadiusAndThickness = true;
             this.addNodeButton.Click += new System.EventHandler(this.addNodeButton_Click);
-            // 
-            // topFilePanel
-            // 
-            this.topFilePanel.BackgroundColor = System.Drawing.Color.Transparent;
-            this.topFilePanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("topFilePanel.BackgroundImage")));
-            this.topFilePanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.topFilePanel.BorderColor = System.Drawing.Color.Transparent;
-            this.topFilePanel.BorderRadius = 3;
-            this.topFilePanel.BorderThickness = 1;
-            this.topFilePanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.topFilePanel.Location = new System.Drawing.Point(3, 3);
-            this.topFilePanel.Name = "topFilePanel";
-            this.topFilePanel.ShowBorders = true;
-            this.topFilePanel.Size = new System.Drawing.Size(996, 28);
-            this.topFilePanel.TabIndex = 2;
             // 
             // bunifuFormDock
             // 
@@ -1523,6 +1759,11 @@ namespace Warehouse
             this.exitButton.UseDefaultRadiusAndThickness = true;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
+            // bunifuElipse
+            // 
+            this.bunifuElipse.ElipseRadius = 10;
+            this.bunifuElipse.TargetControl = this;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1533,7 +1774,6 @@ namespace Warehouse
             this.Controls.Add(this.sidebarPanel);
             this.Controls.Add(this.topbarPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.Name = "MainForm";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -1546,6 +1786,15 @@ namespace Warehouse
             this.controlPage.ResumeLayout(false);
             this.dashboardPage.ResumeLayout(false);
             this.dashboardPage.PerformLayout();
+            this.thirdDashboardPanel.ResumeLayout(false);
+            this.thirdDashboardPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartDashboard)).EndInit();
+            this.secondDashboardPanel.ResumeLayout(false);
+            this.secondDashboardPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nodePicture)).EndInit();
+            this.firstDashboardPanel.ResumeLayout(false);
+            this.firstDashboardPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.filePicture)).EndInit();
             this.filePage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridProduct)).EndInit();
             this.datagridContext.ResumeLayout(false);
@@ -1561,7 +1810,6 @@ namespace Warehouse
         }
 
         #endregion
-        private Bunifu.Framework.UI.BunifuElipse bunifuElipse;
         private Bunifu.UI.WinForms.BunifuShadowPanel sidebarPanel;
         private Bunifu.UI.WinForms.BunifuPanel logoPanel;
         private Bunifu.UI.WinForms.BunifuPanel topbarPanel;
@@ -1582,7 +1830,6 @@ namespace Warehouse
         private Bunifu.UI.WinForms.BunifuColorTransition colorTransitionSide;
         private Bunifu.UI.WinForms.BunifuDataGridView dataGridProduct;
         private Bunifu.UI.WinForms.BunifuShadowPanel treeviewPanel;
-        private Bunifu.UI.WinForms.BunifuPanel topFilePanel;
         private System.Windows.Forms.ContextMenuStrip contextTreeview;
         private System.Windows.Forms.ToolStripMenuItem editNodeStrip;
         private System.Windows.Forms.ToolStripMenuItem createChildNodeStrip;
@@ -1614,6 +1861,18 @@ namespace Warehouse
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton sortButton;
         private Bunifu.UI.WinForms.BunifuPanel quantity;
         private Bunifu.UI.WinForms.BunifuButton.BunifuButton bunifuButton2;
+        private Bunifu.UI.WinForms.BunifuPanel thirdDashboardPanel;
+        private Bunifu.UI.WinForms.BunifuPanel secondDashboardPanel;
+        private Bunifu.UI.WinForms.BunifuPanel firstDashboardPanel;
+        private Bunifu.UI.WinForms.BunifuLabel totalFilesLabel;
+        private Bunifu.UI.WinForms.BunifuLabel totalFilesNumLabel;
+        private Bunifu.UI.WinForms.BunifuPictureBox filePicture;
+        private Bunifu.UI.WinForms.BunifuPictureBox nodePicture;
+        private Bunifu.UI.WinForms.BunifuLabel totalNodesLabel;
+        private Bunifu.UI.WinForms.BunifuLabel totalNodesNumLabel;
+        private Bunifu.UI.WinForms.BunifuLabel statisticsLabel;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartDashboard;
+        private BunifuElipse bunifuElipse;
     }
 }
 

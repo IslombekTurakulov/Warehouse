@@ -118,34 +118,49 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="hide-circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hide-circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="fileIconBug" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fileIconBug.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Start" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Start.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="roll-circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\roll-circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Sidebar-Utilities-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Sidebar-Utilities-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Sidebar-Documents-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sidebar-Documents-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="exit-circle2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\exit-circle2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Sidebar-Window-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sidebar-Window-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Sidebar-Window-icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Sidebar-Window-icon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="fileBigNew" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fileBigNew.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="exit-circle2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\exit-circle2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Sidebar-Sites-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Sidebar-Sites-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="export-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\export-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sidebar-Utilities-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sidebar-Utilities-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hide-circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hide-circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sidebar-Window-icon1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sidebar-Window-icon1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="roll-circle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\roll-circle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fileBig" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fileBig.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="node" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\node.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
