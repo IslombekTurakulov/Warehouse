@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml.Serialization;
 using CsvHelper;
 
@@ -120,6 +121,7 @@ namespace Warehouse
                     fileStreamWriter.Position = 0;
                     using var streamWriter = new StreamWriter(fileStreamWriter);
                     streamWriter.WriteLine(JsonSerializer.Serialize(listClasses));
+                    RefreshDashboard();
                 }
             }
             catch (Exception exception)
@@ -133,11 +135,15 @@ namespace Warehouse
         {
             try
             {
+                DirectoryInfo newRootDit = new DirectoryInfo("data");
                 nodeViewNameBoolean = false;
                 EditTreeName editTree = new EditTreeName();
                 editTree.ShowDialog();
                 if (nodeViewNameBoolean)
+                {
+                    File.Move($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json", $"{newRootDit.FullName}/{nodeViewName}.json");
                     treeView.SelectedNode.Text = nodeViewName;
+                }
             }
             catch (Exception)
             {
@@ -172,6 +178,7 @@ namespace Warehouse
                 else
                     throw new ArgumentException("The name of node is already exist!");
                 SaveTree("DataNodes.xml", treeView);
+                RefreshDashboard();
             }
             catch (Exception exception)
             {
@@ -206,6 +213,7 @@ namespace Warehouse
                     throw new ArgumentException("The name of node is already exist!");
                 SaveTree("DataNodes.xml", treeView);
                 treeView.ExpandAll();
+                RefreshDashboard();
             }
             catch (Exception exception)
             {
@@ -284,6 +292,11 @@ namespace Warehouse
                     FillNode(treeView, treeNode, d);
                 }
                 treeView.ExpandAll();
+                if (treeView.Nodes.Count >= 1)
+                {
+                    csvButton.Enabled = true;
+                }
+
                 RefreshDashboard();
             }
             catch (Exception ex)
@@ -295,13 +308,67 @@ namespace Warehouse
 
         private void RefreshDashboard()
         {
-            var treeNodeCollection = treeView.Nodes;
-            chartDashboard.DataSource = treeNodeCollection;
-            var newRootDit = new DirectoryInfo("data");
-            var amountOfFiles = newRootDit.GetFiles().Length;
-            totalFilesNumLabel.Text = $@"{amountOfFiles}";
-            totalNodesNumLabel.Text = $@"{treeView.Nodes.Count}";
+
+            try
+            {
+                var newRootDit = new DirectoryInfo("data");
+                var amountOfFiles = newRootDit.GetFiles().Length;
+                totalFilesNumLabel.Text = $@"{amountOfFiles}";
+                totalNodesNumLabel.Text = $@"{treeView.Nodes.Count}";
+                List<CSVClassAnalyzer> tempFileClasses = new List<CSVClassAnalyzer>();
+                CallRecursive(treeView);
+                foreach (var treeNode in node.Where(treeNode => File.Exists($"{newRootDit.FullName}/{treeNode.Text}.json")))
+                {
+                    using (var fs =
+                        new FileStream($"{newRootDit.FullName}/{treeNode.Text}.json",
+                            FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                    {
+                        using var sReader = new StreamReader(fs);
+                        while (sReader.Peek() > -1)
+                        {
+                            var input = sReader.ReadToEnd();
+                            if (input == string.Empty)
+                                continue;
+                            if (input.Length < 10)
+                                continue;
+                            var listOfRestoredPerson =
+                                JsonSerializer.Deserialize<List<FileClass>>(input);
+                            if (listOfRestoredPerson != null)
+                                tempFileClasses.AddRange(from data in listOfRestoredPerson
+                                    select new CSVClassAnalyzer
+                                    {
+                                        Country = data.Country,
+                                        Name = data.Name,
+                                        Amount = data.Amount,
+                                        Cost = data.Cost
+                                    });
+                        }
+                    }
+                }
+
+                var series = chartDashboard.Series.Add("Total amount and cost");
+                chartDashboard.Titles.Add("Total amount and cost");
+                foreach (var data in tempFileClasses)
+                {
+                    series.Points.AddXY(data.Cost, data.Amount);
+                }
+
+                var secondSeries = secondChartDashboard.Series.Add("Total name and country");
+                secondChartDashboard.Titles.Add("Total name and country");
+                foreach (var data in tempFileClasses)
+                {
+                    secondSeries.Points.AddXY(data.Name, data.Cost);
+                }
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
+
+      
+        
+
         public static void SerializeToFile<T>(T data, string filename)
         {
             using (var sw = new StreamWriter(filename))
@@ -373,6 +440,7 @@ namespace Warehouse
                     }
                     treeView.SelectedNode.Nodes.Clear();
                     treeView.Nodes.Remove(treeView.SelectedNode);
+                    csvButton.Enabled = treeView.Nodes.Count != 0;
                 }
             }
             catch (Exception)
@@ -438,51 +506,85 @@ namespace Warehouse
         {
             try
             {
-                DirectoryInfo newRootDit = new DirectoryInfo("data");
-                var rowIndex = dataGridProduct.SelectedRows;
-                var fileClassManager = new List<FileClass>();
-                var newListFileClasses = new List<FileClass>();
-                using (FileStream fs =
-                    new FileStream($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json",
-                        FileMode.OpenOrCreate))
+                if (dataGridProduct.Rows.Count >= 1)
                 {
-                    using var sReader = new StreamReader(fs);
-                    while (sReader.Peek() > -1)
+                    DirectoryInfo newRootDit = new DirectoryInfo("data");
+                    var rowIndex = dataGridProduct.SelectedRows;
+                    var fileClassManager = new List<FileClass>();
+                    var newListFileClasses = new List<FileClass>();
+                    using (FileStream fs =
+                        new FileStream($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json",
+                            FileMode.OpenOrCreate))
                     {
-                        string input = sReader.ReadLine();
-                        if (input == String.Empty)
-                            throw new ArgumentException("File is empty");
-                        FileClass restoredPerson =
-                            JsonSerializer.Deserialize<FileClass>(input ?? string.Empty);
-                        fileClassManager.Add(restoredPerson);
+                        using var sReader = new StreamReader(fs);
+                        while (sReader.Peek() > -1)
+                        {
+                            string input = sReader.ReadToEnd();
+                            if (input == String.Empty)
+                                throw new ArgumentException("File is empty");
+                            List<FileClass> restoredPerson =
+                                JsonSerializer.Deserialize<List<FileClass>>(input ?? string.Empty);
+                            fileClassManager.AddRange(restoredPerson);
+                        }
                     }
-                }
 
-                foreach (var file in fileClassManager)
-                {
-                    if (file.UCN == rowIndex[0].Cells[2].Value.ToString())
+                    foreach (var file in fileClassManager)
                     {
-                        newListFileClasses.Add(file);
+                        if (file.UCN == rowIndex[0].Cells[2].Value.ToString())
+                        {
+                            newListFileClasses.Add(file);
+                        }
+                    }
+
+                    var addProductForm = new AddFileForm {fileClass = newListFileClasses};
+                    addProductForm.ShowDialog();
+                    if (isClosedForm)
+                    {
+                        foreach (var file in fileClassManager.Where(file => file.UCN == rowIndex[0].Cells[2].Value.ToString()))
+                        {
+                            file.Name = fileClasses.Name;
+                            file.Code = fileClasses.Code;
+                            file.UCN = fileClasses.UCN;
+                            file.Company = fileClasses.Company;
+                            file.Amount = fileClasses.Amount;
+                            file.Cost = fileClasses.Cost;
+                            file.Currency = fileClasses.Currency;
+                            file.Warranty = fileClasses.Warranty;
+                            file.Status = fileClasses.Status;
+                            file.Discount = fileClasses.Discount;
+                            file.Country = fileClasses.Country;
+                            file.PictureBox = fileClasses.PictureBox;
+                            file.Description = fileClasses.Description;
+                        }
+
+                        for (int i = 0; i < rowIndex.Count; i++)
+                        {
+                            rowIndex[i].Cells[0].Value = fileClasses.Name;
+                            rowIndex[i].Cells[1].Value = fileClasses.Code;
+                            rowIndex[i].Cells[2].Value = fileClasses.UCN;
+                            rowIndex[i].Cells[3].Value = fileClasses.Company;
+                            rowIndex[i].Cells[4].Value = fileClasses.Amount;
+                            rowIndex[i].Cells[5].Value = fileClasses.Cost;
+                            rowIndex[i].Cells[6].Value = fileClasses.Currency;
+                            rowIndex[i].Cells[7].Value = fileClasses.Warranty ? "Available" : "Unavailable";
+                            rowIndex[i].Cells[8].Value = fileClasses.Status ? "Available" : "Unavailable";
+                            rowIndex[i].Cells[9].Value = fileClasses.Discount;
+                            rowIndex[i].Cells[10].Value = fileClasses.Country;
+                        }
+                    }
+
+                    using (var fileStreamWriter =
+                        new FileStream($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json",
+                            FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                    {
+                        fileStreamWriter.Position = 0;
+                        using var streamWriter = new StreamWriter(fileStreamWriter);
+                        streamWriter.WriteLine(JsonSerializer.Serialize(fileClassManager));
                     }
                 }
-                var addProductForm = new AddFileForm { fileClass = newListFileClasses };
-                addProductForm.ShowDialog();
-                if (isClosedForm)
+                else
                 {
-                    for (int i = 0; i < rowIndex.Count; i++)
-                    {
-                        rowIndex[i].Cells[0].Value = fileClasses.Name;
-                        rowIndex[i].Cells[1].Value = fileClasses.Code;
-                        rowIndex[i].Cells[2].Value = fileClasses.UCN;
-                        rowIndex[i].Cells[3].Value = fileClasses.Company;
-                        rowIndex[i].Cells[4].Value = fileClasses.Amount;
-                        rowIndex[i].Cells[5].Value = fileClasses.Cost;
-                        rowIndex[i].Cells[6].Value = fileClasses.Currency;
-                        rowIndex[i].Cells[7].Value = fileClasses.Warranty ? "Available" : "Unavailable";
-                        rowIndex[i].Cells[8].Value = fileClasses.Status ? "Available" : "Unavailable";
-                        rowIndex[i].Cells[9].Value = fileClasses.Discount;
-                        rowIndex[i].Cells[10].Value = fileClasses.Country;
-                    }
+                    MessageBox.Show("Datagrid is empty!");
                 }
             }
             catch (Exception exception)
@@ -506,6 +608,7 @@ namespace Warehouse
         private List<TreeNode> node = new List<TreeNode>();
         private void csvButton_Click(object sender, EventArgs e)
         {
+            node.Clear();
             CSVSort csvSortForm = new CSVSort();
             csvSortForm.ShowDialog();
             int tempCost = csvSortForm.Cost;
@@ -534,23 +637,28 @@ namespace Warehouse
                                 JsonSerializer.Deserialize<List<FileClass>>(input);
                             if (listOfRestoredPerson != null)
                                 tempFileClasses.AddRange(from data in listOfRestoredPerson
-                                                         where data.Amount <= tempAmount && data.Cost <= tempCost
-                                                         select new CSVClassAnalyzer
-                                                         {
-                                                             NodePath = treeNode.FullPath,
-                                                             UCN = data.UCN,
-                                                             Name = data.Name,
-                                                             Amount = data.Amount,
-                                                             Cost = data.Cost
-                                                         });
+                                    where data.Amount <= tempAmount && data.Cost <= tempCost
+                                    select new CSVClassAnalyzer
+                                    {
+                                        NodePath = treeNode.FullPath,
+                                        Country = data.Country,
+                                        UCN = data.UCN,
+                                        Name = data.Name,
+                                        Amount = data.Amount,
+                                        Cost = data.Cost
+                                    });
                         }
                     }
                 }
 
-                if (tempFileClasses.Count > 1)
+                if (tempFileClasses.Count >= 1)
                 {
                     SaveToCSV(tempFileClasses);
                     MessageBox.Show(@"CSV file created!");
+                }
+                else
+                {
+                    MessageBox.Show(@"I couldn't find the data you entered ");
                 }
             }
 
@@ -590,5 +698,22 @@ namespace Warehouse
             }
         }
 
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (dataGridProduct.Rows.Count < 1)
+                    throw new ArgumentException("Datagrid is empty!");
+
+                DirectoryInfo newRootDit = new DirectoryInfo("data");
+                foreach (DataGridViewRow rows in dataGridProduct.SelectedRows)
+                    dataGridProduct.Rows.Remove(rows);
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
     }
 }

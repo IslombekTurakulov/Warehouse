@@ -11,6 +11,7 @@ namespace Warehouse
     {
         [Name("NodePath")] public string NodePath { get; set; }
         [Name("Name")] public string Name { get; set; }
+        [Name("Country")] public string Country { get; set; }
         [Name("UCN")] public string UCN { get; set; }
         [Name("Amount")] public int Amount { get; set; }
         [Name("Cost")] public double Cost { get; set; }
