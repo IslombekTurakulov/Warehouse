@@ -175,6 +175,8 @@ namespace Warehouse
         {
             try
             {
+                if (discountTxtBox.Text == String.Empty)
+                    discountTxtBox.Text = "0";
                 var warranty = warrantyDropdown.Text == @"Available";
                 var status = statusDropdown.Text == @"Available";
                 if (!double.TryParse(firstCostTxtBox.Text, out var cost) || cost < 0)
@@ -338,6 +340,11 @@ namespace Warehouse
             {
                 countryDropdown.Text = @"Russian Federation";
             }
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

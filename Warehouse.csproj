@@ -284,9 +284,6 @@
     <None Include="Resources\Sidebar-Window-icon1.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Start.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\plus.png" />
   </ItemGroup>
   <ItemGroup>
@@ -303,6 +300,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\node.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dashboard.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

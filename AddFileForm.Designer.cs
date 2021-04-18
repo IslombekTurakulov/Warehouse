@@ -880,6 +880,7 @@ namespace Warehouse
             this.cancelButton.TextMarginLeft = 0;
             this.cancelButton.TextPadding = new System.Windows.Forms.Padding(0);
             this.cancelButton.UseDefaultRadiusAndThickness = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // okButton
             // 

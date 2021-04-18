@@ -441,6 +441,7 @@ namespace Warehouse
                     treeView.SelectedNode.Nodes.Clear();
                     treeView.Nodes.Remove(treeView.SelectedNode);
                     csvButton.Enabled = treeView.Nodes.Count != 0;
+                    dataGridProduct.Rows.Clear();
                 }
             }
             catch (Exception)
