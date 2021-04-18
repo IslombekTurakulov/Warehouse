@@ -19,6 +19,9 @@ namespace Warehouse
             Application.Run(new MainForm());
         }
 
+        /// <summary>
+        /// Event Handlers.
+        /// </summary>
         public static class CallBackMy
         {
             public delegate void CallbackEvent(FileClass fileClass, bool isClosed);

@@ -338,6 +338,7 @@ namespace Warehouse
             this.amountTxtBox.TextPlaceholder = "Enter amount value";
             this.amountTxtBox.UseSystemPasswordChar = false;
             this.amountTxtBox.WordWrap = true;
+            this.amountTxtBox.TextChange += new System.EventHandler(this.amountTxtBox_TextChange);
             // 
             // costLabel
             // 
@@ -428,6 +429,7 @@ namespace Warehouse
             this.costTxtBox.TextPlaceholder = "Enter cost value";
             this.costTxtBox.UseSystemPasswordChar = false;
             this.costTxtBox.WordWrap = true;
+            this.costTxtBox.TextChange += new System.EventHandler(this.costTxtBox_TextChange);
             // 
             // bunifuFormDock
             // 

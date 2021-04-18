@@ -19,6 +19,11 @@ namespace Warehouse
             bunifuFormDock.SubscribeControlToDragEvents(topbarPanel);
         }
 
+        /// <summary>
+        /// Exit button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void exitButton_Click(object sender, EventArgs e)
         {
             DialogResult dialog = MessageBox.Show(
@@ -32,13 +37,18 @@ namespace Warehouse
             }
         }
 
+        /// <summary>
+        /// OK button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void okButton_Click(object sender, EventArgs e)
         {
             try
             {
                 if (nameTxtBox.Text == String.Empty) 
                     throw new InvalidOperationException(@"Incorrect name. The name can't be empty!");
-               
+                // Event handler. 
                 Program.CallBackMy.AddTreeViewEventHandler(nameTxtBox.Text, true);
                 this.Close();
             }

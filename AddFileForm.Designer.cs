@@ -1815,7 +1815,7 @@ namespace Warehouse
             this.firstCostTxtBox.TextPlaceholder = "Cost";
             this.firstCostTxtBox.UseSystemPasswordChar = false;
             this.firstCostTxtBox.WordWrap = true;
-            this.firstCostTxtBox.TextChange += new System.EventHandler(this.firstCostTxtBox_TextChange);
+            this.firstCostTxtBox.TextChange += new System.EventHandler(this.costTxtBox_TextChange);
             // 
             // costLabel
             // 
