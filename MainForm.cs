@@ -404,12 +404,14 @@ namespace Warehouse
         {
             try
             {
+                // MessageBox info.
                 string message = "Do you want to load info from database?";
                 string title = "Database";
                 MessageBoxButtons buttons = MessageBoxButtons.YesNo;
                 DialogResult result = MessageBox.Show(message, title, buttons);
                 if (result == DialogResult.Yes)
                 {
+                    // Creating dialog.
                     OpenFileDialog openFileDialog = new OpenFileDialog()
                     {
                         AddExtension = true,
@@ -417,11 +419,12 @@ namespace Warehouse
                     };
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
+                        // Validation.
                         string fileXml = openFileDialog.FileName;
                         this.Text = openFileDialog.FileName;
                         if (!File.Exists(fileXml))
                             return;
-
+                        // Deserializing.
                         var data = DeserializeFromFile<DataNode[]>(fileXml);
                         if (data.Length > 0)
                         {
