@@ -91,7 +91,7 @@ namespace Warehouse
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeviewPanel = new Bunifu.UI.WinForms.BunifuShadowPanel();
-            this.treeView = new System.Windows.Forms.TreeView();
+            this.mainDataTreeView = new System.Windows.Forms.TreeView();
             this.contextTreeview = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.editNodeStrip = new System.Windows.Forms.ToolStripMenuItem();
@@ -109,11 +109,11 @@ namespace Warehouse
             this.bunifuFormDock = new Bunifu.UI.WinForms.BunifuFormDock();
             this.colorTransitionSide = new Bunifu.UI.WinForms.BunifuColorTransition(this.components);
             this.bunifuElipse = new Bunifu.Framework.UI.BunifuElipse(this.components);
+            this.topbarColorTransition = new Bunifu.UI.WinForms.BunifuColorTransition(this.components);
             this.topbarPanel = new Bunifu.UI.WinForms.BunifuPanel();
             this.hideButton = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.bunifuButton1 = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
             this.exitButton = new Bunifu.UI.WinForms.BunifuButton.BunifuButton();
-            this.topbarColorTransition = new Bunifu.UI.WinForms.BunifuColorTransition(this.components);
             this.sidebarPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.indicator)).BeginInit();
             this.logoPanel.SuspendLayout();
@@ -489,10 +489,10 @@ namespace Warehouse
             this.thirdDashboardPanel.Controls.Add(this.secondChartDashboard);
             this.thirdDashboardPanel.Controls.Add(this.chartDashboard);
             this.thirdDashboardPanel.Controls.Add(this.statisticsLabel);
-            this.thirdDashboardPanel.Location = new System.Drawing.Point(31, 307);
+            this.thirdDashboardPanel.Location = new System.Drawing.Point(31, 275);
             this.thirdDashboardPanel.Name = "thirdDashboardPanel";
             this.thirdDashboardPanel.ShowBorders = true;
-            this.thirdDashboardPanel.Size = new System.Drawing.Size(963, 424);
+            this.thirdDashboardPanel.Size = new System.Drawing.Size(963, 456);
             this.thirdDashboardPanel.TabIndex = 5;
             // 
             // secondChartDashboard
@@ -505,10 +505,10 @@ namespace Warehouse
             this.secondChartDashboard.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.secondChartDashboard.Legends.Add(legend1);
-            this.secondChartDashboard.Location = new System.Drawing.Point(480, 56);
+            this.secondChartDashboard.Location = new System.Drawing.Point(480, 53);
             this.secondChartDashboard.Name = "secondChartDashboard";
             this.secondChartDashboard.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            this.secondChartDashboard.Size = new System.Drawing.Size(471, 346);
+            this.secondChartDashboard.Size = new System.Drawing.Size(471, 365);
             this.secondChartDashboard.TabIndex = 7;
             this.secondChartDashboard.Text = "chart";
             // 
@@ -522,10 +522,10 @@ namespace Warehouse
             this.chartDashboard.ChartAreas.Add(chartArea2);
             legend2.Name = "Legend1";
             this.chartDashboard.Legends.Add(legend2);
-            this.chartDashboard.Location = new System.Drawing.Point(27, 56);
+            this.chartDashboard.Location = new System.Drawing.Point(27, 53);
             this.chartDashboard.Name = "chartDashboard";
-            this.chartDashboard.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            this.chartDashboard.Size = new System.Drawing.Size(447, 346);
+            this.chartDashboard.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
+            this.chartDashboard.Size = new System.Drawing.Size(447, 365);
             this.chartDashboard.TabIndex = 6;
             this.chartDashboard.Text = "chart";
             // 
@@ -538,7 +538,7 @@ namespace Warehouse
             this.statisticsLabel.CursorType = System.Windows.Forms.Cursors.Default;
             this.statisticsLabel.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
             this.statisticsLabel.ForeColor = System.Drawing.Color.Black;
-            this.statisticsLabel.Location = new System.Drawing.Point(34, 20);
+            this.statisticsLabel.Location = new System.Drawing.Point(27, 17);
             this.statisticsLabel.Name = "statisticsLabel";
             this.statisticsLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.statisticsLabel.Size = new System.Drawing.Size(237, 30);
@@ -550,6 +550,7 @@ namespace Warehouse
             // secondDashboardPanel
             // 
             this.secondDashboardPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.secondDashboardPanel.AutoSize = true;
             this.secondDashboardPanel.BackgroundColor = System.Drawing.Color.LightGray;
             this.secondDashboardPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("secondDashboardPanel.BackgroundImage")));
             this.secondDashboardPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -559,10 +560,10 @@ namespace Warehouse
             this.secondDashboardPanel.Controls.Add(this.nodePicture);
             this.secondDashboardPanel.Controls.Add(this.totalNodesLabel);
             this.secondDashboardPanel.Controls.Add(this.totalNodesNumLabel);
-            this.secondDashboardPanel.Location = new System.Drawing.Point(549, 54);
+            this.secondDashboardPanel.Location = new System.Drawing.Point(528, 40);
             this.secondDashboardPanel.Name = "secondDashboardPanel";
             this.secondDashboardPanel.ShowBorders = true;
-            this.secondDashboardPanel.Size = new System.Drawing.Size(414, 153);
+            this.secondDashboardPanel.Size = new System.Drawing.Size(466, 178);
             this.secondDashboardPanel.TabIndex = 4;
             // 
             // nodePicture
@@ -574,7 +575,7 @@ namespace Warehouse
             this.nodePicture.BorderRadius = 0;
             this.nodePicture.Image = global::Warehouse.Properties.Resources.node;
             this.nodePicture.IsCircle = true;
-            this.nodePicture.Location = new System.Drawing.Point(266, 21);
+            this.nodePicture.Location = new System.Drawing.Point(292, 34);
             this.nodePicture.Name = "nodePicture";
             this.nodePicture.Size = new System.Drawing.Size(115, 115);
             this.nodePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -591,7 +592,7 @@ namespace Warehouse
             this.totalNodesLabel.CursorType = System.Windows.Forms.Cursors.Default;
             this.totalNodesLabel.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
             this.totalNodesLabel.ForeColor = System.Drawing.Color.Black;
-            this.totalNodesLabel.Location = new System.Drawing.Point(77, 79);
+            this.totalNodesLabel.Location = new System.Drawing.Point(103, 92);
             this.totalNodesLabel.Name = "totalNodesLabel";
             this.totalNodesLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.totalNodesLabel.Size = new System.Drawing.Size(115, 30);
@@ -609,7 +610,7 @@ namespace Warehouse
             this.totalNodesNumLabel.CursorType = System.Windows.Forms.Cursors.Default;
             this.totalNodesNumLabel.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.totalNodesNumLabel.ForeColor = System.Drawing.Color.Black;
-            this.totalNodesNumLabel.Location = new System.Drawing.Point(124, 16);
+            this.totalNodesNumLabel.Location = new System.Drawing.Point(150, 29);
             this.totalNodesNumLabel.Name = "totalNodesNumLabel";
             this.totalNodesNumLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.totalNodesNumLabel.Size = new System.Drawing.Size(16, 37);
@@ -621,6 +622,7 @@ namespace Warehouse
             // firstDashboardPanel
             // 
             this.firstDashboardPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.firstDashboardPanel.AutoSize = true;
             this.firstDashboardPanel.BackgroundColor = System.Drawing.Color.LightGray;
             this.firstDashboardPanel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("firstDashboardPanel.BackgroundImage")));
             this.firstDashboardPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -630,10 +632,10 @@ namespace Warehouse
             this.firstDashboardPanel.Controls.Add(this.filePicture);
             this.firstDashboardPanel.Controls.Add(this.totalFilesLabel);
             this.firstDashboardPanel.Controls.Add(this.totalFilesNumLabel);
-            this.firstDashboardPanel.Location = new System.Drawing.Point(58, 54);
+            this.firstDashboardPanel.Location = new System.Drawing.Point(31, 40);
             this.firstDashboardPanel.Name = "firstDashboardPanel";
             this.firstDashboardPanel.ShowBorders = true;
-            this.firstDashboardPanel.Size = new System.Drawing.Size(407, 153);
+            this.firstDashboardPanel.Size = new System.Drawing.Size(454, 178);
             this.firstDashboardPanel.TabIndex = 3;
             // 
             // filePicture
@@ -645,7 +647,7 @@ namespace Warehouse
             this.filePicture.BorderRadius = 0;
             this.filePicture.Image = global::Warehouse.Properties.Resources.fileBigNew;
             this.filePicture.IsCircle = true;
-            this.filePicture.Location = new System.Drawing.Point(289, 18);
+            this.filePicture.Location = new System.Drawing.Point(313, 31);
             this.filePicture.Name = "filePicture";
             this.filePicture.Size = new System.Drawing.Size(115, 115);
             this.filePicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -662,7 +664,7 @@ namespace Warehouse
             this.totalFilesLabel.CursorType = System.Windows.Forms.Cursors.Default;
             this.totalFilesLabel.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Bold);
             this.totalFilesLabel.ForeColor = System.Drawing.Color.Black;
-            this.totalFilesLabel.Location = new System.Drawing.Point(109, 79);
+            this.totalFilesLabel.Location = new System.Drawing.Point(133, 92);
             this.totalFilesLabel.Name = "totalFilesLabel";
             this.totalFilesLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.totalFilesLabel.Size = new System.Drawing.Size(96, 30);
@@ -680,7 +682,7 @@ namespace Warehouse
             this.totalFilesNumLabel.CursorType = System.Windows.Forms.Cursors.Default;
             this.totalFilesNumLabel.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Bold);
             this.totalFilesNumLabel.ForeColor = System.Drawing.Color.Black;
-            this.totalFilesNumLabel.Location = new System.Drawing.Point(147, 13);
+            this.totalFilesNumLabel.Location = new System.Drawing.Point(171, 26);
             this.totalFilesNumLabel.Name = "totalFilesNumLabel";
             this.totalFilesNumLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.totalFilesNumLabel.Size = new System.Drawing.Size(16, 37);
@@ -696,13 +698,13 @@ namespace Warehouse
             this.dashboardLabelIntro.Cursor = System.Windows.Forms.Cursors.Default;
             this.dashboardLabelIntro.CursorType = System.Windows.Forms.Cursors.Default;
             this.dashboardLabelIntro.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dashboardLabelIntro.Font = new System.Drawing.Font("Segoe UI", 17F, System.Drawing.FontStyle.Bold);
+            this.dashboardLabelIntro.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dashboardLabelIntro.ForeColor = System.Drawing.Color.DimGray;
             this.dashboardLabelIntro.Location = new System.Drawing.Point(3, 3);
             this.dashboardLabelIntro.Name = "dashboardLabelIntro";
-            this.dashboardLabelIntro.Padding = new System.Windows.Forms.Padding(5, 0, 0, 0);
+            this.dashboardLabelIntro.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.dashboardLabelIntro.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dashboardLabelIntro.Size = new System.Drawing.Size(996, 31);
+            this.dashboardLabelIntro.Size = new System.Drawing.Size(996, 33);
             this.dashboardLabelIntro.TabIndex = 2;
             this.dashboardLabelIntro.Text = "Dashboard";
             this.dashboardLabelIntro.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -895,7 +897,7 @@ namespace Warehouse
             this.treeviewPanel.BorderColor = System.Drawing.Color.WhiteSmoke;
             this.treeviewPanel.BorderRadius = 1;
             this.treeviewPanel.BorderThickness = 1;
-            this.treeviewPanel.Controls.Add(this.treeView);
+            this.treeviewPanel.Controls.Add(this.mainDataTreeView);
             this.treeviewPanel.Controls.Add(this.panelButton);
             this.treeviewPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.treeviewPanel.FillStyle = Bunifu.UI.WinForms.BunifuShadowPanel.FillStyles.Solid;
@@ -913,18 +915,19 @@ namespace Warehouse
             this.treeviewPanel.Style = Bunifu.UI.WinForms.BunifuShadowPanel.BevelStyles.Flat;
             this.treeviewPanel.TabIndex = 0;
             // 
-            // treeView
+            // mainDataTreeView
             // 
-            this.treeView.ContextMenuStrip = this.contextTreeview;
-            this.treeView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView.ImageIndex = 1;
-            this.treeView.ImageList = this.imageList;
-            this.treeView.Location = new System.Drawing.Point(0, 48);
-            this.treeView.Name = "treeView";
-            this.treeView.SelectedImageIndex = 0;
-            this.treeView.Size = new System.Drawing.Size(176, 693);
-            this.treeView.TabIndex = 0;
-            this.treeView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeView_MouseDoubleClick);
+            this.mainDataTreeView.ContextMenuStrip = this.contextTreeview;
+            this.mainDataTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainDataTreeView.ImageIndex = 1;
+            this.mainDataTreeView.ImageList = this.imageList;
+            this.mainDataTreeView.ItemHeight = 20;
+            this.mainDataTreeView.Location = new System.Drawing.Point(0, 48);
+            this.mainDataTreeView.Name = "mainDataTreeView";
+            this.mainDataTreeView.SelectedImageIndex = 0;
+            this.mainDataTreeView.Size = new System.Drawing.Size(176, 693);
+            this.mainDataTreeView.TabIndex = 0;
+            this.mainDataTreeView.DoubleClick += new System.EventHandler(this.mainDataTreeView_DoubleClick);
             // 
             // contextTreeview
             // 
@@ -1357,6 +1360,19 @@ namespace Warehouse
             this.bunifuElipse.ElipseRadius = 10;
             this.bunifuElipse.TargetControl = this;
             // 
+            // topbarColorTransition
+            // 
+            this.topbarColorTransition.AutoTransition = false;
+            this.topbarColorTransition.ColorArray = new System.Drawing.Color[] {
+        System.Drawing.Color.Purple,
+        System.Drawing.Color.LightBlue,
+        System.Drawing.Color.Orange};
+            this.topbarColorTransition.EndColor = System.Drawing.Color.White;
+            this.topbarColorTransition.Interval = 20;
+            this.topbarColorTransition.ProgessValue = 0;
+            this.topbarColorTransition.StartColor = System.Drawing.Color.White;
+            this.topbarColorTransition.TransitionControl = this.topbarPanel;
+            // 
             // topbarPanel
             // 
             this.topbarPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(205)))), ((int)(((byte)(182)))));
@@ -1412,7 +1428,7 @@ namespace Warehouse
             this.hideButton.IconLeftCursor = System.Windows.Forms.Cursors.Default;
             this.hideButton.IconLeftPadding = new System.Windows.Forms.Padding(11, 3, 3, 3);
             this.hideButton.IconMarginLeft = 11;
-            this.hideButton.IconPadding = 5;
+            this.hideButton.IconPadding = 6;
             this.hideButton.IconRightAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.hideButton.IconRightCursor = System.Windows.Forms.Cursors.Default;
             this.hideButton.IconRightPadding = new System.Windows.Forms.Padding(3, 3, 7, 3);
@@ -1424,7 +1440,7 @@ namespace Warehouse
             this.hideButton.IdleIconLeftImage = global::Warehouse.Properties.Resources.hide_circle;
             this.hideButton.IdleIconRightImage = null;
             this.hideButton.IndicateFocus = false;
-            this.hideButton.Location = new System.Drawing.Point(50, 0);
+            this.hideButton.Location = new System.Drawing.Point(48, 0);
             this.hideButton.Name = "hideButton";
             this.hideButton.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.hideButton.OnDisabledState.BorderRadius = 1;
@@ -1458,7 +1474,7 @@ namespace Warehouse
             this.hideButton.OnPressedState.ForeColor = System.Drawing.Color.Transparent;
             this.hideButton.OnPressedState.IconLeftImage = null;
             this.hideButton.OnPressedState.IconRightImage = null;
-            this.hideButton.Size = new System.Drawing.Size(28, 27);
+            this.hideButton.Size = new System.Drawing.Size(24, 27);
             this.hideButton.TabIndex = 9;
             this.hideButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.hideButton.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1503,7 +1519,7 @@ namespace Warehouse
             this.bunifuButton1.IconLeftCursor = System.Windows.Forms.Cursors.Default;
             this.bunifuButton1.IconLeftPadding = new System.Windows.Forms.Padding(11, 3, 3, 3);
             this.bunifuButton1.IconMarginLeft = 11;
-            this.bunifuButton1.IconPadding = 5;
+            this.bunifuButton1.IconPadding = 6;
             this.bunifuButton1.IconRightAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.bunifuButton1.IconRightCursor = System.Windows.Forms.Cursors.Default;
             this.bunifuButton1.IconRightPadding = new System.Windows.Forms.Padding(3, 3, 7, 3);
@@ -1515,7 +1531,7 @@ namespace Warehouse
             this.bunifuButton1.IdleIconLeftImage = global::Warehouse.Properties.Resources.roll_circle;
             this.bunifuButton1.IdleIconRightImage = null;
             this.bunifuButton1.IndicateFocus = false;
-            this.bunifuButton1.Location = new System.Drawing.Point(27, 0);
+            this.bunifuButton1.Location = new System.Drawing.Point(24, 0);
             this.bunifuButton1.Name = "bunifuButton1";
             this.bunifuButton1.OnDisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(191)))), ((int)(((byte)(191)))), ((int)(((byte)(191)))));
             this.bunifuButton1.OnDisabledState.BorderRadius = 1;
@@ -1549,7 +1565,7 @@ namespace Warehouse
             this.bunifuButton1.OnPressedState.ForeColor = System.Drawing.Color.Transparent;
             this.bunifuButton1.OnPressedState.IconLeftImage = null;
             this.bunifuButton1.OnPressedState.IconRightImage = null;
-            this.bunifuButton1.Size = new System.Drawing.Size(23, 27);
+            this.bunifuButton1.Size = new System.Drawing.Size(24, 27);
             this.bunifuButton1.TabIndex = 8;
             this.bunifuButton1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.bunifuButton1.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1594,7 +1610,7 @@ namespace Warehouse
             this.exitButton.IconLeftCursor = System.Windows.Forms.Cursors.Default;
             this.exitButton.IconLeftPadding = new System.Windows.Forms.Padding(11, 3, 3, 3);
             this.exitButton.IconMarginLeft = 11;
-            this.exitButton.IconPadding = 5;
+            this.exitButton.IconPadding = 6;
             this.exitButton.IconRightAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.exitButton.IconRightCursor = System.Windows.Forms.Cursors.Default;
             this.exitButton.IconRightPadding = new System.Windows.Forms.Padding(3, 3, 7, 3);
@@ -1640,7 +1656,7 @@ namespace Warehouse
             this.exitButton.OnPressedState.ForeColor = System.Drawing.Color.Transparent;
             this.exitButton.OnPressedState.IconLeftImage = null;
             this.exitButton.OnPressedState.IconRightImage = null;
-            this.exitButton.Size = new System.Drawing.Size(27, 27);
+            this.exitButton.Size = new System.Drawing.Size(24, 27);
             this.exitButton.TabIndex = 7;
             this.exitButton.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.exitButton.TextAlignment = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1648,19 +1664,6 @@ namespace Warehouse
             this.exitButton.TextPadding = new System.Windows.Forms.Padding(0);
             this.exitButton.UseDefaultRadiusAndThickness = true;
             this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
-            // 
-            // topbarColorTransition
-            // 
-            this.topbarColorTransition.AutoTransition = false;
-            this.topbarColorTransition.ColorArray = new System.Drawing.Color[] {
-        System.Drawing.Color.Purple,
-        System.Drawing.Color.LightBlue,
-        System.Drawing.Color.Orange};
-            this.topbarColorTransition.EndColor = System.Drawing.Color.White;
-            this.topbarColorTransition.Interval = 20;
-            this.topbarColorTransition.ProgessValue = 0;
-            this.topbarColorTransition.StartColor = System.Drawing.Color.White;
-            this.topbarColorTransition.TransitionControl = this.topbarPanel;
             // 
             // MainForm
             // 
@@ -1672,8 +1675,9 @@ namespace Warehouse
             this.Controls.Add(this.sidebarPanel);
             this.Controls.Add(this.topbarPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MinimumSize = new System.Drawing.Size(900, 800);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.sidebarPanel.ResumeLayout(false);
@@ -1750,7 +1754,7 @@ namespace Warehouse
         private System.Windows.Forms.ToolStripMenuItem editProductToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
-        private System.Windows.Forms.TreeView treeView;
+        private System.Windows.Forms.TreeView mainDataTreeView;
         private System.Windows.Forms.ToolStripMenuItem openToolStrip;
         private System.Windows.Forms.DataGridViewTextBoxColumn CountryColumn;
         private System.Windows.Forms.Panel thirdPanelButton;

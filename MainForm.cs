@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml.Serialization;
 using CsvHelper;
 using CsvHelper.Configuration;
@@ -20,7 +21,7 @@ namespace Warehouse
         private string nodeViewName;
         private bool nodeViewNameBoolean;
         private bool isClosedForm;
-        private readonly List<TreeNode> node = new List<TreeNode>();
+        private List<TreeNode> nodeList = new List<TreeNode>();
 
         public MainForm()
         {
@@ -154,6 +155,9 @@ namespace Warehouse
         {
             try
             {
+                if (mainDataTreeView.SelectedNode == null)
+                    throw new ArgumentException("Node is not selected");
+
                 isClosedForm = false;
                 // Creating new form and showing it.
                 addFileForm = new AddFileForm();
@@ -168,7 +172,7 @@ namespace Warehouse
                 if (!newRootDit.Exists) newRootDit.Create();
 
                 // FileStream function.
-                using (var fileStreamWriter = new FileStream($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json", FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                using (var fileStreamWriter = new FileStream($"{newRootDit.FullName}/{mainDataTreeView.SelectedNode.Text}.json", FileMode.OpenOrCreate, FileAccess.ReadWrite))
                 {
                     List<FileClass> listClasses = new List<FileClass>();
                     using var streamReader = new StreamReader(fileStreamWriter);
@@ -197,10 +201,9 @@ namespace Warehouse
                     using var streamWriter = new StreamWriter(fileStreamWriter);
                     // Serializing.
                     streamWriter.WriteLine(JsonSerializer.Serialize(listClasses));
-
-                    // Refreshing the main dashboard.
-                    RefreshDashboard();
                 }
+                // Refreshing the main dashboard.
+                RefreshDashboard();
             }
             catch (Exception exception)
             {
@@ -217,6 +220,12 @@ namespace Warehouse
         {
             try
             {
+                if (mainDataTreeView.SelectedNode == null)
+                {
+                    MessageBox.Show("Node is not selected");
+                    throw new ArgumentException("Node is not selected");
+                }
+
                 DirectoryInfo newRootDit = new DirectoryInfo("data");
                 // Validation. If this directory exists.
                 if (!newRootDit.Exists) newRootDit.Create();
@@ -224,11 +233,11 @@ namespace Warehouse
                 // Calling form.
                 EditTreeName editTree = new EditTreeName();
                 editTree.ShowDialog();
-                if (!nodeViewNameBoolean) 
+                if (!nodeViewNameBoolean)
                     return;
                 // Renaming the filename using File.Move().
-                File.Move($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json", $"{newRootDit.FullName}/{nodeViewName}.json");
-                treeView.SelectedNode.Text = nodeViewName;
+                File.Move($"{newRootDit.FullName}/{mainDataTreeView.SelectedNode.Text}.json", $"{newRootDit.FullName}/{nodeViewName}.json");
+                mainDataTreeView.SelectedNode.Text = nodeViewName;
             }
             catch (Exception)
             {
@@ -252,9 +261,12 @@ namespace Warehouse
                 editTreeName.ShowDialog();
 
                 if (!nodeViewNameBoolean) return;
-                if (treeView.Nodes.Cast<TreeNode>().Any(nodes => nodes.Text == nodeViewName))
+                if (mainDataTreeView.Nodes.Cast<TreeNode>().Any(nodes => nodes.Text == nodeViewName))
                     throw new ArgumentException("Node is already exist!");
-
+                foreach (TreeNode node in mainDataTreeView.Nodes)
+                {
+                    RecursiveValidationNames(node, nodeViewName);
+                }
                 // Checking, if this directory exists.
                 var newRootDit = new DirectoryInfo("data");
                 if (!newRootDit.Exists) newRootDit.Create();
@@ -266,15 +278,34 @@ namespace Warehouse
                     var sw = new StreamWriter(fs);
                     sw.Write("");
                 }
+
+                if (mainDataTreeView.Nodes.Count >= 1)
+                {
+                    csvButton.Enabled = true;
+                }
+
                 // Adding new node to treeview.
-                treeView.Nodes.Add(nodeViewName);
-                // Saving treeview.
-                SaveTree("DataNodes.xml", treeView);
+                if (!mainDataTreeView.Nodes.ContainsKey(nodeViewName))
+                    mainDataTreeView.Nodes.Add(nodeViewName);
+                else
+                    throw new ArgumentException("The name of node is already exist!");
                 RefreshDashboard();
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void RecursiveValidationNames(TreeNode node, string tempNodeViewName)
+        {
+
+            foreach (TreeNode tempNode in node.Nodes)
+            {
+                if (tempNode.Text == tempNodeViewName)
+                    throw new ArgumentException("Node is already exist!");
+                else
+                    RecursiveValidationNames(tempNode, tempNodeViewName);
             }
         }
 
@@ -287,16 +318,23 @@ namespace Warehouse
         {
             try
             {
-                var name = treeView.SelectedNode;
+                if (mainDataTreeView.SelectedNode == null)
+                    throw new ArgumentException("Node is not selected");
+
+                var name = mainDataTreeView.SelectedNode;
                 nodeViewName = "";
                 nodeViewNameBoolean = false;
                 // Creating new form.
                 var editTreeName = new EditTreeName();
                 editTreeName.ShowDialog();
                 // If this node is exists.
-                if (treeView.Nodes.Cast<TreeNode>().Any(nodes => nodes.Text == nodeViewName))
-                    throw new ArgumentException("Node is already exist!");
 
+                if (mainDataTreeView.Nodes.Cast<TreeNode>().Any(nodes => nodes.Text == nodeViewName))
+                    throw new ArgumentException("Node is already exist!");
+                foreach (TreeNode node in mainDataTreeView.Nodes)
+                {
+                    RecursiveValidationNames(node, nodeViewName);
+                }
                 if (!nodeViewNameBoolean) return;
                 var newRootDit = new DirectoryInfo("data");
                 // Validation.
@@ -308,15 +346,12 @@ namespace Warehouse
                     var sw = new StreamWriter(fs);
                     sw.Write("");
                 }
-                // Checking if this node exist,
                 var treeNode = new TreeNode(nodeViewName);
-                if (!treeView.Nodes.Contains(treeNode))
+                if (!mainDataTreeView.Nodes.Contains(treeNode))
                     name.Nodes.Add(nodeViewName);
                 else
                     throw new ArgumentException("The name of node is already exist!");
-                // Save treeview.
-                SaveTree("DataNodes.xml", treeView);
-                treeView.ExpandAll();
+                mainDataTreeView.ExpandAll();
                 RefreshDashboard();
             }
             catch (Exception exception)
@@ -325,57 +360,33 @@ namespace Warehouse
             }
         }
 
-        private void treeView_MouseDoubleClick(object sender, MouseEventArgs e)
+        /// <summary>
+        /// Mainform close event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
-                // Checking the directory.
-                DirectoryInfo newRootDit = new DirectoryInfo("data");
-                if (!newRootDit.Exists)
-                    newRootDit.Create();
+                if (Text == string.Empty)
+                {
+                    MessageBox.Show("Save your file before closing");
+                    SaveFileDialog saveFileDialog = new SaveFileDialog
+                    {
+                        AddExtension = true,
+                        Filter = "XML file (*.xml)|*.xml",
+                        FileName = "untitled file",
+                        ValidateNames = true
+                    };
+                    if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        SaveTree(saveFileDialog.FileName, mainDataTreeView);
+                    }
+                }
                 else
                 {
-                    // Checking the datagrid.
-                    if (dataGridProduct.Rows.Count > 0)
-                        dataGridProduct.Rows.Clear();
-                    // Checking the existance of file.
-                    var path = $"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json";
-                    if (!File.Exists(path))
-                    {
-                        treeView.Nodes.Remove(treeView.SelectedNode);
-                        throw new ArgumentException("File doesn't exist");
-                    }
-
-                    using (FileStream fs =
-                        new FileStream(path,
-                            FileMode.OpenOrCreate, FileAccess.ReadWrite))
-                    {
-                        using var sReader = new StreamReader(fs);
-                        // While loop.
-                        while (sReader.Peek() > -1)
-                        {
-                            string input = sReader.ReadToEnd();
-                            // Validation.
-                            if (input == String.Empty)
-                                throw new ArgumentException("File is empty");
-                            if (input.Length < 10)
-                                throw new ArgumentException("File is empty");
-                            // Deserializing the file to class.
-                            List<FileClass> listOfRestoredPerson =
-                                JsonSerializer.Deserialize<List<FileClass>>(input);
-                            if (listOfRestoredPerson == null) continue;
-                            // Adding the information to datagrid.
-                            foreach (var restoredPerson in listOfRestoredPerson)
-                            {
-                                dataGridProduct.Rows.Add(restoredPerson?.Name, restoredPerson?.Code,
-                                    restoredPerson?.UCN, restoredPerson?.Company,
-                                    restoredPerson?.Amount, restoredPerson?.Cost,
-                                    restoredPerson?.Currency, restoredPerson?.Warranty,
-                                    restoredPerson?.Status, restoredPerson?.Discount,
-                                    restoredPerson?.Country);
-                            }
-                        }
-                    }
+                    SaveTree(Text, mainDataTreeView);
                 }
             }
             catch (Exception exception)
@@ -383,13 +394,6 @@ namespace Warehouse
                 MessageBox.Show(exception.Message);
             }
         }
-        /// <summary>
-        /// Mainform close event.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-            => SaveTree("DataNodes.xml", treeView);
 
         /// <summary>
         /// Mainform load event.
@@ -400,27 +404,47 @@ namespace Warehouse
         {
             try
             {
-                string fileXml = "DataNodes.xml";
-                // If file exists.
-                if (!File.Exists(fileXml))
-                    return;
-                // Deserializing file.
-                var data = DeserializeFromFile<DataNode[]>(fileXml);
-                foreach (var d in data)
+                string message = "Do you want to load info from database?";
+                string title = "Database";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result = MessageBox.Show(message, title, buttons);
+                if (result == DialogResult.Yes)
                 {
-                    // Adding node to treeview and filling.
-                    var treeNode = new TreeNode();
-                    treeView.Nodes.Add(treeNode);
-                    FillNode(treeView, treeNode, d);
-                }
-                treeView.ExpandAll();
-                // If nodes is greater than 1
-                if (treeView.Nodes.Count >= 1)
-                {
-                    csvButton.Enabled = true;
+                    OpenFileDialog openFileDialog = new OpenFileDialog()
+                    {
+                        AddExtension = true,
+                        Filter = "XML file (*.xml)|*.xml",
+                    };
+                    if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    {
+                        string fileXml = openFileDialog.FileName;
+                        this.Text = openFileDialog.FileName;
+                        if (!File.Exists(fileXml))
+                            return;
+
+                        var data = DeserializeFromFile<DataNode[]>(fileXml);
+                        if (data.Length > 0)
+                        {
+
+                            // Receiving node to treeview.
+                            foreach (var d in data)
+                            {
+                                var treeNode = new TreeNode();
+                                mainDataTreeView.Nodes.Add(treeNode);
+                                FillNode(mainDataTreeView, treeNode, d);
+                            }
+
+                            // Validation.
+                            mainDataTreeView.ExpandAll();
+                            if (mainDataTreeView.Nodes.Count >= 1)
+                            {
+                                csvButton.Enabled = true;
+                            }
+                            RefreshDashboard();
+                        }
+                    }
                 }
 
-                RefreshDashboard();
             }
             catch (Exception ex)
             {
@@ -442,12 +466,12 @@ namespace Warehouse
                 var amountOfFiles = newRootDit.GetFiles().Length;
                 // Variables.
                 totalFilesNumLabel.Text = $@"{amountOfFiles}";
-                totalNodesNumLabel.Text = $@"{treeView.Nodes.Count}";
+                totalNodesNumLabel.Text = $@"{mainDataTreeView.GetNodeCount(true)}";
 
                 List<CSVClassAnalyzer> tempFileClasses = new List<CSVClassAnalyzer>();
-                CallRecursive(treeView);
+                CallRecursive(mainDataTreeView);
 
-                foreach (var treeNode in node.Where(treeNode => File.Exists($"{newRootDit.FullName}/{treeNode.Text}.json")))
+                foreach (var treeNode in nodeList.Where(treeNode => File.Exists($"{newRootDit.FullName}/{treeNode.Text}.json")))
                 {
                     using (var fs =
                         new FileStream($"{newRootDit.FullName}/{treeNode.Text}.json",
@@ -479,22 +503,30 @@ namespace Warehouse
                         }
                     }
                 }
+                // Clearing chart
+                chartDashboard.Titles.Clear();
+                secondChartDashboard.Titles.Clear();
+                chartDashboard.Series.Clear();
+                secondChartDashboard.Series.Clear();
                 // Adding the new series.
                 var series = chartDashboard.Series.Add("Total amount and cost");
+                series.ChartType = SeriesChartType.Column;
                 chartDashboard.Titles.Add("Total amount and cost");
                 // Adding the data.
                 foreach (var data in tempFileClasses)
-                    series.Points.AddXY(data.Cost, data.Amount);
+                    series.Points.AddXY((int)data.Cost, (int)data.Amount);
                 // Adding the new series.
                 var secondSeries = secondChartDashboard.Series.Add("Total name and country");
+                secondSeries.ChartType = SeriesChartType.Pie;
+                secondSeries.MarkerColor = Color.CornflowerBlue;
                 secondChartDashboard.Titles.Add("Total name and country");
                 // Adding the data.
                 foreach (var data in tempFileClasses)
-                    secondSeries.Points.AddXY(data.Name, data.Cost);
+                    secondSeries.Points.AddXY(data.Country, data.Cost);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // ignored
+                MessageBox.Show(e.Message);
             }
         }
 
@@ -506,14 +538,20 @@ namespace Warehouse
         /// <param name="filename"></param>
         public static void SerializeToFile<T>(T data, string filename)
         {
-            using (var sw = new StreamWriter(filename))
+            try
             {
-                // Xml serializer.
-                var ser = new XmlSerializer(typeof(T));
-                ser.Serialize(sw, data);
+                using (var sw = new StreamWriter(filename))
+                {
+                    var ser = new XmlSerializer(typeof(T));
+                    ser.Serialize(sw, data);
+                }
+            }
+            catch (Exception)
+            {
+                // ignored
             }
         }
-        
+
         /// <summary>
         /// Method of deserialization.
         /// </summary>
@@ -522,14 +560,15 @@ namespace Warehouse
         /// <returns></returns>
         public static T DeserializeFromFile<T>(string fname) where T : class
         {
+
             using (var sr = new StreamReader(fname))
             {
-                // Xml serialization.
                 var ser = new XmlSerializer(typeof(T));
                 var data = ser.Deserialize(sr) as T;
                 return data;
             }
         }
+
         /// <summary>
         /// Filling node to treeview.
         /// </summary>
@@ -538,16 +577,23 @@ namespace Warehouse
         /// <param name="dataNode">DataNode</param>
         private static void FillNode(TreeView tempTreeView, TreeNode node, DataNode dataNode)
         {
-            foreach (var c in dataNode.Nodes)
+            try
             {
-                var n = new TreeNode();
-                FillNode(tempTreeView, n, c);
-                node.Nodes.Add(n);
+                foreach (var c in dataNode.Nodes)
+                {
+                    var n = new TreeNode();
+                    FillNode(tempTreeView, n, c);
+                    node.Nodes.Add(n);
+                }
+                // Adding info.
+                node.Text = dataNode.Text;
+                if (dataNode.IsExpanded) node.Expand();
+                if (dataNode.IsSelected) tempTreeView.SelectedNode = node;
             }
-            // Adding info.
-            node.Text = dataNode.Text;
-            if (dataNode.IsExpanded) node.Expand();
-            if (dataNode.IsSelected) tempTreeView.SelectedNode = node;
+            catch (Exception)
+            {
+               // ignored.
+            }
         }
 
         /// <summary>
@@ -557,7 +603,14 @@ namespace Warehouse
         /// <param name="tv"></param>
         private static void SaveTree(string filename, TreeView tv)
         {
-            var data = (from TreeNode node in tv.Nodes select GetDataNode(node)).ToList();
+            var data = new List<DataNode>();
+
+            foreach (TreeNode node in tv.Nodes)
+            {
+                var dataNode = GetDataNode(node);
+                data.Add(dataNode);
+            }
+
             SerializeToFile(data, filename);
         }
 
@@ -568,15 +621,38 @@ namespace Warehouse
         /// <returns></returns>
         private static DataNode GetDataNode(TreeNode node)
         {
-            // Creating new object DataNode.
             var dataNode = new DataNode { Text = node.Text, IsExpanded = node.IsExpanded, IsSelected = node.IsSelected };
-            foreach (TreeNode treeNode in node.Nodes)
+            foreach (TreeNode n in node.Nodes)
             {
-                // Adding node to datanode.
-                var tempDataNode = GetDataNode(treeNode);
-                tempDataNode.Nodes.Add(tempDataNode);
+                var d = GetDataNode(n);
+                dataNode.Nodes.Add(d);
             }
+
             return dataNode;
+        }
+
+        /// <summary>
+        /// Recursive Deletion.
+        /// </summary>
+        /// <param name="node"></param>
+        private void RecursiveDeletion(TreeNode node)
+        {
+            try
+            {
+                // Delete file.
+                File.Delete($"{node.Text}.json");
+                foreach (TreeNode tempNode in node.Nodes)
+                {
+                    // Recursive Method.
+                    RecursiveDeletion(tempNode);
+                    File.Delete($"{tempNode.Text}.json");
+                }
+                node.Remove();
+            }
+            catch (Exception)
+            {
+                // ignored.
+            }
         }
 
         /// <summary>
@@ -588,30 +664,43 @@ namespace Warehouse
         {
             try
             {
+                if (mainDataTreeView.SelectedNode == null)
+                {
+                    MessageBox.Show("Node is not selected");
+                    throw new ArgumentException("Node is not selected");
+                }
+
                 // Directory validation.
                 DirectoryInfo newRootDit = new DirectoryInfo("data");
                 if (!newRootDit.Exists)
                     newRootDit.Create();
                 else
                 {
-                    var path = $"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json";
+                    var path = $"{newRootDit.FullName}/{mainDataTreeView.SelectedNode.Text}.json";
                     // File existance.
                     if (File.Exists(path))
                         File.Delete(path);
-                    if (treeView.SelectedNode.Nodes.Count >= 1)
+                    if (mainDataTreeView.SelectedNode.Nodes.Count >= 1)
                     {
                         // Creating tree node collection.
-                        TreeNodeCollection nodes = treeView.SelectedNode.Nodes;
+                        TreeNodeCollection nodes = mainDataTreeView.SelectedNode.Nodes;
                         foreach (TreeNode node in nodes)
                             File.Delete($"{node.Text}.json");
                     }
-                    // Clear the nodes.
-                    treeView.SelectedNode.Nodes.Clear();
                     // Removing nodes.
-                    treeView.Nodes.Remove(treeView.SelectedNode);
-                    csvButton.Enabled = treeView.Nodes.Count != 0;
+                    foreach (TreeNode node in mainDataTreeView.SelectedNode.Nodes)
+                    {
+                        RecursiveDeletion(node);
+                    }
+
+                    mainDataTreeView.Nodes.Remove(mainDataTreeView.SelectedNode);
+                    csvButton.Enabled = mainDataTreeView.Nodes.Count != 0;
                     // Clearing DataGrid rows.
                     dataGridProduct.Rows.Clear();
+                    if (mainDataTreeView.Nodes.Count == 0)
+                    {
+                        csvButton.Enabled = false;
+                    }
                 }
             }
             catch (Exception)
@@ -629,6 +718,8 @@ namespace Warehouse
         {
             try
             {
+                if (mainDataTreeView.SelectedNode == null)
+                    throw new ArgumentException("Node is not selected");
                 // Checking the directory.
                 DirectoryInfo newRootDit = new DirectoryInfo("data");
                 if (!newRootDit.Exists)
@@ -639,10 +730,10 @@ namespace Warehouse
                     if (dataGridProduct.Rows.Count > 0)
                         dataGridProduct.Rows.Clear();
                     // Checking the existance of file.
-                    var path = $"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json";
+                    var path = $"{newRootDit.FullName}/{mainDataTreeView.SelectedNode.Text}.json";
                     if (!File.Exists(path))
                     {
-                        treeView.Nodes.Remove(treeView.SelectedNode);
+                        mainDataTreeView.Nodes.Remove(mainDataTreeView.SelectedNode);
                         throw new ArgumentException("File doesn't exist");
                     }
 
@@ -705,7 +796,7 @@ namespace Warehouse
                     var fileClassManager = new List<FileClass>();
                     // FileStream reader.
                     using (FileStream fs =
-                        new FileStream($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json",
+                        new FileStream($"{newRootDit.FullName}/{mainDataTreeView.SelectedNode.Text}.json",
                             FileMode.OpenOrCreate))
                     {
                         using var sReader = new StreamReader(fs);
@@ -722,6 +813,7 @@ namespace Warehouse
                         }
                     }
 
+                    isClosedForm = false;
                     // Foreach loop validation.
                     var newListFileClasses = fileClassManager.Where(file => file.UCN == rowIndex[0].Cells[2].Value.ToString()).ToList();
                     // Creating new object AddFileForm.
@@ -762,9 +854,10 @@ namespace Warehouse
                             rowIndex[i].Cells[10].Value = fileClasses.Country;
                         }
                     }
+                    File.WriteAllText($"{newRootDit.FullName}/{mainDataTreeView.SelectedNode.Text}.json", "");
                     // FileStream.
                     using (var fileStreamWriter =
-                        new FileStream($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json",
+                        new FileStream($"{newRootDit.FullName}/{mainDataTreeView.SelectedNode.Text}.json",
                             FileMode.OpenOrCreate, FileAccess.ReadWrite))
                     {
                         // Writes and serializes.
@@ -793,8 +886,8 @@ namespace Warehouse
         {
             try
             {
-                treeView.TreeViewNodeSorter = new SortNode();
-                treeView.Sort();
+                mainDataTreeView.TreeViewNodeSorter = new SortNode();
+                mainDataTreeView.Sort();
             }
             catch (Exception)
             {
@@ -809,7 +902,6 @@ namespace Warehouse
         /// <param name="e"></param>
         private void csvButton_Click(object sender, EventArgs e)
         {
-            node.Clear();
             // Form creates.
             CSVSort csvSortForm = new CSVSort();
             csvSortForm.ShowDialog();
@@ -825,11 +917,13 @@ namespace Warehouse
                 newRootDit.Create();
             var tempFileClasses = new List<CSVClassAnalyzer>();
 
-            if (!tempIsClosed) return;
+            if (!tempIsClosed) 
+                return;
+            nodeList.Clear();
             // Recursive treeview.
-            CallRecursive(treeView);
+            CallRecursive(mainDataTreeView);
             // Foreach loop validation.
-            foreach (var treeNode in node.Where(treeNode => File.Exists($"{newRootDit.FullName}/{treeNode.Text}.json")))
+            foreach (var treeNode in nodeList.Where(treeNode => File.Exists($"{newRootDit.FullName}/{treeNode.Text}.json")))
             {
                 using (var fs =
                     new FileStream($"{newRootDit.FullName}/{treeNode.Text}.json",
@@ -852,16 +946,16 @@ namespace Warehouse
                         if (listOfRestoredPerson != null)
                             // Validation.
                             tempFileClasses.AddRange(from data in listOfRestoredPerson
-                                where data.Amount <= tempAmount && data.Cost <= tempCost
-                                select new CSVClassAnalyzer
-                                {
-                                    NodePath = treeNode.FullPath,
-                                    Country = data.Country,
-                                    UCN = data.UCN,
-                                    Name = data.Name,
-                                    Amount = data.Amount,
-                                    Cost = data.Cost
-                                });
+                                                     where data.Amount <= tempAmount && data.Cost <= tempCost
+                                                     select new CSVClassAnalyzer
+                                                     {
+                                                         NodePath = treeNode.FullPath,
+                                                         Country = data.Country,
+                                                         UCN = data.UCN,
+                                                         Name = data.Name,
+                                                         Amount = data.Amount,
+                                                         Cost = data.Cost
+                                                     });
                     }
                 }
             }
@@ -884,10 +978,7 @@ namespace Warehouse
         /// <param name="tempFileClasses"></param>
         private void SaveToCSV(List<CSVClassAnalyzer> tempFileClasses)
         {
-            // If this file exists.
-            if (File.Exists("csvData.csv"))
-                File.Delete("csvData.csv");
-
+            File.WriteAllText("csvData.csv", "");
             using (StreamWriter streamReader = new StreamWriter("csvData.csv"))
             {
                 // Csv configuration.
@@ -903,7 +994,7 @@ namespace Warehouse
 
         private void PrintRecursive(TreeNode treeNode)
         {
-            node.Add(treeNode);
+            nodeList.Add(treeNode);
             // Print each node recursively.  
             foreach (TreeNode tempTreeNode in treeNode.Nodes)
             {
@@ -912,10 +1003,10 @@ namespace Warehouse
         }
 
         // Call the procedure using the TreeView.  
-        private void CallRecursive(TreeView treeView)
+        private void CallRecursive(TreeView tempTreeView)
         {
             // Print each node recursively.  
-            TreeNodeCollection nodes = treeView.Nodes;
+            TreeNodeCollection nodes = tempTreeView.Nodes;
             foreach (TreeNode treeNode in nodes)
             {
                 PrintRecursive(treeNode);
@@ -937,7 +1028,7 @@ namespace Warehouse
                 List<FileClass> tempFileClasses = new List<FileClass>();
 
                 using (FileStream fs =
-                    new FileStream($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json",
+                    new FileStream($"{newRootDit.FullName}/{mainDataTreeView.SelectedNode.Text}.json",
                         FileMode.OpenOrCreate))
                 {
                     using var sReader = new StreamReader(fs);
@@ -960,11 +1051,11 @@ namespace Warehouse
                                 tempFileClasses.Add(data);
                     fs.Position = 0;
                 }
-
+                File.WriteAllText($"{newRootDit.FullName}/{mainDataTreeView.SelectedNode.Text}.json", "");
                 if (tempFileClasses.Count > 0)
                 {
                     using (FileStream fs =
-                        new FileStream($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json",
+                        new FileStream($"{newRootDit.FullName}/{mainDataTreeView.SelectedNode.Text}.json",
                             FileMode.OpenOrCreate))
                     {
                         // Serialization.
@@ -974,11 +1065,70 @@ namespace Warehouse
                 }
                 else
                 {
-                    File.WriteAllText($"{newRootDit.FullName}/{treeView.SelectedNode.Text}.json", "");
+                    File.WriteAllText($"{newRootDit.FullName}/{mainDataTreeView.SelectedNode.Text}.json", "");
                 }
                 // Removes the selected row.
                 foreach (DataGridViewRow rows in selected)
                     dataGridProduct.Rows.Remove(rows);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void mainDataTreeView_DoubleClick(object sender, EventArgs e)
+        {
+               try
+            {
+                // Checking the directory.
+                DirectoryInfo newRootDit = new DirectoryInfo("data");
+                if (!newRootDit.Exists)
+                    newRootDit.Create();
+                else
+                {
+                    // Checking the datagrid.
+                    if (dataGridProduct.Rows.Count > 0)
+                        dataGridProduct.Rows.Clear();
+                    // Checking the existance of file.
+                    var path = $"{newRootDit.FullName}/{mainDataTreeView.SelectedNode.Text}.json";
+                    if (!File.Exists(path))
+                    {
+                        mainDataTreeView.Nodes.Remove(mainDataTreeView.SelectedNode);
+                        throw new ArgumentException("File doesn't exist");
+                    }
+
+                    using (FileStream fs =
+                        new FileStream(path,
+                            FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                    {
+                        using var sReader = new StreamReader(fs);
+                        // While loop.
+                        while (sReader.Peek() > -1)
+                        {
+                            string input = sReader.ReadToEnd();
+                            // Validation.
+                            if (input == String.Empty)
+                                throw new ArgumentException("File is empty");
+                            if (input.Length < 10)
+                                throw new ArgumentException("File is empty");
+                            // Deserializing the file to class.
+                            List<FileClass> listOfRestoredPerson =
+                                JsonSerializer.Deserialize<List<FileClass>>(input);
+                            if (listOfRestoredPerson == null) continue;
+                            // Adding the information to datagrid.
+                            foreach (var restoredPerson in listOfRestoredPerson)
+                            {
+                                dataGridProduct.Rows.Add(restoredPerson?.Name, restoredPerson?.Code,
+                                    restoredPerson?.UCN, restoredPerson?.Company,
+                                    restoredPerson?.Amount, restoredPerson?.Cost,
+                                    restoredPerson?.Currency, restoredPerson?.Warranty,
+                                    restoredPerson?.Status, restoredPerson?.Discount,
+                                    restoredPerson?.Country);
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception exception)
             {

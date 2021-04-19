@@ -133,6 +133,16 @@ namespace Warehouse.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap iconProduc {
+            get {
+                object obj = ResourceManager.GetObject("iconProduc", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap node {
             get {
                 object obj = ResourceManager.GetObject("node", resourceCulture);

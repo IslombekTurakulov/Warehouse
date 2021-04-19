@@ -118,7 +118,7 @@ namespace Warehouse
                 // Validation.
                 if (nameTxtBox.Text == String.Empty)
                     return;
-                if (!Regex.IsMatch(nameTxtBox.Text, @"^[a-zA-Zа-я-А-я]+$"))
+                if (!Regex.IsMatch(nameTxtBox.Text, @"^[a-zA-Zа-я-А-я ]+$"))
                     nameTxtBox.Text = String.Empty;
             }
             catch (Exception exception)

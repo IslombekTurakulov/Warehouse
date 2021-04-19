@@ -2631,7 +2631,7 @@ namespace Warehouse
             this.imageFileBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.imageFileBox.AutoSizeHeight = true;
             this.imageFileBox.BorderRadius = 82;
-            this.imageFileBox.Image = ((System.Drawing.Image)(resources.GetObject("imageFileBox.Image")));
+            this.imageFileBox.Image = global::Warehouse.Properties.Resources.iconProduc;
             this.imageFileBox.IsCircle = true;
             this.imageFileBox.Location = new System.Drawing.Point(314, 31);
             this.imageFileBox.Name = "imageFileBox";
