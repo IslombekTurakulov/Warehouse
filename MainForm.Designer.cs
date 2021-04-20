@@ -1368,7 +1368,7 @@ namespace Warehouse
         System.Drawing.Color.LightBlue,
         System.Drawing.Color.Orange};
             this.topbarColorTransition.EndColor = System.Drawing.Color.White;
-            this.topbarColorTransition.Interval = 20;
+            this.topbarColorTransition.Interval = 10;
             this.topbarColorTransition.ProgessValue = 0;
             this.topbarColorTransition.StartColor = System.Drawing.Color.White;
             this.topbarColorTransition.TransitionControl = this.topbarPanel;

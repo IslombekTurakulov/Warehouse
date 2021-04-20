@@ -125,7 +125,8 @@ namespace Warehouse
         /// <param name="e"></param>
         private void BunifuPictureBox_Click(object sender, EventArgs e)
         {
-            colorTransitionSide.Interval = 20;
+            colorTransitionSide.Interval = 10;
+            topbarColorTransition.Interval = 10;
             topbarColorTransition.ColorArray = colorTransitionSide.ColorArray;
             topbarColorTransition.Start();
             colorTransitionSide.Start();

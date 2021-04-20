@@ -14,11 +14,15 @@ namespace Warehouse
         [STAThread]
         static void Main()
         {
+            // Если ваше разрешение 2к или 4к, рекомендуется включить этот if и метод SetProcessDPI
+            //if (Environment.OSVersion.Version.Major >= 6) SetProcessDPIAware();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
         }
 
+        // [System.Runtime.InteropServices.DllImport("user32.dll")]
+        // private static extern bool SetProcessDPIAware();
         /// <summary>
         /// Event Handlers.
         /// </summary>
